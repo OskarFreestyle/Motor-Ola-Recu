@@ -2,7 +2,7 @@
 #include <utility>
 #include <limits.h>
 #include "Motor.h"
-#include <Windows.h>
+
 #include "LuaReader.h"
 
 // Ogre
@@ -33,8 +33,8 @@
 #include "RigidBody.h"
 #include <iostream>
 
-typedef HRESULT(CALLBACK* LPFNDLLFUNC1)(DWORD, UINT*);
-HINSTANCE hDLL;               // Handle to DLL
+
+
 
 Motor::Motor()
 {
@@ -140,7 +140,6 @@ void Motor::mainLoop()
 
 void Motor::loadDLLGame()
 {
-	HINSTANCE hDLL;
 	LPFNDLLFUNC1 lpfnDllFunc1;    // Function pointer
 	HRESULT hrReturnVal;
 	std::cout<<"Entra en loadDLL\n";

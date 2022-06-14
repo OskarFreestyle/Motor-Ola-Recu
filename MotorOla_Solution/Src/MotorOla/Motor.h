@@ -11,6 +11,7 @@
 #include <string>
 #include <iostream>
 #include <Ogre.h>
+#include <Windows.h>
 
 // Declaracion de clases necesarias
 class OgreManager;
@@ -23,6 +24,8 @@ class EntidadManager;
 class Entity;
 class OverlayManager;
 
+typedef HRESULT(CALLBACK* LPFNDLLFUNC1)(DWORD, UINT*);
+
 MOTOR_API class Motor
 {
 private:
@@ -34,7 +37,7 @@ private:
 	// Contador auxiliar
 	int frame = 0;
 
-	
+	HINSTANCE hDLL;               // Handle to DLL
 
 public:
 	MOTOR_API Motor();
