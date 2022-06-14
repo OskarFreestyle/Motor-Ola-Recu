@@ -89,7 +89,6 @@ public:
 	MOTOR_API int getID(int k) { return _ids[k]; };
 	MOTOR_API std::vector<int>* getIDs() { return &_ids; };
 	MOTOR_API PxPhysics* getPhysX() { return mPhysics; };
-	MOTOR_API PxRigidDynamic* getBall() { return testBALL; };
 	MOTOR_API PxScene* getScene() { return mScene; };
 	MOTOR_API PxMaterial* getMaterial() { return mMaterial; };
 	MOTOR_API Entidad* findEntityByPxActor(PxActor* actor);
@@ -101,10 +100,9 @@ public:
 	MOTOR_API void setPhysxToGlobalTR(Entidad& e, PxRigidActor& body);
 
 private:
-	PhysxManager(/*...*/);
-	PhysxManager(bool n) { _patata = n; };
+	PhysxManager();
+	
 
-	PxRigidDynamic* testBALL = nullptr;
 
 	// ON/OFF physics
 	bool	mPause = false;
@@ -117,7 +115,7 @@ private:
 	__int64 GlobalTimer = 0;
 
 	// Variables editables
-	bool _patata;
+	
 
 	PxTolerancesScale scale;
 	PxCudaContextManagerDesc cudaDesc;

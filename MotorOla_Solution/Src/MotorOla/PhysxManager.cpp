@@ -14,7 +14,7 @@
 
 std::unique_ptr<PhysxManager> Singleton<PhysxManager>::instance_ = nullptr;
 
-PhysxManager::PhysxManager() : _patata(false)
+PhysxManager::PhysxManager() 
 {
 	
 
@@ -454,18 +454,7 @@ void PhysxManager::debugTime()
 	std::cout << "GlobalTimer : " << GlobalTimer << "\n";
 }
 
-void PhysxManager::debugBall()
-{
-	 
-	// Comienza con una media de 15.05ms si se resetea con CounterLast = CounterStart,
-	// pero su uso real es llevar el tiempo real de la app activa.
-	if (GetLastTime() - GlobalTimer > 1.0) {
-		PxVec3 v = testBALL->getGlobalPose().p;
-		std::cout << "PhyBALL position : ";
-		std::cout << "( " << v.x << " , " << v.y << " , " << v.z << " )" << "\n";
-		GlobalTimer = GetLastTime();
-	}
-}
+
 
 #include "RigidBody.h"
 void PhysxManager::debugBuddy(Entidad* e)
