@@ -15,7 +15,6 @@
 #include "ContactReportCallback.h"
 class Transform;
 
-
 using namespace physx;
 
 MOTOR_API inline std::ostream& operator<<(std::ostream& os, const physx::PxVec3& v) {

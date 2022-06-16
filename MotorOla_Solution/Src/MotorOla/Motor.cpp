@@ -20,6 +20,7 @@
 #include "FMODAudioManager.h"
 #include "OverlayManager.h"
 #include "PhysxManager.h"
+#include "SceneManager.h"
 
 // Componentes
 #include "Entidad.h"
@@ -33,15 +34,17 @@
 #include "RigidBody.h"
 #include <iostream>
 
-
-
-
 Motor::Motor()
 {
 	// Inicia los managers
 	Singleton<LoadResources>::instance();
 	Singleton<OgreManager>::instance();	
+	
 	Singleton<EntidadManager>::instance();
+
+	
+
+
 	Singleton<FMODAudioManager>::instance();
 	Singleton<OverlayManager>::instance();
 	Singleton<PhysxManager>::instance();
@@ -50,6 +53,7 @@ Motor::Motor()
 
 Motor::~Motor()
 {
+	// Libera la libreria dinamica (el juego)
 	FreeLibrary(hDLL);
 	// Destruye los managers en orden inverso a la creaci�n (PC: puede que esto no sea necesario porque al cerrar se borran solos)
 	if (Singleton<FMODAudioManager>::instance() != nullptr) delete Singleton<FMODAudioManager>::instance();
@@ -58,7 +62,22 @@ Motor::~Motor()
 	//if (Singleton<PhysxManager>::instance() != nullptr) delete Singleton<PhysxManager>::instance();
 }
 
-void Motor::initSystems()
+bool Motor::initSystems()
+{
+	// Intenta iniciar todos los singletons del motor
+	try {
+		SceneManager::Init();
+	}
+	catch (std::exception e) {
+#if (defined _DEBUG)
+		std::cout << e.what();
+#endif
+		return false;
+	}
+	return true;
+}
+
+void Motor::initSystemss()
 {
 	// Inicia los sistemas
 	Singleton<LoadResources>::instance()->init();
@@ -99,31 +118,32 @@ void Motor::registryComponents()
 
 void Motor::mainLoop()
 {
+#ifdef _DEBUG
 	std::cout << "------------------- COMIENZA EL BUCLE PRINCIPAL -------------------\n";
+#endif
 	//Actualiza el motor. Bucle input->update/fisicas->render
 	SDL_Event event;
-	std::cout << Singleton<EntidadManager>::instance() << "\n";
+	stop = false;
 
 	while (!stop) {
-		
+		// Recoge un puntero con el vector de entidades;
 		Singleton<EntidadManager>::instance()->refresh();
 
-		// Recoger el Input
+		// Borra el Input del frame anterior
 		ih().clearState();
-
+		// Recoge el Input para este frame
 		while (SDL_PollEvent(&event))
 			ih().update(event);
 
 		// Cierra la aplicacion con ESCAPE
-		if (ih().isKeyDown(SDL_SCANCODE_ESCAPE)) {
-			stop = true;
-			continue;
-		}
+		//if (ih().isKeyDown(SDL_SCANCODE_ESCAPE)) {
+		//	stop = true;
+		//	continue;
+		//}
 
 		// Actualizar las fisicas de las entidades
 		pm().runPhysX();
 
-		Singleton<EntidadManager>::instance()->refresh();
 
 		// Actualiza los transforms de las entitys despues de las fisicas
 		if (Singleton<OverlayManager>::instance() != nullptr) {
@@ -133,8 +153,14 @@ void Motor::mainLoop()
 		// Actualiza el resto de componentes (tambien los del juego)
 		Singleton<EntidadManager>::instance()->update();
 
-		// Renderiza las entidades
+		// Renderiza un frame
 		Singleton<OgreManager>::instance()->update();
+
+		// Se eliminan las entidades marcadas
+		Singleton<EntidadManager>::instance()->refresh();
+
+		// Se cargan nuevas entidades
+
 	}
 }
 

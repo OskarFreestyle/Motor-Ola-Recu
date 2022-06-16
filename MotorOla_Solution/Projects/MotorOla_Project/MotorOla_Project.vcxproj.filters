@@ -65,6 +65,9 @@
     <ClCompile Include="..\..\Src\MotorOla\pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\MotorOla\SceneManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\MotorOla\utils\Vector2D.h">
@@ -148,6 +151,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\MotorOla\utils\checkML.h">
       <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\MotorOla\SceneManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -84,7 +84,6 @@ void OgreManager::init()
 
 void OgreManager::update()
 {
-
 	// Renderiza el frame actual
 	_root->renderOneFrame();
 }

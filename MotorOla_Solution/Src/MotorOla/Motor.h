@@ -43,7 +43,13 @@ public:
 	MOTOR_API Motor();
 	MOTOR_API ~Motor();
 
-	MOTOR_API void initSystems();
+	MOTOR_API void initSystemss();	// Quitar más adelante
+
+	/// <summary>
+	/// Inicia todos los singletons del motor
+	/// </summary>
+	/// <returns>Devuelve True si todo es correcto</returns>
+	MOTOR_API bool initSystems();
 
 	/// <summary>
 	/// Añadir aqui todos los componentes que se hagan

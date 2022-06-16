@@ -3,14 +3,13 @@
 
 #include <windows.h> // LARGE_INTEGER ...
 
-#define PVD_HOST "127.0.0.1"	//Set this to the IP address of the system running the PhysX Visual Debugger that you want to connect to.
+#define PVD_HOST "127.0.0.1"	// Set this to the IP address of the system running the PhysX Visual Debugger that you want to connect to.
 #define PX_RELEASE(x)	if(x)	{ x->release(); x = NULL;	}
 
 ///#include "callbacks.hpp"
 #include "EntidadManager.h"
 #include "RigidBody.h"
 #include "Transform.h"
-
 
 std::unique_ptr<PhysxManager> Singleton<PhysxManager>::instance_ = nullptr;
 
@@ -227,8 +226,6 @@ void PhysxManager::onCollision(physx::PxActor* actor1, physx::PxActor* actor2)
 		a->OnCollisionEnter(b);
 		if (a != nullptr && b != nullptr) b->OnCollisionEnter(a);
 	}
-
-	
 }
 
 void PhysxManager::onTrigger(physx::PxActor* actor1, physx::PxActor* actor2)
@@ -454,9 +451,6 @@ void PhysxManager::debugTime()
 	std::cout << "GlobalTimer : " << GlobalTimer << "\n";
 }
 
-
-
-#include "RigidBody.h"
 void PhysxManager::debugBuddy(Entidad* e)
 {
 	if (GetLastTime() - GlobalTimer > 2.0) {

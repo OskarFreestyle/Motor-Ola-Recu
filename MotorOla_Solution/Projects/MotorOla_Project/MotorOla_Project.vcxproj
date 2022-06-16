@@ -48,6 +48,7 @@
     <ClCompile Include="..\..\Src\MotorOla\PhysxManager.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\OverlayManager.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\RigidBody.cpp" />
+    <ClCompile Include="..\..\Src\MotorOla\SceneManager.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\Transform.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\utils\Quaterniola.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\utils\Vectola3D.cpp" />
@@ -75,6 +76,7 @@
     <ClInclude Include="..\..\Src\MotorOla\PhysxManager.h" />
     <ClInclude Include="..\..\Src\MotorOla\OverlayManager.h" />
     <ClInclude Include="..\..\Src\MotorOla\RigidBody.h" />
+    <ClInclude Include="..\..\Src\MotorOla\SceneManager.h" />
     <ClInclude Include="..\..\Src\MotorOla\Transform.h" />
     <ClInclude Include="..\..\Src\MotorOla\utils\checkML.h" />
     <ClInclude Include="..\..\Src\MotorOla\utils\Quaterniola.h" />

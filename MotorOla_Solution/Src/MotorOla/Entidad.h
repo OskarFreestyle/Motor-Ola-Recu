@@ -28,14 +28,11 @@ public:
 	MOTOR_API void OnCollisionEnter(Entidad* other);
 	MOTOR_API void OnTriggerEnter(Entidad* other);
 
-	
-
 	MOTOR_API inline EntidadManager* getEntityMngr() const { return _entManager; }
 
 	MOTOR_API inline void setEntityMngr(EntidadManager* mngr) { _entManager = mngr; }
 
 	MOTOR_API inline int getID() { return _id; }
-
 
 	template<typename T>
 	bool hasComponent() {
@@ -61,29 +58,40 @@ public:
 
 	Componente* addComponent(const std::string& compName, const std::map<std::string, std::string>& map);
 
-	MOTOR_API inline void setActive(bool state);
-	MOTOR_API inline void setName(std::string n) { _name = n; }
+	// Getters
+	MOTOR_API inline std::string getName() const { return _name; }
+	MOTOR_API inline std::string getTag() const { return _tag; }
+	MOTOR_API inline int getID() const { return _id; }
+	MOTOR_API inline bool getPaused() const { return _paused; };
 
-	MOTOR_API std::string getName() const { return _name; }
+	// Setters
+	MOTOR_API inline void setName(std::string n) { _name = n; }
+	MOTOR_API inline void setTag(std::string t) { _tag = t; };
+	MOTOR_API inline void setID(int i) { _id = i; }
+	MOTOR_API inline void setPaused(bool state) { _paused = state; };
+
+	MOTOR_API inline void setActive(bool state);//Quitar
 
 	MOTOR_API bool init();
 
 	MOTOR_API static Entidad* instantiate(std::string name, Vectola3D position = Vectola3D(), Quaterniola rotation = Quaterniola());
 
 private:
-	std::string _name;
-	int _id;
+	std::string _name;	// Nombre de la entidad
+	std::string _tag;	// Tag de la entidad
+	int _id;			// Id de la entidad (no tiene porque ser unico)
+	bool _paused;		// Si la entidad esta pausada
 
 	EntidadManager* _entManager;
 
-	std::vector<uptr_cmp> components;
-	bool active = true;
+	std::vector<uptr_cmp> components;	// Vector de componentes de la entidad
+	std::vector<bool> compinits;		// Marca los componentes que estan inicializados
+	std::vector<std::map<std::string, std::string>> compMaps;
+	
+	bool active = true;	// Quitar porque esto se va a hacer en el SceneManager
 
 
 	// Aqui estaran los componentes de esta entidad
-	std::vector<std::map<std::string, std::string>> compMaps;
-	std::vector<bool> compinits;
-
 	ComponentArray componentArray;
 	ComponentBitSet componentBitset;
 

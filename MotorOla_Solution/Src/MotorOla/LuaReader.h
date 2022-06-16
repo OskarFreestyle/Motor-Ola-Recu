@@ -10,6 +10,7 @@ extern "C"
 {
     struct lua_State;
 }
+
 class LuaScript
 {
 public:
