@@ -1,6 +1,7 @@
 #include "LoadResources.h"
+#include <iostream>
 
-std::unique_ptr<LoadResources> Singleton<LoadResources>::instance_ = nullptr;
+LoadResources* LoadResources::_singleton = nullptr;
 
 LoadResources::LoadResources()
 {
@@ -10,9 +11,14 @@ LoadResources::~LoadResources()
 {
 }
 
-void LoadResources::init()
-{
-	search(ASSETS);
+bool LoadResources::Init() {
+	// Si ya existe devuelve false
+	if (_singleton != nullptr) return false;
+
+	// Si lo tiene que crear devuelve true
+	_singleton = new LoadResources();
+	_singleton->search(ASSETS);
+	return true;
 }
 
 string LoadResources::mes(string m)

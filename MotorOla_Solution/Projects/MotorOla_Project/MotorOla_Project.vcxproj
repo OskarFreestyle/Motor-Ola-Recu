@@ -51,7 +51,6 @@
     <ClCompile Include="..\..\Src\MotorOla\Transform.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\utils\Quaterniola.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\utils\Vectola3D.cpp" />
-    <ClCompile Include="..\..\Src\MotorOla\utils\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\MotorOla\AudioManager.h" />
@@ -77,9 +76,7 @@
     <ClInclude Include="..\..\Src\MotorOla\Transform.h" />
     <ClInclude Include="..\..\Src\MotorOla\utils\checkML.h" />
     <ClInclude Include="..\..\Src\MotorOla\utils\Quaterniola.h" />
-    <ClInclude Include="..\..\Src\MotorOla\utils\Singleton.h" />
     <ClInclude Include="..\..\Src\MotorOla\utils\Vectola3D.h" />
-    <ClInclude Include="..\..\Src\MotorOla\utils\Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\MotorOla\Motor.h" />

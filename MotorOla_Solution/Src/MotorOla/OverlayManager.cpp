@@ -4,7 +4,7 @@
 #include "Motor.h"
 #include "OgreManager.h"
 
-std::unique_ptr<OverlayManager> Singleton<OverlayManager>::instance_ = nullptr;
+OverlayManager* OverlayManager::_singleton = nullptr;
 
 OverlayManager::~OverlayManager()
 {
@@ -17,7 +17,19 @@ OverlayManager::~OverlayManager()
 	overlayManager.destroyAllOverlayElements();
 }
 
-void OverlayManager::init(OgreManager*om,Motor* m)
+bool OverlayManager::Init(OgreManager* om_, Motor* m)
+{
+	// Si ya existe devuelve false
+	if (_singleton != nullptr) return false;
+
+	// Si lo tiene que crear devuelve true
+	_singleton = new OverlayManager();
+	_singleton->initOverlay(om_, m);
+
+	return true;
+}
+
+void OverlayManager::initOverlay(OgreManager* om, Motor* m)
 {
 	Ogre::OverlayManager& overlayManager = Ogre::OverlayManager::getSingleton();
 	mOverlay = 0;
@@ -26,7 +38,6 @@ void OverlayManager::init(OgreManager*om,Motor* m)
 	mOverlay->setZOrder(100);
 	og = om;
 	motor = m;
-			
 }
 
 void OverlayManager::update() {

@@ -11,14 +11,11 @@
 #include "RigidBody.h"
 #include "Transform.h"
 
-std::unique_ptr<PhysxManager> Singleton<PhysxManager>::instance_ = nullptr;
+PhysxManager* PhysxManager::_singleton = nullptr;
 
 PhysxManager::PhysxManager() 
 {
-	
-
-	PX_UNUSED(true);
-	
+	PX_UNUSED(true);	
 
 	// General settings
 	scale.length = 100;        // typical length of an object
@@ -496,6 +493,15 @@ void PhysxManager::debugAllBodies()
 
 ////----
 float stepTime = 0.0f;
+
+bool PhysxManager::Init() {
+	// Si ya existe devuelve false
+	if (_singleton != nullptr) return false;
+
+	// Si lo tiene que crear devuelve true
+	_singleton = new PhysxManager();
+	return true;
+}
 
 void PhysxManager::runPhysX()
 {

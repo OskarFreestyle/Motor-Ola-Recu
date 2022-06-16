@@ -6,28 +6,41 @@
 #endif
 #include <string>
 #include <unordered_map>
-#include "utils/Singleton.h"
 class Componente;
 
 typedef Componente* (*componentInstanceGenerator) ();
 
-MOTOR_API class ComponenteFactoria : public Singleton<ComponenteFactoria> {
+class MOTOR_API ComponenteFactoria {
 public:
-	ComponenteFactoria() {};
 	~ComponenteFactoria() {};
+
+	/// <summary>
+	/// Devuelve una instancia de la clase.
+	/// </summary>
+	inline static ComponenteFactoria* GetInstance() { return _singleton; }
+
+	/// <summary>
+	/// Inicializa la clase SceneManager con los parametros dados si no se ha inicializado antes.
+	/// Devuelve true si se inicializa por primera vez y false si ya habia sido inicializada.
+	/// </summary>
+	static bool Init();
+
 	///<summary>
 	///Devuele el componente si esta guardado en mGenerators, si no existe devuelve nullptr
 	///</summary>
-	MOTOR_API Componente* getComponent(std::string name);
+	Componente* getComponent(std::string name);
 
 	///<summary>
 	///Registra el nuevo componente que le pasas, primero el nombre (identificador del ecs) y luego el componente como tal
 	///</summary>
-	MOTOR_API bool registerGenerator(std::string compName, const componentInstanceGenerator& instGenerator);
+	bool registerGenerator(std::string compName, const componentInstanceGenerator& instGenerator);
 
-	
+protected:
+	static ComponenteFactoria* _singleton;
+
+	ComponenteFactoria() {};
+
 private:
-
 	// Tabla hash donde guardamos todos los componentes | Nombre -> Componente
 	std::unordered_map<std::string, componentInstanceGenerator> _mGenerators;
 };

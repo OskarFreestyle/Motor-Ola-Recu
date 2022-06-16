@@ -8,7 +8,6 @@
 
 #include <map>
 #include <string>
-#include "utils/Singleton.h"
 #include <filesystem>
 
 using namespace std::filesystem;
@@ -20,17 +19,32 @@ using namespace std;
 static const std::string ASSETS = "../../Exes/Assets/";
 
 
-MOTOR_API class LoadResources : public Singleton<LoadResources> {
-	friend Singleton<LoadResources>;
+class MOTOR_API LoadResources {
 public:
-	LoadResources();
 	~LoadResources();
-	MOTOR_API void init();
-	MOTOR_API string mes(string m);
-	MOTOR_API string aud(string name);
-	MOTOR_API string tex(string tex);
-	MOTOR_API string scene(string scene);
-	MOTOR_API string prefab(string prefab);
+
+	/// <summary>
+	/// Devuelve una instancia de la clase.
+	/// </summary>
+	inline static LoadResources* GetInstance() { return _singleton; }
+
+	/// <summary>
+	/// Inicializa la clase LoadResources con los parametros dados si no se ha inicializado antes.
+	/// Devuelve true si se inicializa por primera vez y false si ya habia sido inicializada.
+	/// </summary>
+	static bool Init();
+
+	string mes(string m);
+	string aud(string name);
+	string tex(string tex);
+	string scene(string scene);
+	string prefab(string prefab);
+
+protected:
+	static LoadResources* _singleton;
+
+	LoadResources();	// Constructor vacío
+
 private:
 	map<string, string>mesh;//.mesh
 	map<string, string>audio;//.mp3,.ogg,.wav

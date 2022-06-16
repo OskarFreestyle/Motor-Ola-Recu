@@ -5,7 +5,6 @@
 
 // Clases propias
 #include "Entidad.h"
-#include "utils/Singleton.h"
 #include "SceneManager.h"
 #include "OgreManager.h"
 #include "OverlayManager.h"
@@ -68,7 +67,7 @@ void readFile(std::string file) {
 		std::string aux = lua_tostring(l, -1);
 		std::string::size_type sz = 0, sa = 0;
 		float a = std::stof(aux, &sz), b = std::stof(aux.substr(sz + 1), &sa), c = std::stof(aux.substr(sz + sa + 2));
-		Singleton<OgreManager>::instance()->getViewPort()->setBackgroundColour(Ogre::ColourValue(a, b, c, 1.0f));
+		OgreManager::GetInstance()->getViewPort()->setBackgroundColour(Ogre::ColourValue(a, b, c, 1.0f));
 		lua_pop(l, 1);
 
 		// Luego la luz ambiente
@@ -76,7 +75,7 @@ void readFile(std::string file) {
 		std::string aux2 = lua_tostring(l, -1);
 		sz = 0, sa = 0;
 		a = std::stof(aux2, &sz); b = std::stof(aux2.substr(sz + 1), &sa); c = std::stof(aux2.substr(sz + sa + 2));
-		Singleton<OgreManager>::instance()->getSceneManager()->setAmbientLight(Ogre::ColourValue(a, b, c));
+		OgreManager::GetInstance()->getSceneManager()->setAmbientLight(Ogre::ColourValue(a, b, c));
 		lua_pop(l, 1);
 
 		// Modifica la gravedad de la escena
@@ -93,8 +92,8 @@ void readFile(std::string file) {
 		//lua_pushnil(l);
 
 		// Obtenemos la camara y su nodo
-		Ogre::Camera* cam = Singleton<OgreManager>::instance()->getCam();
-		Ogre::SceneNode* camNode = Singleton<OgreManager>::instance()->getCamNode();
+		Ogre::Camera* cam = OgreManager::GetInstance()->getCam();
+		Ogre::SceneNode* camNode = OgreManager::GetInstance()->getCamNode();
 
 		// Ajustamos sus parametros
 		lua_getfield(l, -1, "nearClipDistance");
@@ -129,7 +128,7 @@ void readFile(std::string file) {
 		camNode->lookAt(Ogre::Vector3(cx, cy, cz), Ogre::Node::TS_WORLD);
 		lua_pop(l, 1);	
 
-		Singleton<OgreManager>::instance()->getRenderWindow()->getViewport(0)->update();
+		OgreManager::GetInstance()->getRenderWindow()->getViewport(0)->update();
 
 		lua_pop(l, 1);
 
@@ -238,7 +237,7 @@ void readFileMenus(std::string file,const char* get)
 		std::string aux = lua_tostring(l, -1);
 		std::string::size_type sz = 0, sa = 0;
 		float a = std::stof(aux, &sz), b = std::stof(aux.substr(sz + 1), &sa), c = std::stof(aux.substr(sz + sa + 2));
-		Singleton<OgreManager>::instance()->getViewPort()->setBackgroundColour(Ogre::ColourValue(a, b, c, 1.0f));
+		OgreManager::GetInstance()->getViewPort()->setBackgroundColour(Ogre::ColourValue(a, b, c, 1.0f));
 		lua_pop(l, 1);
 
 		// Luego la luz ambiente
@@ -246,7 +245,7 @@ void readFileMenus(std::string file,const char* get)
 		std::string aux2 = lua_tostring(l, -1);
 		sz = 0, sa = 0;
 		a = std::stof(aux2, &sz); b = std::stof(aux2.substr(sz + 1), &sa); c = std::stof(aux2.substr(sz + sa + 2));
-		Singleton<OgreManager>::instance()->getSceneManager()->setAmbientLight(Ogre::ColourValue(a, b, c));
+		OgreManager::GetInstance()->getSceneManager()->setAmbientLight(Ogre::ColourValue(a, b, c));
 		lua_pop(l, 1);
 
 		// Modifica la gravedad de la escena
@@ -298,7 +297,7 @@ void readFileMenus(std::string file,const char* get)
 			float dimensionY = lua_tonumber(l, -1);
 			lua_pop(l, 1);
 
-			Singleton<OverlayManager>::instance()->creaBoton(positionX, positionY, texto, nombrePanel, nombreTexto, tamLetra, material, dimensionX, dimensionY);
+			OverlayManager::GetInstance()->creaBoton(positionX, positionY, texto, nombrePanel, nombreTexto, tamLetra, material, dimensionX, dimensionY);
 			
 			// Entity is no longer here, only key to be removed by lua_next
 			lua_pop(l, 1);

@@ -10,26 +10,33 @@
 #include <SDL.h>
 #include <array>
 
-#include "utils/Singleton.h"
 #include "OgreManager.h"
 
 // Instead of a Singleton class, we could make it part of
 // SDLUtils as well.
 
-MOTOR_API class InputManager : public Singleton<InputManager> {
-
-	friend Singleton<InputManager>;
-
+class MOTOR_API InputManager {
 public:
-	MOTOR_API enum MOUSEBUTTON : uint8_t {
+	enum MOUSEBUTTON : uint8_t {
 		LEFT = 0, MIDDLE = 1, RIGHT = 2
 	};
 
 	virtual ~InputManager() {
 	}
 
+	/// <summary>
+	/// Devuelve una instancia de la clase.
+	/// </summary>
+	inline static InputManager* GetInstance() { return _singleton; }
+
+	/// <summary>
+	/// Inicializa la clase SceneManager con los parametros dados si no se ha inicializado antes.
+	/// Devuelve true si se inicializa por primera vez y false si ya habia sido inicializada.
+	/// </summary>
+	static bool Init();
+
 	// clear the state
-	MOTOR_API inline void clearState() {
+	inline void clearState() {
 		_isCloseWindoEvent = false;
 		_isKeyDownEvent = false;
 		_isKeyUpEvent = false;
@@ -40,7 +47,7 @@ public:
 
 
 	// update the state with a new event
-	MOTOR_API inline void update(const SDL_Event& event) {
+	inline void update(const SDL_Event& event) {
 		switch (event.type) {
 		case SDL_KEYDOWN:
 			onKeyDown(event);
@@ -66,7 +73,7 @@ public:
 	}
 
 	// refresh
-	MOTOR_API inline void refresh() {
+	inline void refresh() {
 		SDL_Event event;
 
 		clearState();
@@ -75,59 +82,62 @@ public:
 	}
 
 	// close window event
-	MOTOR_API inline bool closeWindowEvent() {
+	inline bool closeWindowEvent() {
 		return _isCloseWindoEvent;
 	}
 
 	// keyboard
-	MOTOR_API inline bool keyDownEvent() {
+	inline bool keyDownEvent() {
 		return _isKeyDownEvent;
 	}
 
-	MOTOR_API inline bool keyUpEvent() {
+	inline bool keyUpEvent() {
 		return _isKeyUpEvent;
 	}
 
-	MOTOR_API inline bool isKeyDown(SDL_Scancode key) {
+	inline bool isKeyDown(SDL_Scancode key) {
 		return keyDownEvent() && _kbState[key] == 1;
 	}
 
-	MOTOR_API inline bool isKeyDown(SDL_Keycode key) {
+	inline bool isKeyDown(SDL_Keycode key) {
 		return isKeyDown(SDL_GetScancodeFromKey(key));
 	}
 
-	MOTOR_API inline bool isKeyUp(SDL_Scancode key) {
+	inline bool isKeyUp(SDL_Scancode key) {
 		return keyUpEvent() && _kbState[key] == 0;
 	}
 
-	MOTOR_API inline bool isKeyUp(SDL_Keycode key) {
+	inline bool isKeyUp(SDL_Keycode key) {
 		return isKeyUp(SDL_GetScancodeFromKey(key));
 	}
 
 	// mouse
-	MOTOR_API inline bool mouseMotionEvent() {
+	inline bool mouseMotionEvent() {
 		return _isMouseMotionEvent;
 	}
 
-	MOTOR_API inline bool mouseButtonEvent() {
+	inline bool mouseButtonEvent() {
 		return _isMouseButtonEvent;
 	}
 
-	MOTOR_API inline const std::pair<Sint32, Sint32>& getMousePos() {
+	inline const std::pair<Sint32, Sint32>& getMousePos() {
 		return _mousePos;
 	}
 
-	MOTOR_API inline int getMouseButtonState(MOUSEBUTTON b) {
+	inline int getMouseButtonState(MOUSEBUTTON b) {
 		return _mbState[b];
 	}
 
-	MOTOR_API inline std::pair<Sint32, Sint32> getMousePosInGame() {
+	inline std::pair<Sint32, Sint32> getMousePosInGame() {
 		std::pair<Sint32, Sint32>p;
-		p.first = _mousePos.first -(Singleton<OgreManager>::instance()->getWindowWidth() / 2);
-		p.second = _mousePos.second -(Singleton<OgreManager>::instance()->getWindowHeight() / 2);
+		p.first = _mousePos.first -(OgreManager::GetInstance()->getWindowWidth() / 2);
+		p.second = _mousePos.second -(OgreManager::GetInstance()->getWindowHeight() / 2);
 		return p;
 
 	}
+
+protected:
+	static InputManager* _singleton;
 
 private:
 	InputManager() {
@@ -192,6 +202,6 @@ private:
 // writing InputHandler::instance()->method() we write ih().method()
 //
 MOTOR_API inline InputManager& ih() {
-	return *InputManager::instance();
+	return *InputManager::GetInstance();
 }
 

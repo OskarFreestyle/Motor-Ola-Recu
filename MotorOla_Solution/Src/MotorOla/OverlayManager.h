@@ -7,11 +7,8 @@
 #endif
 
 #include <string>
-#include "./utils/Singleton.h"
 #include <Ogre.h>
 #include "OverlayManager.h"
-
-
 
 #include <OgreOverlayElement.h>
 
@@ -28,25 +25,36 @@
 #include <OgrePanelOverlayElement.h>
 #include <OgreOverlay.h>
 
-
 #include <vector>
 class Motor;
 class OgreManager;
 using CallBackOnClick = void(Motor* m);
 
-MOTOR_API class OverlayManager : public Singleton<OverlayManager> {
+class MOTOR_API OverlayManager {
 	
 public:
-	OverlayManager() {  };
 	virtual ~OverlayManager();
-	MOTOR_API void init(OgreManager* om_,Motor* m);
-	MOTOR_API void update();
 
-	MOTOR_API void creaBoton(float x,float y,const std::string& texto, const std::string& nombrePanel, const std::string& nombreTexto,float tamLetra,const std::string& material,float dimX,float dimY/*, CallBackOnClick* click_*/);
-	MOTOR_API void setCallBackToButton(std::string p, CallBackOnClick* click_);
-	MOTOR_API void creaTexto(float x, float y, const std::string& texto, const std::string& nombreTexto, float tamLetra,const std::string& nombrePanel,float dimX,float dimY);
-	MOTOR_API void creaPanel(float x, float y,  const std::string& nombrePanel, const std::string& material, float dimX, float dimY);
-	MOTOR_API Ogre::TextAreaOverlayElement* getTexto(std::string panelName, std::string textName);
+	/// <summary>
+	/// Devuelve una instancia de la clase.
+	/// </summary>
+	inline static OverlayManager* GetInstance() { return _singleton; }
+
+	/// <summary>
+	/// Inicializa la clase SceneManager con los parametros dados si no se ha inicializado antes.
+	/// Devuelve true si se inicializa por primera vez y false si ya habia sido inicializada.
+	/// </summary>
+	static bool Init(OgreManager* om_, Motor* m);
+
+	void initOverlay(OgreManager* om_, Motor* m);
+
+	void update();
+
+	void creaBoton(float x,float y,const std::string& texto, const std::string& nombrePanel, const std::string& nombreTexto,float tamLetra,const std::string& material,float dimX,float dimY/*, CallBackOnClick* click_*/);
+	void setCallBackToButton(std::string p, CallBackOnClick* click_);
+	void creaTexto(float x, float y, const std::string& texto, const std::string& nombreTexto, float tamLetra,const std::string& nombrePanel,float dimX,float dimY);
+	void creaPanel(float x, float y,  const std::string& nombrePanel, const std::string& material, float dimX, float dimY);
+	Ogre::TextAreaOverlayElement* getTexto(std::string panelName, std::string textName);
 
 	/// <summary>
 	/// Solo cambia a rojo o negro
@@ -55,13 +63,16 @@ public:
 	/// <param name="textName"></param>
 	/// <param name="newColor">"Red" para rojo y ya</param>
 	/// <returns></returns>
-	MOTOR_API void changeTextColor(std::string panelName, std::string textName, std::string newColor);
-	MOTOR_API Ogre::PanelOverlayElement* getPanel(std::string name);
-	MOTOR_API Ogre::PanelOverlayElement* getBoton(std::string name);
-	MOTOR_API void clear();
-	MOTOR_API Motor* getMotor();
+	void changeTextColor(std::string panelName, std::string textName, std::string newColor);
+	Ogre::PanelOverlayElement* getPanel(std::string name);
+	Ogre::PanelOverlayElement* getBoton(std::string name);
+	void clear();
+	Motor* getMotor();
 
+protected:
+	static OverlayManager* _singleton;
 
+	OverlayManager() {};
 private:
 	
 
@@ -73,7 +84,6 @@ private:
 	
 	OgreManager* og;
 	Motor* motor;
-	
 };
 
 

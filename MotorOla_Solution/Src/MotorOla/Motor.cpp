@@ -12,7 +12,6 @@
 #include <OgreVector.h>
 
 // Managers
-#include "utils/Singleton.h"
 #include "OgreManager.h"
 #include "InputManager.h"
 #include "LoadResources.h"
@@ -36,12 +35,7 @@
 Motor::Motor()
 {
 	// Inicia los managers
-	Singleton<LoadResources>::instance();
-	Singleton<OgreManager>::instance();	
-
-	Singleton<OverlayManager>::instance();
-	Singleton<PhysxManager>::instance();
-	std::cout << "MANAGERS INSTANCIADOS CORRECTAMENTE\n";
+	std::cout << "MOTOR VACIO INICIADO CORRECTAMENTE\n";
 }
 
 Motor::~Motor()
@@ -51,8 +45,8 @@ Motor::~Motor()
 	// Destruye los managers en orden inverso a la creaci�n (PC: puede que esto no sea necesario porque al cerrar se borran solos)
 	if (AudioManager::GetInstance() != nullptr) delete AudioManager::GetInstance();
 	if (SceneManager::GetInstance() != nullptr) delete SceneManager::GetInstance();
-	if (Singleton<LoadResources>::instance() != nullptr) delete Singleton<LoadResources>::instance();
-	//if (Singleton<PhysxManager>::instance() != nullptr) delete Singleton<PhysxManager>::instance();
+	if (PhysxManager::GetInstance() != nullptr) delete PhysxManager::GetInstance();
+	if (LoadResources::GetInstance() != nullptr) delete LoadResources::GetInstance();
 }
 
 bool Motor::initSystems()
@@ -62,12 +56,11 @@ bool Motor::initSystems()
 		// Ya cambiados
 		SceneManager::Init();
 		AudioManager::Init();
-
-		// Cambiar
-		Singleton<LoadResources>::instance()->init();
-		Singleton<OgreManager>::instance()->init();
-		Singleton<OverlayManager>::instance()->init(Singleton<OgreManager>::instance(), this);
-		pm().init();
+		LoadResources::Init();
+		PhysxManager::Init();
+		InputManager::Init();
+		OgreManager::Init();
+		OverlayManager::Init(OgreManager::GetInstance(), this);
 	}
 	catch (std::exception e) {
 #if (defined _DEBUG)
@@ -154,15 +147,15 @@ void Motor::mainLoop()
 
 		// TODO creo que quitar en un futuro cuando los overlays sean componentes
 		// Actualiza los transforms de las entitys despues de las fisicas
-		if (Singleton<OverlayManager>::instance() != nullptr) {
-			Singleton<OverlayManager>::instance()->update();
+		if (OverlayManager::GetInstance() != nullptr) {
+			OverlayManager::GetInstance()->update();
 		}
 
 		// Actualiza el resto de componentes (tambien los del juego)
 		//Singleton<EntidadManager>::instance()->update();
 
 		// Renderiza un frame
-		Singleton<OgreManager>::instance()->update();
+		OgreManager::GetInstance()->update();
 
 		// Se eliminan las entidades marcadas
 		SceneManager::GetInstance()->deleteEntities();
@@ -203,7 +196,7 @@ bool Motor::loadScene(std::string name) {
 		//Singleton<EntidadManager>::instance()->pauseEntidades();
 
 		// Devuelve la ruta de la escena
-		std::string sceneRoute = Singleton<LoadResources>::instance()->scene(name).c_str();
+		std::string sceneRoute = LoadResources::GetInstance()->scene(name).c_str();
 
 		// Lee la escena cargando todas las entidades y sus componentes
 		readFile(sceneRoute);
@@ -223,7 +216,7 @@ bool Motor::loadMenu(std::string name,const char*get) {
 		//Singleton<EntidadManager>::instance()->pauseEntidades();
 
 		// Devuelve la ruta de la escena
-		std::string sceneRoute = Singleton<LoadResources>::instance()->scene(name).c_str();
+		std::string sceneRoute = LoadResources::GetInstance()->scene(name).c_str();
 
 		// Lee la escena cargando todas las entidades y sus componentes
 		readFileMenus(sceneRoute,get);

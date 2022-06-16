@@ -1,6 +1,15 @@
 #include "ComponenteFactoria.h"
 
-std::unique_ptr<ComponenteFactoria> Singleton<ComponenteFactoria>::instance_ = nullptr;
+ComponenteFactoria* ComponenteFactoria::_singleton = nullptr;
+
+bool ComponenteFactoria::Init() {
+	// Si ya existe devuelve false
+	if (_singleton != nullptr) return false;
+
+	// Si lo tiene que crear devuelve true
+	_singleton = new ComponenteFactoria();
+	return true;
+}
 
 Componente* ComponenteFactoria::getComponent(std::string name)
 {

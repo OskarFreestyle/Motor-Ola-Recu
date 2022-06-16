@@ -6,7 +6,6 @@
 #define MOTOR_API __declspec(dllimport)
 #endif
 
-#include "utils\Singleton.h"
 #include <PxPhysicsAPI.h>
 #include <vector>
 #include <cassert>
@@ -27,81 +26,92 @@ MOTOR_API inline std::ostream& operator<<(std::ostream& os, const physx::PxQuat&
 	return os;
 }
 
-MOTOR_API class PhysxManager : public Singleton<PhysxManager> {
-	friend Singleton<PhysxManager>;
+class MOTOR_API PhysxManager {
 public:	
 	~PhysxManager();
 
+	/// <summary>
+	/// Devuelve una instancia de la clase.
+	/// </summary>
+	inline static PhysxManager* GetInstance() { return _singleton; }
+
+	/// <summary>
+	/// Inicializa la clase PhysxManager con los parametros dados si no se ha inicializado antes.
+	/// Devuelve true si se inicializa por primera vez y false si ya habia sido inicializada.
+	/// </summary>
+	static bool Init();
+
 	// main resources
-	MOTOR_API void runPhysX();
-	MOTOR_API void togglePause() { mPause != mPause; };
+	void runPhysX();
+	void togglePause() { mPause != mPause; };
 
 	// transform
-	MOTOR_API PxTransform globalToPhysxTR(Transform& tr);
-	MOTOR_API Transform physxToGlobalTR(const PxRigidActor& body);
+	PxTransform globalToPhysxTR(Transform& tr);
+	Transform physxToGlobalTR(const PxRigidActor& body);
 	
 	// elimina memoria
-	MOTOR_API void releaseScene();
-	MOTOR_API void releaseBody(PxActor& body);
+	void releaseScene();
+	void releaseBody(PxActor& body);
 
 	// MAIN SINGLETON
-	MOTOR_API void init();
-	MOTOR_API void update(bool interactive, double t);
-	MOTOR_API void close(bool interactive);
+	void init();
+	void update(bool interactive, double t);
+	void close(bool interactive);
 
 	// utils
-	MOTOR_API void stepPhysics(bool interactive, double t);
-	MOTOR_API void onCollision(physx::PxActor* actor1, physx::PxActor* actor2);
-	MOTOR_API void onTrigger(physx::PxActor* actor1, physx::PxActor* actor2);
+	void stepPhysics(bool interactive, double t);
+	void onCollision(physx::PxActor* actor1, physx::PxActor* actor2);
+	void onTrigger(physx::PxActor* actor1, physx::PxActor* actor2);
 
 	// TIMER
-	MOTOR_API void StartCounter();
-	MOTOR_API double GetCounter();
-	MOTOR_API double GetLastTime();
+	void StartCounter();
+	double GetCounter();
+	double GetLastTime();
 
 	// testing debug
-	MOTOR_API void debugTime();
-	MOTOR_API void debugBall();
-	MOTOR_API void debugBuddy(Entidad* e);
-	MOTOR_API void debugBody(PxRigidDynamic* rd);
-	MOTOR_API void debugAllBodies();
+	void debugTime();
+	void debugBall();
+	void debugBuddy(Entidad* e);
+	void debugBody(PxRigidDynamic* rd);
+	void debugAllBodies();
 
 	// FACTORY
-	MOTOR_API PxRigidDynamic* createDynamic(const PxTransform& transform, const PxVec3& velocity = PxVec3(PxZero));
-	MOTOR_API PxRigidDynamic* createDynamic(const PxTransform& transform, const PxGeometry& geometry, PxMaterial& material, const PxVec3& velocity = PxVec3(PxZero));
-	MOTOR_API PxRigidDynamic* createDynamic(const PxTransform& transform, PxShape* shape, const PxVec3& velocity = PxVec3(PxZero));
+	PxRigidDynamic* createDynamic(const PxTransform& transform, const PxVec3& velocity = PxVec3(PxZero));
+	PxRigidDynamic* createDynamic(const PxTransform& transform, const PxGeometry& geometry, PxMaterial& material, const PxVec3& velocity = PxVec3(PxZero));
+	PxRigidDynamic* createDynamic(const PxTransform& transform, PxShape* shape, const PxVec3& velocity = PxVec3(PxZero));
 	
-	MOTOR_API PxRigidStatic* createStaticRigid(const PxTransform& transform);
-	MOTOR_API PxRigidStatic* createStaticRigid(const PxTransform& transform, const PxGeometry& geom, PxMaterial& material);
-	MOTOR_API PxRigidStatic* createStaticRigid(const PxTransform& transform, PxShape* shape);
+	PxRigidStatic* createStaticRigid(const PxTransform& transform);
+	PxRigidStatic* createStaticRigid(const PxTransform& transform, const PxGeometry& geom, PxMaterial& material);
+	PxRigidStatic* createStaticRigid(const PxTransform& transform, PxShape* shape);
 
-	MOTOR_API PxShape* createShape(const PxGeometry& geom, PxMaterial& material, bool isExclusive = false);
-	MOTOR_API PxShape* createTriggerShape(const PxGeometry& geom, PxMaterial& material, bool isExclusive = false);
+	PxShape* createShape(const PxGeometry& geom, PxMaterial& material, bool isExclusive = false);
+	PxShape* createTriggerShape(const PxGeometry& geom, PxMaterial& material, bool isExclusive = false);
 
 	// factory prefabs
-	MOTOR_API PxRigidStatic* createTriggerStaticBox(const PxVec3 halfExtent = PxVec3(10.0f, 1.0f, 10.0f), const PxTransform& transform = PxTransform(0.0f, 10.0f, 0.0f));
-	MOTOR_API PxRigidDynamic* createBall();
-	MOTOR_API void createStackBoxes(const PxTransform& t, PxU32 size, PxReal halfExtent);
-	MOTOR_API void tiledStacks(PxReal num = 5, PxReal sideLength = 1.0f);
+	PxRigidStatic* createTriggerStaticBox(const PxVec3 halfExtent = PxVec3(10.0f, 1.0f, 10.0f), const PxTransform& transform = PxTransform(0.0f, 10.0f, 0.0f));
+	PxRigidDynamic* createBall();
+	void createStackBoxes(const PxTransform& t, PxU32 size, PxReal halfExtent);
+	void tiledStacks(PxReal num = 5, PxReal sideLength = 1.0f);
 
 	// Getters
-	MOTOR_API int getID(int k) { return _ids[k]; };
-	MOTOR_API std::vector<int>* getIDs() { return &_ids; };
-	MOTOR_API PxPhysics* getPhysX() { return mPhysics; };
-	MOTOR_API PxScene* getScene() { return mScene; };
-	MOTOR_API PxMaterial* getMaterial() { return mMaterial; };
-	MOTOR_API Entidad* findEntityByPxActor(PxActor* actor);
+	int getID(int k) { return _ids[k]; };
+	std::vector<int>* getIDs() { return &_ids; };
+	PxPhysics* getPhysX() { return mPhysics; };
+	PxScene* getScene() { return mScene; };
+	PxMaterial* getMaterial() { return mMaterial; };
+	Entidad* findEntityByPxActor(PxActor* actor);
 
 	// Setters
-	MOTOR_API void addEntityID(int id) { _ids.push_back(id); };
-	MOTOR_API void addEntityToEraseID(int id) { ids_erase.push_back(id); };
-	MOTOR_API void setGlobalToPhysxTR(Entidad& e, PxRigidActor& body);
-	MOTOR_API void setPhysxToGlobalTR(Entidad& e, PxRigidActor& body);
+	void addEntityID(int id) { _ids.push_back(id); };
+	void addEntityToEraseID(int id) { ids_erase.push_back(id); };
+	void setGlobalToPhysxTR(Entidad& e, PxRigidActor& body);
+	void setPhysxToGlobalTR(Entidad& e, PxRigidActor& body);
+
+protected:
+	static PhysxManager* _singleton;
 
 private:
 	PhysxManager();
-	
-
 
 	// ON/OFF physics
 	bool	mPause = false;
@@ -147,10 +157,10 @@ private:
 // Esta macro define una forma compacta para usar el Singleton PhysxManager, 
 // en lugar de escribir 'PhysxManager::instance()->method()' escribiremos 'im().method()'
 inline PhysxManager& pm() {
-	return *PhysxManager::instance();
+	return *PhysxManager::GetInstance();
 }
 
-// Forma breve de acceder al creador y padre todopoderoso de las fisicas
+ // Forma breve de acceder al creador y padre todopoderoso de las fisicas
 inline PxPhysics* physX() {
-	return PhysxManager::instance()->getPhysX();
+	return PhysxManager::GetInstance()->getPhysX();
 }

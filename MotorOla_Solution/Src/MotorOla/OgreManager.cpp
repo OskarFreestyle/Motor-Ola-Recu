@@ -15,8 +15,7 @@
 
 #include "InputManager.h"
 
-std::unique_ptr<OgreManager> Singleton<OgreManager>::instance_ = nullptr;
-
+OgreManager* OgreManager::_singleton = nullptr;
 
 OgreManager::OgreManager(const Ogre::String& appName)
 {
@@ -33,7 +32,17 @@ OgreManager::~OgreManager()
 	delete _fileSystemLayer;
 }
 
-void OgreManager::init()
+bool OgreManager::Init() {
+	// Si ya existe devuelve false
+	if (_singleton != nullptr) return false;
+
+	// Si lo tiene que crear devuelve true
+	_singleton = new OgreManager();
+	_singleton->initOgre();
+	return true;
+}
+
+void OgreManager::initOgre()
 {
     // Crea el root de Ogre
     createRoot();

@@ -1,21 +1,19 @@
 #include "Mesh.h"
 #include "Entidad.h"
 #include "Transform.h"
-#include "utils/Singleton.h"
-#include "utils/Vector2D.h"
 #include "OgreManager.h"
 
 
 Mesh::Mesh()
 {
-	_sceneManager = Singleton<OgreManager>::instance()->getSceneManager();
+	_sceneManager = OgreManager::GetInstance()->getSceneManager();
 	_nodo = _sceneManager->getRootSceneNode()->createChildSceneNode();
 }
 
 Mesh::~Mesh()
 {
-	Singleton<OgreManager>::instance()->getSceneManager()->destroyEntity(_ogreEntity);
-	Singleton<OgreManager>::instance()->getSceneManager()->destroySceneNode(_nodo);
+	OgreManager::GetInstance()->getSceneManager()->destroyEntity(_ogreEntity);
+	OgreManager::GetInstance()->getSceneManager()->destroySceneNode(_nodo);
 }
 
 

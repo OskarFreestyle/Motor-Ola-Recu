@@ -17,7 +17,7 @@ bool SceneManager::Init() {
 	if (_singleton != nullptr) return false;
 
 	// Si lo tiene que crear devuelve true
-	_singleton = new SceneManager(); 
+	_singleton = new SceneManager();
 	return true;
 }
 
@@ -102,7 +102,7 @@ void SceneManager::newScene(std::string sceneName) {
 	// Cambia el nombre de la escena
 	_sceneName = sceneName;
 	// Buscar la ruta de dicha escena (el scene.lua)
-	_sceneNameRoute = LoadResources::instance()->scene(sceneName);
+	_sceneNameRoute = LoadResources::GetInstance()->scene(sceneName);
 	// Marca que hay una nueva escena para que se cargue al frame siguiente
 	_newScene = true;
 }
