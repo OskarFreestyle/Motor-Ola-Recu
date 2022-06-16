@@ -1,5 +1,4 @@
 #pragma once
-
 #ifdef MOTOR_EXPORTS
 #define MOTOR_API __declspec(dllexport)
 #else
@@ -7,23 +6,56 @@
 #endif
 
 #include <string>
-#include "./utils/Singleton.h"
+#include <fmod.hpp>
+#include <fmod_errors.h>
+#include <map>
 
-MOTOR_API class AudioManager : public Singleton<AudioManager> {
-	friend Singleton<AudioManager>;
+class MOTOR_API AudioManager {
 public:
-	AudioManager() {};
-	virtual ~AudioManager() {};
+	~AudioManager();
 
-	MOTOR_API virtual void init() = 0;
-	MOTOR_API virtual void update() = 0;
+	/// <summary>
+	/// Devuelve una instancia de la clase.
+	/// </summary>
+	inline static AudioManager* GetInstance() { return _singleton; }
 
-	MOTOR_API virtual void loadMusic(int channel, const char* fileName) = 0;
-	MOTOR_API virtual void playMusic(int channel, bool loops) = 0;
-	MOTOR_API virtual void stopMusic(int channel) = 0;
-	MOTOR_API virtual void togglePause(int channel) = 0;
-	MOTOR_API virtual void setVolume(int chan, int volume) = 0;
-	MOTOR_API virtual void setPitch(int chan, int pitch) = 0;
-	MOTOR_API virtual void fadeIn(int chan) = 0;
-	MOTOR_API virtual void fadeOut(int chan) = 0;
+	/// <summary>
+	/// Inicializa la clase AudioManager con los parametros dados si no se ha inicializado antes.
+	/// Devuelve true si se inicializa por primera vez y false si ya habia sido inicializada.
+	/// </summary>
+	static bool Init();
+
+	void update();
+
+	void loadMusic(int channel, const char* fileName);
+	void playMusic(int channel, bool loops);
+	void stopMusic(int channel);
+	void togglePause(int channel);
+	void setVolume(int chan, int volume);
+	void setPitch(int chan, int pitch);
+	void fadeIn(int chan);
+	void fadeOut(int chan);
+	void checkError(FMOD_RESULT result);
+	int getCont();
+	bool getMute();
+	void setMute(bool m);
+	FMOD::Channel* getChannel(int i);
+
+protected:
+	static AudioManager* _singleton;
+
+	AudioManager() {
+		result = System_Create(&system);
+		checkError(result);
+		result = system->init(128, FMOD_INIT_NORMAL, 0);
+		checkError(result);
+	};
+
+private:
+	FMOD::System* system = nullptr;
+	FMOD_RESULT result = FMOD_OK;
+	FMOD::Channel* channel[24];
+	FMOD::Sound* sound[24];
+	bool mute = false;
+	int cont = 0;
 };

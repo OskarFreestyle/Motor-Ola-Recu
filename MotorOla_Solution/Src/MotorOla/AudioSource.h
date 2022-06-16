@@ -1,17 +1,18 @@
 #pragma once
 #include "Componente.h"
-class FMODAudioManager;
+class AudioManager;
 using namespace std;
+
 class AudioSource :	public Componente
 {
 public:
-	AudioSource(int channel,FMODAudioManager*a,const char* s);
+	AudioSource(int channel, AudioManager*a,const char* s);
 	~AudioSource();
 
 	void play();
 	void pause();
 private:
-	FMODAudioManager* aud;
+	AudioManager* aud;
 	int _channel;
 };
 

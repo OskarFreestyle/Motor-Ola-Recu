@@ -30,12 +30,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Src\MotorOla\AudioManager.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\AudioSource.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\ContactReportCallback.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\Collider.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\dllmain.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\InputManager.cpp" />
-    <ClCompile Include="..\..\Src\MotorOla\FMODAudioManager.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\LoadResources.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\LuaReader.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\Mesh.cpp" />
@@ -68,7 +68,6 @@
     <ClInclude Include="..\..\Src\MotorOla\LoadResources.h" />
     <ClInclude Include="..\..\Src\MotorOla\LuaReader.h" />
     <ClInclude Include="..\..\Src\MotorOla\OgreManager.h" />
-    <ClInclude Include="..\..\Src\MotorOla\FMODAudioManager.h" />
     <ClInclude Include="..\..\Src\MotorOla\Mesh.h" />
     <ClInclude Include="..\..\Src\MotorOla\pch.h" />
     <ClInclude Include="..\..\Src\MotorOla\PhysxManager.h" />

@@ -20,14 +20,14 @@ Entidad::Entidad(std::string entityName, int id, std::string entityTag) :
 
 Entidad::~Entidad()
 {
-	int n = components.size();
-	for (int i = 0; i < n; i++)
-	{
-		if (components.at(i) != nullptr) {
-			components.at(i).reset();
-			components.at(i) = nullptr;
-		}
-	}
+	//int n = components.size();
+	//for (int i = 0; i < n; i++)
+	//{
+	//	if (components.at(i) != nullptr) {
+	//		components.at(i).reset();
+	//		components.at(i) = nullptr;
+	//	}
+	//}
 }
 
 void Entidad::update()

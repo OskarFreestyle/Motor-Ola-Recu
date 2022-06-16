@@ -16,7 +16,7 @@
 #include "OgreManager.h"
 #include "InputManager.h"
 #include "LoadResources.h"
-#include "FMODAudioManager.h"
+#include "AudioManager.h"
 #include "OverlayManager.h"
 #include "PhysxManager.h"
 #include "SceneManager.h"
@@ -39,7 +39,6 @@ Motor::Motor()
 	Singleton<LoadResources>::instance();
 	Singleton<OgreManager>::instance();	
 
-	Singleton<FMODAudioManager>::instance();
 	Singleton<OverlayManager>::instance();
 	Singleton<PhysxManager>::instance();
 	std::cout << "MANAGERS INSTANCIADOS CORRECTAMENTE\n";
@@ -50,7 +49,7 @@ Motor::~Motor()
 	// Libera la libreria dinamica (el juego)
 	FreeLibrary(hDLL);
 	// Destruye los managers en orden inverso a la creaci�n (PC: puede que esto no sea necesario porque al cerrar se borran solos)
-	if (Singleton<FMODAudioManager>::instance() != nullptr) delete Singleton<FMODAudioManager>::instance();
+	if (AudioManager::GetInstance() != nullptr) delete AudioManager::GetInstance();
 	if (SceneManager::GetInstance() != nullptr) delete SceneManager::GetInstance();
 	if (Singleton<LoadResources>::instance() != nullptr) delete Singleton<LoadResources>::instance();
 	//if (Singleton<PhysxManager>::instance() != nullptr) delete Singleton<PhysxManager>::instance();
@@ -62,11 +61,11 @@ bool Motor::initSystems()
 	try {
 		// Ya cambiados
 		SceneManager::Init();
+		AudioManager::Init();
 
 		// Cambiar
 		Singleton<LoadResources>::instance()->init();
 		Singleton<OgreManager>::instance()->init();
-		Singleton<FMODAudioManager>::instance()->init();
 		Singleton<OverlayManager>::instance()->init(Singleton<OgreManager>::instance(), this);
 		pm().init();
 	}
@@ -88,7 +87,6 @@ void Motor::initSystemss()
 	// Inicia los sistemas
 	//Singleton<LoadResources>::instance()->init();
 	//Singleton<OgreManager>::instance()->init();
-	//Singleton<FMODAudioManager>::instance()->init();
 	//Singleton<OverlayManager>::instance()->init(Singleton<OgreManager>::instance(),this);
 	//pm().init();
 

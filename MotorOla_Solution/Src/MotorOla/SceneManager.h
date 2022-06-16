@@ -8,7 +8,7 @@
 #include "Entidad.h"
 #include <vector>
 
-class SceneManager {
+class MOTOR_API SceneManager {
 public:
 	~SceneManager();
 

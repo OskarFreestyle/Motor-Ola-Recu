@@ -1,7 +1,7 @@
 #include "AudioSource.h"
-#include "FMODAudioManager.h"
+#include "AudioManager.h"
 
-AudioSource::AudioSource(int channel,FMODAudioManager* a,const char* s):aud(a),_channel(channel)
+AudioSource::AudioSource(int channel,AudioManager* a,const char* s):aud(a),_channel(channel)
 {
 	aud->loadMusic(_channel, s);
 }
