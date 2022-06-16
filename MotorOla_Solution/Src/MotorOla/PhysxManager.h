@@ -54,7 +54,7 @@ public:
 	void releaseBody(PxActor& body);
 
 	// MAIN SINGLETON
-	void init();
+	void initPhysx();
 	void update(bool interactive, double t);
 	void close(bool interactive);
 
@@ -124,8 +124,6 @@ private:
 	__int64 GlobalTimer = 0;
 
 	// Variables editables
-	
-
 	PxTolerancesScale scale;
 	PxCudaContextManagerDesc cudaDesc;
 

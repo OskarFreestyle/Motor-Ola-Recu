@@ -29,6 +29,8 @@ PhysxManager::~PhysxManager()
 	std::cout << " - - - - - - - - - - - - - \n";
 }
 
+
+
 // -------------- TIMER ----------------------------------------------------------------
 
 void PhysxManager::StartCounter()
@@ -61,7 +63,7 @@ double PhysxManager::GetLastTime()
 
 // ------------ MAIN SINGLETON -------------------------------------------------------
 
-void PhysxManager::init()
+void PhysxManager::initPhysx()
 {
 	// Foundation --------------------------------------------------------------------
 	mFoundation = PxCreateFoundation(PX_PHYSICS_VERSION, mAllocator, mErrorCallback);
@@ -500,6 +502,7 @@ bool PhysxManager::Init() {
 
 	// Si lo tiene que crear devuelve true
 	_singleton = new PhysxManager();
+	_singleton->initPhysx();
 	return true;
 }
 

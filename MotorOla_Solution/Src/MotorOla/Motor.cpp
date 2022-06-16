@@ -43,10 +43,19 @@ Motor::~Motor()
 	// Libera la libreria dinamica (el juego)
 	FreeLibrary(hDLL);
 	// Destruye los managers en orden inverso a la creaci�n (PC: puede que esto no sea necesario porque al cerrar se borran solos)
-	if (AudioManager::GetInstance() != nullptr) delete AudioManager::GetInstance();
-	if (SceneManager::GetInstance() != nullptr) delete SceneManager::GetInstance();
+	if (OverlayManager::GetInstance() != nullptr) delete OverlayManager::GetInstance();
+	if (OgreManager::GetInstance() != nullptr) delete OgreManager::GetInstance();
+	if (InputManager::GetInstance() != nullptr) delete InputManager::GetInstance();
 	if (PhysxManager::GetInstance() != nullptr) delete PhysxManager::GetInstance();
 	if (LoadResources::GetInstance() != nullptr) delete LoadResources::GetInstance();
+	if (AudioManager::GetInstance() != nullptr) delete AudioManager::GetInstance();
+	if (SceneManager::GetInstance() != nullptr) delete SceneManager::GetInstance();
+	if (ComponenteFactoria::GetInstance() != nullptr) delete ComponenteFactoria::GetInstance();
+
+#if (defined _DEBUG)
+	std::cout << "--------- MOTOR BORRADO CORRECTAMENTE ----------\n";
+#endif
+
 }
 
 bool Motor::initSystems()
@@ -54,6 +63,7 @@ bool Motor::initSystems()
 	// Intenta iniciar todos los singletons del motor
 	try {
 		// Ya cambiados
+		ComponenteFactoria::Init();
 		SceneManager::Init();
 		AudioManager::Init();
 		LoadResources::Init();
@@ -61,6 +71,7 @@ bool Motor::initSystems()
 		InputManager::Init();
 		OgreManager::Init();
 		OverlayManager::Init(OgreManager::GetInstance(), this);
+		std::cout << "Singletons iniciados correctamente\n";
 	}
 	catch (std::exception e) {
 #if (defined _DEBUG)
@@ -86,7 +97,9 @@ void Motor::initSystemss()
 	// Se registran los componentes que conoce el motor
 	registryComponents();
 
+#if (defined _DEBUG)
 	std::cout << "ANTES DE CARGAR JUEGO TRY\n";
+#endif
 
 	// El motor intenta cargar un juego, pero si hay algun error se arranca con la funcion loadTestMotorGame
 	try {
