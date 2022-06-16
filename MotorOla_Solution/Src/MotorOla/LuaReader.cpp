@@ -6,7 +6,7 @@
 // Clases propias
 #include "Entidad.h"
 #include "utils/Singleton.h"
-#include "EntidadManager.h"
+#include "SceneManager.h"
 #include "OgreManager.h"
 #include "OverlayManager.h"
 #include <stdio.h>
@@ -148,9 +148,12 @@ void readFile(std::string file) {
 			int id = lua_tonumber(l, -1);
 			lua_pop(l, 1);
 
-			Entidad* ent = Singleton<EntidadManager>::instance()->addEntidad(name, id);
+
+			//Entidad* ent = Singleton<EntidadManager>::instance()->addEntidad(name, id);
+			Entidad* ent = new Entidad(name, id);
 			ents.push_back(ent);
 			entInits.push_back(false);
+			SceneManager::GetInstance()->addEntity(ent);
 
 			// Components
 			// Calls a similar while loop, creating a set<string, string> with each pair
@@ -188,7 +191,6 @@ void readFile(std::string file) {
 #endif
 		lua_close(l);
 
-		int initTotales = 0;
 		int i = 0;
 		int numEnts = ents.size();
 		int initedEnts = 0;
@@ -197,13 +199,11 @@ void readFile(std::string file) {
 				++initedEnts;
 				entInits[i] = true;
 				std::cout << "Entidad " << i << " iniciada\n";
-				initTotales++;
+				SceneManager::GetInstance()->addEntity(ents[i]);
 			}
 			++i;
 			i %= numEnts;
 		}
-
-		std::cout << "Init Totales "<< initTotales << "\n";
 	}
 	catch (...) {
 		throw std::exception("Lua file has incorrect formatting\n");
@@ -212,13 +212,10 @@ void readFile(std::string file) {
 
 void readFileMenus(std::string file,const char* get)
 {
-
 	// Preparamos un LuaState para leer el fichero
 	lua_State* l;
 	l = luaL_newstate();
 	openlualibs(l);
-
-
 	
 	if (!luaL_loadfile(l, file.c_str()) && lua_pcall(l, 0, 0, 0)) {
 		std::cout << lua_tostring(l, -1) << "\n";
@@ -394,7 +391,8 @@ Entidad* readPrefab(std::string file) {
 		lua_pop(l, 1);
 		
 
-		Entidad* ent = Singleton<EntidadManager>::instance()->addEntidad(name, id);
+		Entidad* ent = new Entidad(name, id);
+		SceneManager::GetInstance()->addEntity(ent);
 
 		// Components
 		// Calls a similar while loop, creating a set<string, string> with each pair

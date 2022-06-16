@@ -9,14 +9,12 @@
 #include "utils/Vectola3D.h"
 #include "utils/Quaterniola.h"
 
-class EntidadManager;
-
 class Entidad
 {
 	using uptr_cmp = std::unique_ptr<Componente>;
 public:
 	Entidad();
-	Entidad(std::string entityName, int id);
+	Entidad(std::string entityName, int id, std::string entidadTag = "Default");
 
 	virtual ~Entidad();
 
@@ -27,10 +25,6 @@ public:
 
 	MOTOR_API void OnCollisionEnter(Entidad* other);
 	MOTOR_API void OnTriggerEnter(Entidad* other);
-
-	MOTOR_API inline EntidadManager* getEntityMngr() const { return _entManager; }
-
-	MOTOR_API inline void setEntityMngr(EntidadManager* mngr) { _entManager = mngr; }
 
 	MOTOR_API inline int getID() { return _id; }
 
@@ -54,7 +48,6 @@ public:
 		}
 		return ret;
 	}
-
 
 	Componente* addComponent(const std::string& compName, const std::map<std::string, std::string>& map);
 
@@ -81,8 +74,6 @@ private:
 	std::string _tag;	// Tag de la entidad
 	int _id;			// Id de la entidad (no tiene porque ser unico)
 	bool _paused;		// Si la entidad esta pausada
-
-	EntidadManager* _entManager;
 
 	std::vector<uptr_cmp> components;	// Vector de componentes de la entidad
 	std::vector<bool> compinits;		// Marca los componentes que estan inicializados

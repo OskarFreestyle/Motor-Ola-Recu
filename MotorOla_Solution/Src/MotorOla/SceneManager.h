@@ -23,6 +23,8 @@ public:
 	/// </summary>
 	static bool Init();
 
+	void updateEntidades();
+
 	/// <summary>
 	/// Añade una entidad a la lista. Si existe devuelve false, sino, true y la añade.
 	/// </summary>
@@ -46,7 +48,7 @@ public:
 	/// <summary>
 	/// Devuelve una lista con todas las entidades creadas.
 	/// </summary>
-	inline std::vector<Entidad*>* getEntities() { return &_entities; }
+	inline std::vector<Entidad*>* getEntities() { return &_entidades; }
 
 	/// <summary>
 	/// Avisa al manager de que se va a cargar una escana
@@ -85,7 +87,7 @@ protected:
 	std::string _sceneNameRoute;	// La ruta de la escena
 	std::string _sceneName;			// El nombre de la escena como tal
 
-	std::vector<Entidad*> _entities;			// Vector con las entidades que hay
-	std::vector<Entidad*> _entitiesToRemove;	// Vector con las entidades a borrar al final del frame
-	std::vector<Entidad*> _entitiesToLoad;		// Vector con las entidades a cargar al final del frame
+	std::vector<Entidad*> _entidades;			// Vector con las entidades que hay
+	std::vector<Entidad*> _entidadesToRemove;	// Vector con las entidades a borrar al final del frame
+	std::vector<Entidad*> _entidadesToLoad;		// Vector con las entidades a cargar al final del frame
 };

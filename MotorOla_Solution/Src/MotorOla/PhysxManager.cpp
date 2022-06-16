@@ -7,7 +7,7 @@
 #define PX_RELEASE(x)	if(x)	{ x->release(); x = NULL;	}
 
 ///#include "callbacks.hpp"
-#include "EntidadManager.h"
+#include "SceneManager.h"
 #include "RigidBody.h"
 #include "Transform.h"
 
@@ -154,10 +154,12 @@ void PhysxManager::update(bool interactive, double t)
 		return;
 
 	// Actualiza las posiciones: Transform global --> PxTransform
-	auto it = em().getAllEntidades().begin();
-	while (it != em().getAllEntidades().end()) {
-		Entidad* e = (*it).get();
+	std::vector<Entidad*>* currEntities = SceneManager::GetInstance()->getEntities();
+	auto it = currEntities->begin();
+	while (it != currEntities->end()) {
+		Entidad* e = (*it);
 		it++;
+		// Si no tiene Rigidbody no hace falta
 		if (e->getComponent<RigidBody>() == nullptr) continue;
 		RigidBody* body = e->getComponent<RigidBody>();
 		if (body->getBody()) setGlobalToPhysxTR(*e, *body->getBody());
@@ -167,10 +169,11 @@ void PhysxManager::update(bool interactive, double t)
 	stepPhysics(interactive, 1.0f/60.0f);
 
 	// Actualiza las posiciones: PxTransform --> Transform global
-	it = em().getAllEntidades().begin();
-	while (it != em().getAllEntidades().end()) {
-		Entidad* e = (*it).get();
+	it = currEntities->begin();
+	while (it != currEntities->end()) {
+		Entidad* e = (*it);
 		it++;
+		// Si no tiene Rigidbody no hace falta
 		if (e->getComponent<RigidBody>() == nullptr) continue;
 		RigidBody* body = e->getComponent<RigidBody>();
 		if (body->getBody()) setPhysxToGlobalTR(*e, *body->getBody());
@@ -285,9 +288,10 @@ Transform PhysxManager::physxToGlobalTR(const PxRigidActor& body)
 MOTOR_API Entidad* PhysxManager::findEntityByPxActor(PxActor* actor)
 {
 	RigidBody* body = nullptr;
-	auto it = em().getAllEntidades().begin();
-	while (it != em().getAllEntidades().end()) {
-		Entidad* e = (*it).get();
+	std::vector<Entidad*>* currEntities = SceneManager::GetInstance()->getEntities();
+	auto it = currEntities->begin();
+	while (it != currEntities->end()) {
+		Entidad* e = (*it);
 		it++;
 
 		if (e->getComponent<RigidBody>() == nullptr) continue;
@@ -475,9 +479,10 @@ void PhysxManager::debugBody(PxRigidDynamic* rd)
 void PhysxManager::debugAllBodies()
 {
 	if (GetLastTime() - GlobalTimer > 2.0) {
-		auto it = em().getAllEntidades().begin();
-		while (it != em().getAllEntidades().end()) {
-			Entidad* e = (*it).get();
+		std::vector<Entidad*>* currEntities = SceneManager::GetInstance()->getEntities();
+		auto it = currEntities->begin();
+		while (it != currEntities->end()) {
+			Entidad* e = (*it);
 			it++;
 			if (e->getComponent<RigidBody>() == nullptr) continue;
 			RigidBody* body = e->getComponent<RigidBody>();

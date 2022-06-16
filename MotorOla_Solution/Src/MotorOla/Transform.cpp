@@ -1,7 +1,7 @@
 #include "Transform.h"
 #include "OgreManager.h"
 #include "utils/Singleton.h"
-#include "EntidadManager.h"
+#include "SceneManager.h"
 #include "Entidad.h"
 
 Transform::Transform() :
@@ -25,7 +25,8 @@ bool Transform::init(const std::map<std::string, std::string>& mapa)
 
 	std::string parentString = mapa.at("parent");
 	if (std::stoi(parentString) >= 0) {
-		setParent(Singleton<EntidadManager>::instance()->getEntidadByID(stoi(parentString))->getComponent<Transform>());
+		setParent(SceneManager::GetInstance()->getEntityByID(stoi(parentString))->getComponent<Transform>());
+		//setParent(Singleton<EntidadManager>::instance()->getEntidadByID(stoi(parentString))->getComponent<Transform>());
 	}
 
 	std::string posString = mapa.at("position");

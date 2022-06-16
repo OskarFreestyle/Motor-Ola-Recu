@@ -1,7 +1,6 @@
 #include "Entidad.h"
 #include "Transform.h"
 #include "LoadResources.h"
-#include "EntidadManager.h"
 #include "PhysxManager.h"
 #include "LuaReader.h"
 #include "RigidBody.h"
@@ -9,14 +8,13 @@
 #include "ComponenteFactoria.h"
 
 
-Entidad::Entidad():
-	_entManager(nullptr),
-	active(true)
+Entidad::Entidad() : 
+	_name("Entity"), _id(), _tag("Default"), _paused(false)
 {
 }
 
-Entidad::Entidad(std::string entityName, int id) :
-	_entManager(nullptr), active(true), _name(entityName), _id(id)
+Entidad::Entidad(std::string entityName, int id, std::string entityTag) :
+	_name(entityName), _tag(entityTag), _id(id), _paused(false)
 {
 }
 

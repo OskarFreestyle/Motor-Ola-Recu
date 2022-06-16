@@ -7,9 +7,9 @@ SceneManager* SceneManager::_singleton = nullptr;
 
 SceneManager::~SceneManager() {
 	// Vaciamos todos los vectores de entidades
-	for (Entidad* e : _entities) if (e != nullptr) delete e;
-	for (Entidad* r : _entitiesToRemove) if (r != nullptr) delete r;
-	for (Entidad* l : _entitiesToLoad) if (l != nullptr) delete l;
+	for (Entidad* e : _entidades) if (e != nullptr) delete e;
+	for (Entidad* r : _entidadesToRemove) if (r != nullptr) delete r;
+	for (Entidad* l : _entidadesToLoad) if (l != nullptr) delete l;
 }
 
 bool SceneManager::Init() {
@@ -21,26 +21,34 @@ bool SceneManager::Init() {
 	return true;
 }
 
+void SceneManager::updateEntidades()
+{
+	// Para todas las entidades
+	for (Entidad* e : _entidades)
+		// Si no esta pausada se actualiza (actualiza sus todos sus componentes) 
+		if (!e->getPaused()) e->update();
+}
+
 bool SceneManager::addEntity(Entidad* ent) {
 	// Primero comprueba que la entidad no exista 
-	auto it = find(_entities.begin(), _entities.end(), ent);
-	if (it != _entities.end()) return false;
+	auto it = find(_entidades.begin(), _entidades.end(), ent);
+	if (it != _entidades.end()) return false;
 
 	// Luego se comprueba que la entidad no este en la lista de entidades a crear
-	it = find(_entitiesToLoad.begin(), _entitiesToLoad.end(), ent);
-	if (it != _entitiesToLoad.end()) return false;
+	it = find(_entidadesToLoad.begin(), _entidadesToLoad.end(), ent);
+	if (it != _entidadesToLoad.end()) return false;
 
 	// Despues añade esa entidad a la lista de entidades que crear
-	_entitiesToLoad.push_back(ent); return true;
+	_entidadesToLoad.push_back(ent); return true;
 }
 
 bool SceneManager::addEntityToRemove(Entidad* ent) {
-	auto it = find(_entities.begin(), _entities.end(), ent);
-	if (it == _entities.end()) return false;
+	auto it = find(_entidades.begin(), _entidades.end(), ent);
+	if (it == _entidades.end()) return false;
 
 	//Se cambian las entidades al vector de eliminar
-	_entitiesToRemove.push_back(*it);
-	_entities.erase(it);
+	_entidadesToRemove.push_back(*it);
+	_entidades.erase(it);
 	return true;
 }
 
@@ -48,8 +56,8 @@ Entidad* SceneManager::getEntityByID(int id)
 {
 	// Busca entre las entidades activas
 	Entidad* ent = nullptr;
-	auto it = _entities.begin();
-	while (ent == nullptr && it != _entities.end()) {
+	auto it = _entidades.begin();
+	while (ent == nullptr && it != _entidades.end()) {
 		if ((*it)->getID() == id)
 			ent = *it;
 		++it;
@@ -57,8 +65,8 @@ Entidad* SceneManager::getEntityByID(int id)
 
 	//Si no se encuentra, entre las entidades a crear
 	if (ent == nullptr) {
-		auto it = _entitiesToLoad.begin();
-		while (ent == nullptr && it != _entitiesToLoad.end()) {
+		auto it = _entidadesToLoad.begin();
+		while (ent == nullptr && it != _entidadesToLoad.end()) {
 			if ((*it)->getID() == id)
 				ent = *it;
 			++it;
@@ -69,22 +77,22 @@ Entidad* SceneManager::getEntityByID(int id)
 
 void SceneManager::removeEntities() {
 	// Borra todas las entidades marcadas
-	for (Entidad* e : _entitiesToRemove) {
+	for (Entidad* e : _entidadesToRemove) {
 		if (e) delete e;
 	}
-	_entitiesToRemove.clear();
+	_entidadesToRemove.clear();
 }
 
 void SceneManager::deleteEntities() {
 	//Elimina todas las entidades creadas y a crear
-	for (Entidad* e : _entities) {
-		_entitiesToRemove.push_back(e);
+	for (Entidad* e : _entidades) {
+		_entidadesToRemove.push_back(e);
 	}
-	for (Entidad* e : _entitiesToLoad) {
-		_entitiesToRemove.push_back(e);
+	for (Entidad* e : _entidadesToLoad) {
+		_entidadesToRemove.push_back(e);
 	}
-	_entities.clear();
-	_entitiesToLoad.clear();
+	_entidades.clear();
+	_entidadesToLoad.clear();
 }
 
 
@@ -107,14 +115,14 @@ void SceneManager::loadEntities() {
 	}
 
 	// Crea dichas entidades
-	for (Entidad* e : _entitiesToLoad)
-		_entities.push_back(e);
-	_entitiesToLoad.clear();
+	for (Entidad* e : _entidadesToLoad)
+		_entidades.push_back(e);
+	_entidadesToLoad.clear();
 }
 
 void SceneManager::pauseScene() {
 	// Marca en pausa todas las entidades de la escena actual
-	for (Entidad* e : _entities) e->setPaused(true);
+	for (Entidad* e : _entidades) e->setPaused(true);
 
 	// TODO PAUSAR FISICAS
 	//PhysxManager::instance()->togglePause();
@@ -122,7 +130,7 @@ void SceneManager::pauseScene() {
 }
 
 void SceneManager::continueScene() {
-	for (Entidad* e : _entities) {
+	for (Entidad* e : _entidades) {
 		//Si es una entidad pausada la reanuda
 		if (e->getPaused())
 			e->setPaused(false);

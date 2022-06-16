@@ -14,7 +14,6 @@
 // Managers
 #include "utils/Singleton.h"
 #include "OgreManager.h"
-#include "EntidadManager.h"
 #include "InputManager.h"
 #include "LoadResources.h"
 #include "FMODAudioManager.h"
@@ -39,11 +38,6 @@ Motor::Motor()
 	// Inicia los managers
 	Singleton<LoadResources>::instance();
 	Singleton<OgreManager>::instance();	
-	
-	Singleton<EntidadManager>::instance();
-
-	
-
 
 	Singleton<FMODAudioManager>::instance();
 	Singleton<OverlayManager>::instance();
@@ -57,7 +51,7 @@ Motor::~Motor()
 	FreeLibrary(hDLL);
 	// Destruye los managers en orden inverso a la creaci�n (PC: puede que esto no sea necesario porque al cerrar se borran solos)
 	if (Singleton<FMODAudioManager>::instance() != nullptr) delete Singleton<FMODAudioManager>::instance();
-	if (Singleton<EntidadManager>::instance() != nullptr) delete Singleton<EntidadManager>::instance();
+	if (SceneManager::GetInstance() != nullptr) delete SceneManager::GetInstance();
 	if (Singleton<LoadResources>::instance() != nullptr) delete Singleton<LoadResources>::instance();
 	//if (Singleton<PhysxManager>::instance() != nullptr) delete Singleton<PhysxManager>::instance();
 }
@@ -66,7 +60,15 @@ bool Motor::initSystems()
 {
 	// Intenta iniciar todos los singletons del motor
 	try {
+		// Ya cambiados
 		SceneManager::Init();
+
+		// Cambiar
+		Singleton<LoadResources>::instance()->init();
+		Singleton<OgreManager>::instance()->init();
+		Singleton<FMODAudioManager>::instance()->init();
+		Singleton<OverlayManager>::instance()->init(Singleton<OgreManager>::instance(), this);
+		pm().init();
 	}
 	catch (std::exception e) {
 #if (defined _DEBUG)
@@ -74,17 +76,21 @@ bool Motor::initSystems()
 #endif
 		return false;
 	}
+
+	// Quitar
+	initSystemss();
+
 	return true;
 }
 
 void Motor::initSystemss()
 {
 	// Inicia los sistemas
-	Singleton<LoadResources>::instance()->init();
-	Singleton<OgreManager>::instance()->init();
-	Singleton<FMODAudioManager>::instance()->init();
-	Singleton<OverlayManager>::instance()->init(Singleton<OgreManager>::instance(),this);
-	pm().init();
+	//Singleton<LoadResources>::instance()->init();
+	//Singleton<OgreManager>::instance()->init();
+	//Singleton<FMODAudioManager>::instance()->init();
+	//Singleton<OverlayManager>::instance()->init(Singleton<OgreManager>::instance(),this);
+	//pm().init();
 
 	// Se registran los componentes que conoce el motor
 	registryComponents();
@@ -127,7 +133,8 @@ void Motor::mainLoop()
 
 	while (!stop) {
 		// Recoge un puntero con el vector de entidades;
-		Singleton<EntidadManager>::instance()->refresh();
+		std::vector<Entidad*>* currEntities = SceneManager::GetInstance()->getEntities();
+		//Singleton<EntidadManager>::instance()->refresh();
 
 		// Borra el Input del frame anterior
 		ih().clearState();
@@ -136,31 +143,35 @@ void Motor::mainLoop()
 			ih().update(event);
 
 		// Cierra la aplicacion con ESCAPE
-		//if (ih().isKeyDown(SDL_SCANCODE_ESCAPE)) {
-		//	stop = true;
-		//	continue;
-		//}
+		if (ih().isKeyDown(SDL_SCANCODE_ESCAPE)) {
+			stop = true;
+			continue;
+		}
 
 		// Actualizar las fisicas de las entidades
 		pm().runPhysX();
 
+		// Actualiza las entidades (lo cual llama a actualizar cada uno de sus componentes)
+		SceneManager::GetInstance()->updateEntidades();
 
+		// TODO creo que quitar en un futuro cuando los overlays sean componentes
 		// Actualiza los transforms de las entitys despues de las fisicas
 		if (Singleton<OverlayManager>::instance() != nullptr) {
 			Singleton<OverlayManager>::instance()->update();
 		}
 
 		// Actualiza el resto de componentes (tambien los del juego)
-		Singleton<EntidadManager>::instance()->update();
+		//Singleton<EntidadManager>::instance()->update();
 
 		// Renderiza un frame
 		Singleton<OgreManager>::instance()->update();
 
 		// Se eliminan las entidades marcadas
-		Singleton<EntidadManager>::instance()->refresh();
+		SceneManager::GetInstance()->deleteEntities();
+		//Singleton<EntidadManager>::instance()->refresh();
 
 		// Se cargan nuevas entidades
-
+		SceneManager::GetInstance()->loadEntities();
 	}
 }
 
@@ -190,7 +201,8 @@ void Motor::loadDLLGame()
 bool Motor::loadScene(std::string name) {
 	try {
 		// Borra las entidades de la escena actual
-		Singleton<EntidadManager>::instance()->pauseEntidades();
+		SceneManager::GetInstance()->pauseScene();
+		//Singleton<EntidadManager>::instance()->pauseEntidades();
 
 		// Devuelve la ruta de la escena
 		std::string sceneRoute = Singleton<LoadResources>::instance()->scene(name).c_str();
@@ -209,7 +221,8 @@ bool Motor::loadScene(std::string name) {
 bool Motor::loadMenu(std::string name,const char*get) {
 	try {
 		// Borra las entidades de la escena actual
-		Singleton<EntidadManager>::instance()->pauseEntidades();
+		SceneManager::GetInstance()->pauseScene();
+		//Singleton<EntidadManager>::instance()->pauseEntidades();
 
 		// Devuelve la ruta de la escena
 		std::string sceneRoute = Singleton<LoadResources>::instance()->scene(name).c_str();
@@ -235,8 +248,6 @@ bool Motor::getStop()
 {
 	return stop;
 }
-
-
 
 void Motor::setStop(bool s)
 {
