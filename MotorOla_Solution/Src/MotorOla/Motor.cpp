@@ -45,12 +45,12 @@ Motor::~Motor()
 	// Destruye los managers en orden inverso a la creaci�n (PC: puede que esto no sea necesario porque al cerrar se borran solos)
 	if (LuaReader::GetInstance() != nullptr) delete LuaReader::GetInstance();
 	if (OverlayManager::GetInstance() != nullptr) delete OverlayManager::GetInstance();
-	if (OgreManager::GetInstance() != nullptr) delete OgreManager::GetInstance();
 	if (InputManager::GetInstance() != nullptr) delete InputManager::GetInstance();
 	if (PhysxManager::GetInstance() != nullptr) delete PhysxManager::GetInstance();
 	if (LoadResources::GetInstance() != nullptr) delete LoadResources::GetInstance();
 	if (AudioManager::GetInstance() != nullptr) delete AudioManager::GetInstance();
 	if (SceneManager::GetInstance() != nullptr) delete SceneManager::GetInstance();
+	if (OgreManager::GetInstance() != nullptr) delete OgreManager::GetInstance();
 	if (ComponenteFactoria::GetInstance() != nullptr) delete ComponenteFactoria::GetInstance();
 #if (defined _DEBUG)
 	std::cout << "--------- MOTOR BORRADO CORRECTAMENTE ----------\n";
@@ -142,7 +142,6 @@ void Motor::mainLoop()
 	while (!stop) {
 		// Recoge un puntero con el vector de entidades;
 		std::vector<Entidad*>* currEntities = SceneManager::GetInstance()->getEntities();
-		//Singleton<EntidadManager>::instance()->refresh();
 
 		// Borra el Input del frame anterior
 		ih().clearState();
@@ -158,6 +157,7 @@ void Motor::mainLoop()
 
 		// Actualizar las fisicas de las entidades
 		pm().runPhysX();
+
 		// Actualiza las entidades (lo cual llama a actualizar cada uno de sus componentes)
 		SceneManager::GetInstance()->updateEntidades();
 
@@ -166,9 +166,6 @@ void Motor::mainLoop()
 		if (OverlayManager::GetInstance() != nullptr) {
 			OverlayManager::GetInstance()->update();
 		}
-
-		// Actualiza el resto de componentes (tambien los del juego)
-		//Singleton<EntidadManager>::instance()->update();
 
 		// Renderiza un frame
 		OgreManager::GetInstance()->update();

@@ -20,7 +20,6 @@ RigidBody::~RigidBody()
 
 bool RigidBody::init(const std::map<std::string, std::string>& mapa)
 {
-
 	// Recoge si existe el componente transform
 	Transform* tr = getEntidad()->getComponent<Transform>();
 

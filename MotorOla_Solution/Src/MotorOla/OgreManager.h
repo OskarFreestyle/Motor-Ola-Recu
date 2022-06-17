@@ -100,7 +100,7 @@ private:
 	Ogre::Root* _root = nullptr;
 	NativeWindowPair _window;
 	Ogre::FileSystemLayer* _fileSystemLayer = nullptr;
-	Ogre::OverlaySystem* _overlaySystem=nullptr;  // Overlay system
+	Ogre::OverlaySystem* _overlaySystem = nullptr;  // Overlay system
 	Ogre::SceneManager* _sceneManager = nullptr;
 	Ogre::Viewport* _vp = nullptr;
 	Ogre::Camera* cam = nullptr;

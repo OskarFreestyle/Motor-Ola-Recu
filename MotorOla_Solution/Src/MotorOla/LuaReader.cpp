@@ -74,14 +74,6 @@ void LuaReader::readFile(std::string file) {
 			throw std::exception("Lua function GetLevel was not able to be loaded");
 		}
 
-		//// Primero asigna el color de fondo de la escena
-		//lua_getfield(l, -1, "backgroundColor");
-		//std::string aux = lua_tostring(l, -1);
-		//std::string::size_type sz = 0, sa = 0;
-		//float a = std::stof(aux, &sz), b = std::stof(aux.substr(sz + 1), &sa), c = std::stof(aux.substr(sz + sa + 2));
-		//OgreManager::GetInstance()->getViewPort()->setBackgroundColour(Ogre::ColourValue(a, b, c, 1.0f));
-		//lua_pop(l, 1);
-
 		// Luego la luz ambiente
 		lua_getfield(l, -1, "ambient");
 		std::string aux2 = lua_tostring(l, -1);
