@@ -74,19 +74,19 @@ void LuaReader::readFile(std::string file) {
 			throw std::exception("Lua function GetLevel was not able to be loaded");
 		}
 
-		// Primero asigna el color de fondo de la escena
-		lua_getfield(l, -1, "backgroundColor");
-		std::string aux = lua_tostring(l, -1);
-		std::string::size_type sz = 0, sa = 0;
-		float a = std::stof(aux, &sz), b = std::stof(aux.substr(sz + 1), &sa), c = std::stof(aux.substr(sz + sa + 2));
-		OgreManager::GetInstance()->getViewPort()->setBackgroundColour(Ogre::ColourValue(a, b, c, 1.0f));
-		lua_pop(l, 1);
+		//// Primero asigna el color de fondo de la escena
+		//lua_getfield(l, -1, "backgroundColor");
+		//std::string aux = lua_tostring(l, -1);
+		//std::string::size_type sz = 0, sa = 0;
+		//float a = std::stof(aux, &sz), b = std::stof(aux.substr(sz + 1), &sa), c = std::stof(aux.substr(sz + sa + 2));
+		//OgreManager::GetInstance()->getViewPort()->setBackgroundColour(Ogre::ColourValue(a, b, c, 1.0f));
+		//lua_pop(l, 1);
 
 		// Luego la luz ambiente
 		lua_getfield(l, -1, "ambient");
 		std::string aux2 = lua_tostring(l, -1);
-		sz = 0, sa = 0;
-		a = std::stof(aux2, &sz); b = std::stof(aux2.substr(sz + 1), &sa); c = std::stof(aux2.substr(sz + sa + 2));
+		std::string::size_type sz = 0, sa = 0;
+		float a = std::stof(aux2, &sz); float b = std::stof(aux2.substr(sz + 1), &sa); float c = std::stof(aux2.substr(sz + sa + 2));
 		OgreManager::GetInstance()->getSceneManager()->setAmbientLight(Ogre::ColourValue(a, b, c));
 		lua_pop(l, 1);
 
@@ -96,53 +96,52 @@ void LuaReader::readFile(std::string file) {
 		sz = 0, sa = 0;
 		a = std::stof(aux3, &sz); b = std::stof(aux3.substr(sz + 1), &sa); c = std::stof(aux3.substr(sz + sa + 2));
 		pm().getScene()->setGravity(PxVec3(a, b, c));
-
 		lua_pop(l, 1);
 
 		// Modifica la camara de la escena
-		lua_getfield(l, -1, "camera");
-		//lua_pushnil(l);
+		//lua_getfield(l, -1, "camera");
+		////lua_pushnil(l);
 
-		// Obtenemos la camara y su nodo
-		Ogre::Camera* cam = OgreManager::GetInstance()->getCam();
-		Ogre::SceneNode* camNode = OgreManager::GetInstance()->getCamNode();
+		//// Obtenemos la camara y su nodo
+		//Ogre::Camera* cam = OgreManager::GetInstance()->getCam();
+		//Ogre::SceneNode* camNode = OgreManager::GetInstance()->getCamNode();
 
-		// Ajustamos sus parametros
-		lua_getfield(l, -1, "nearClipDistance");
-		int nCD = lua_tonumber(l, -1);
-		cam->setNearClipDistance(nCD);
-		lua_pop(l, 1);
+		//// Ajustamos sus parametros
+		//lua_getfield(l, -1, "nearClipDistance");
+		//int nCD = lua_tonumber(l, -1);
+		//cam->setNearClipDistance(nCD);
+		//lua_pop(l, 1);
 
-		lua_getfield(l, -1, "farClipDistance");
-		int fCD = lua_tonumber(l, -1);
-		cam->setFarClipDistance(fCD);
-		lua_pop(l, 1);
+		//lua_getfield(l, -1, "farClipDistance");
+		//int fCD = lua_tonumber(l, -1);
+		//cam->setFarClipDistance(fCD);
+		//lua_pop(l, 1);
 
-		lua_getfield(l, -1, "camPosition");
-		sz = 0, sa = 0;
-		std::string camPos = lua_tostring(l, -1);
-		float cx, cy, cz;
-		cx = stof(camPos, &sz);
-		std::string temp = camPos.substr(sz + 1);
-		cy = stof(temp, &sa);
-		cz = stof(camPos.substr(sz + sa + 2));
-		camNode->setPosition(cx, cy, cz);
-		////////////////camNode->setPosition(0, -800, 1200);////////_test_caidas_forma_javi_////////
-		lua_pop(l, 1);
+		//lua_getfield(l, -1, "camPosition");
+		//sz = 0, sa = 0;
+		//std::string camPos = lua_tostring(l, -1);
+		//float cx, cy, cz;
+		//cx = stof(camPos, &sz);
+		//std::string temp = camPos.substr(sz + 1);
+		//cy = stof(temp, &sa);
+		//cz = stof(camPos.substr(sz + sa + 2));
+		//camNode->setPosition(cx, cy, cz);
+		//////////////////camNode->setPosition(0, -800, 1200);////////_test_caidas_forma_javi_////////
+		//lua_pop(l, 1);
 
-		lua_getfield(l, -1, "camRotation");
-		sz = 0; sa = 0;
-		std::string camRot = lua_tostring(l, -1);
-		cx = stof(camRot, &sz);
-		temp = camRot.substr(sz + 1);
-		cy = stof(temp, &sa);
-		cz = stof(camRot.substr(sz + sa + 2));
-		camNode->lookAt(Ogre::Vector3(cx, cy, cz), Ogre::Node::TS_WORLD);
-		lua_pop(l, 1);	
+		//lua_getfield(l, -1, "camRotation");
+		//sz = 0; sa = 0;
+		//std::string camRot = lua_tostring(l, -1);
+		//cx = stof(camRot, &sz);
+		//temp = camRot.substr(sz + 1);
+		//cy = stof(temp, &sa);
+		//cz = stof(camRot.substr(sz + sa + 2));
+		//camNode->lookAt(Ogre::Vector3(cx, cy, cz), Ogre::Node::TS_WORLD);
+		//lua_pop(l, 1);	
 
-		OgreManager::GetInstance()->getRenderWindow()->getViewport(0)->update();
+		//OgreManager::GetInstance()->getRenderWindow()->getViewport(0)->update();
 
-		lua_pop(l, 1);
+		//lua_pop(l, 1);
 
 		// Después lee todas las entidades y los componentes de cada una
 		lua_getfield(l, -1, "entidades");

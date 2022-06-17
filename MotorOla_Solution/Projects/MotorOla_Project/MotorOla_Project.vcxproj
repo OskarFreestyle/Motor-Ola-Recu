@@ -32,6 +32,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\Src\MotorOla\AudioManager.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\AudioSource.cpp" />
+    <ClCompile Include="..\..\Src\MotorOla\Camera.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\ContactReportCallback.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\Collider.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\dllmain.cpp" />
@@ -55,6 +56,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\Src\MotorOla\AudioManager.h" />
     <ClInclude Include="..\..\Src\MotorOla\AudioSource.h" />
+    <ClInclude Include="..\..\Src\MotorOla\Camera.h" />
     <ClInclude Include="..\..\Src\MotorOla\ContactReportCallback.h" />
     <ClInclude Include="..\..\Src\MotorOla\Collider.h" />
     <ClInclude Include="..\..\Src\MotorOla\Componente.h" />

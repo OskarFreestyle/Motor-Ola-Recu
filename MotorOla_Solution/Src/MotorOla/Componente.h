@@ -2,6 +2,7 @@
 #include "ECS.h"
 #include <map>
 #include <string>
+#include "utils/Vectola3D.h"
 
 class Entidad;
 
@@ -16,8 +17,6 @@ public:
 	virtual void start() {};
 	virtual void update() {};
 
-	
-
 	//Para triggers
 	virtual void onTriggerStart(Entidad* other) {};
 	virtual void onTriggerStay(Entidad* other) {};
@@ -30,13 +29,17 @@ public:
 
 	virtual void draw() {};
 
-	inline bool setActive(bool state) { _active = state; }
-	inline bool setInitialized(bool state) { _inicializado = state; }
+	inline void setActive(bool state) { _active = state; }
+	inline void setInitialized(bool state) { _inicializado = state; }
 	
+	inline bool getActive() const { return _active; }
+	inline bool getInitialized() const { return _inicializado; }
+
 	inline void setEntidad(Entidad* entity)	{ _entity = entity;	}
 	inline Entidad* getEntidad() const { return _entity; }
 
 protected:
+	virtual void render() {};
 	bool _active = true;
 	bool _inicializado= false;
 	Entidad* _entity = nullptr;

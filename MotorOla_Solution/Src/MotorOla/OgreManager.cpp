@@ -55,24 +55,21 @@ void OgreManager::initOgre()
 	// Agregado una prueba
 	_sceneManager = _root->createSceneManager();
 	
-	
-	// Create the camera
-	cam = _sceneManager->createCamera("Cam");
-	cam->setNearClipDistance(1);
-	cam->setFarClipDistance(10000);
-	cam->setAutoAspectRatio(true);
+	//// Create the camera QUITAR
+	//cam = _sceneManager->createCamera("Cam");
+	//cam->setNearClipDistance(1);
+	//cam->setFarClipDistance(10000);
+	//cam->setAutoAspectRatio(true);
 
-	camNode = _sceneManager->getRootSceneNode()->createChildSceneNode("nCam");
-	camNode->attachObject(cam);
-	camNode->setPosition(0, 2000, 0);
-	camNode->lookAt(Ogre::Vector3(1, 0, 0), Ogre::Node::TS_WORLD);
-	
+	//camNode = _sceneManager->getRootSceneNode()->createChildSceneNode("nCam");
+	//camNode->attachObject(cam);
+	//camNode->setPosition(0, 2000, 0);
+	//camNode->lookAt(Ogre::Vector3(1, 0, 0), Ogre::Node::TS_WORLD);
+	//
 
-	// and tell it to render into the main window
-	_vp = getRenderWindow()->addViewport(cam);
-	_vp->setBackgroundColour(Ogre::ColourValue(1.0, 1.0, 0.0, 1.0));
-
-	
+	//// and tell it to render into the main window
+	//_vp = getRenderWindow()->addViewport(cam);
+	//_vp->setBackgroundColour(Ogre::ColourValue(1.0, 1.0, 0.0, 1.0));
 
 	// Luz de prueba
 	Ogre::Light* luz = _sceneManager->createLight("Luz");	//Cada luz tiene que tener un nombre diferente

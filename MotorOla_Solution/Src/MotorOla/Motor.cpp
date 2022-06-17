@@ -29,6 +29,7 @@
 #include "Mesh.h"
 #include "AudioSource.h"
 #include "Collider.h"
+#include "Camera.h"
 #include "RigidBody.h"
 #include <iostream>
 
@@ -114,6 +115,7 @@ void Motor::registryComponents()
 	try {
 		ComponenteRegistro::ComponenteRegistro<Transform>("transform");
 		ComponenteRegistro::ComponenteRegistro<Mesh>("mesh");
+		ComponenteRegistro::ComponenteRegistro<Camera>("camera");
 		ComponenteRegistro::ComponenteRegistro<Collider>("collider");
 		ComponenteRegistro::ComponenteRegistro<RigidBody>("rigidbody");
 	}
