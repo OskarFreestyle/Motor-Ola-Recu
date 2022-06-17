@@ -70,7 +70,6 @@ public:
 
 	// testing debug
 	void debugTime();
-	void debugBall();
 	void debugBuddy(Entidad* e);
 	void debugBody(PxRigidDynamic* rd);
 	void debugAllBodies();

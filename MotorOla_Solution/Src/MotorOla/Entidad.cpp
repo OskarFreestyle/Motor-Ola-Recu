@@ -125,7 +125,7 @@ bool Entidad::init()
 Entidad* Entidad::instantiate(std::string name, Vectola3D position, Quaterniola rotation)
 {
 	std::string path = LoadResources::GetInstance()->prefab(name);
-	Entidad* ent = readPrefab(path);
+	Entidad* ent = LuaReader::GetInstance()->readPrefab(path);
 	ent->getComponent<Transform>()->setPosition(position);
 	ent->getComponent<Transform>()->setRotation(rotation);
 	if (ent->getComponent<RigidBody>() != nullptr) {

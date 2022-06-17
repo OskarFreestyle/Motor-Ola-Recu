@@ -32,7 +32,19 @@ void openlualibs(lua_State* l) {
 	}
 }
 
-void readFile(std::string file) {
+LuaReader* LuaReader::_singleton = nullptr;
+
+bool LuaReader::Init()
+{
+	// Si ya existe devuelve false
+	if (_singleton != nullptr) return false;
+
+	// Si lo tiene que crear devuelve true
+	_singleton = new LuaReader();
+	return true;
+}
+
+void LuaReader::readFile(std::string file) {
 	// Vector de entidades que creamos y vector auxiliar para marcarlas iniciadas
 	std::vector<Entidad*> ents;
 	std::vector<bool> entInits;
@@ -209,7 +221,7 @@ void readFile(std::string file) {
 	}
 }
 
-void readFileMenus(std::string file,const char* get)
+void LuaReader::readFileMenus(std::string file,const char* get)
 {
 	// Preparamos un LuaState para leer el fichero
 	lua_State* l;
@@ -315,7 +327,7 @@ void readFileMenus(std::string file,const char* get)
 }
 
 // In Lua 5.0 reference manual is a table traversal example at page 29.
-void PrintTable(lua_State* L)
+void LuaReader::PrintTable(lua_State* L)
 {
 	lua_pushnil(L);
 
@@ -332,7 +344,7 @@ void PrintTable(lua_State* L)
 	}
 }
 
-void readFileTest(std::string file)
+void LuaReader::readFileTest(std::string file)
 {
 	lua_State* L = luaL_newstate();
 	luaL_openlibs(L);
@@ -359,7 +371,7 @@ void readFileTest(std::string file)
 	lua_close(L);
 }
 
-Entidad* readPrefab(std::string file) {
+Entidad* LuaReader::readPrefab(std::string file) {
 	lua_State* l;
 	l = luaL_newstate();
 	openlualibs(l);
@@ -428,4 +440,6 @@ Entidad* readPrefab(std::string file) {
 		throw std::exception("Prefab file has incorrect formatting");
 	}
 }
+
+
 

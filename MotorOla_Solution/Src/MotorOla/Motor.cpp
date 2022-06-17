@@ -71,6 +71,8 @@ bool Motor::initSystems()
 		InputManager::Init();
 		OgreManager::Init();
 		OverlayManager::Init(OgreManager::GetInstance(), this);
+		LuaReader::Init();
+		
 		std::cout << "Singletons iniciados correctamente\n";
 	}
 	catch (std::exception e) {
@@ -212,7 +214,7 @@ bool Motor::loadScene(std::string name) {
 		std::string sceneRoute = LoadResources::GetInstance()->scene(name).c_str();
 
 		// Lee la escena cargando todas las entidades y sus componentes
-		readFile(sceneRoute);
+		LuaReader::GetInstance()->readFile(sceneRoute);
 	}
 	catch (std::exception e) {
 #if (defined _DEBUG)
@@ -232,7 +234,7 @@ bool Motor::loadMenu(std::string name,const char*get) {
 		std::string sceneRoute = LoadResources::GetInstance()->scene(name).c_str();
 
 		// Lee la escena cargando todas las entidades y sus componentes
-		readFileMenus(sceneRoute,get);
+		LuaReader::GetInstance()->readFileMenus(sceneRoute,get);
 	}
 	catch (std::exception e) {
 #if (defined _DEBUG)

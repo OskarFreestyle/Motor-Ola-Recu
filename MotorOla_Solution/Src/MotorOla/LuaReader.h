@@ -5,58 +5,28 @@
 #define MOTOR_API __declspec(dllimport)
 #endif
 #include <string>
+class Entidad;
 
 extern "C"
 {
     struct lua_State;
 }
 
-class LuaScript
-{
+class MOTOR_API LuaReader {
 public:
-    LuaScript(const std::string& filename);
-    ~LuaScript();
+    ~LuaReader() {};
+    inline static LuaReader* GetInstance() { return _singleton; }
+    static bool Init();
+    void readFile(std::string file);
+    void readFileMenus(std::string file, const char* get);
 
-    void printError(const std::string& variableName, const std::string& reason);
+    void PrintTable(lua_State* L);
 
-    template<typename... Targs>
-    void callFunction(std::string functionName, int nArg, Targs... args);
+    void readFileTest(std::string file);
+    Entidad* readPrefab(std::string file);
+protected:
+    static LuaReader* _singleton;
+    LuaReader() {};
 
-    template<typename T>
-    T get(const std::string& variableName);
-
-    bool lua_gettostack(const std::string& variableName);
-
-    // Generic get
-    template<typename T>
-    T lua_get(const std::string& variableName) {
-        return 0;
-    }
-
-
-    // Generic default get
-    template<typename T>
-    T lua_getdefault() {
-        return 0;
-    }
-
-
-private:
-    lua_State* L;
-    int level = 0;
 
 };
-
-MOTOR_API void readFile(std::string file);
-MOTOR_API void readFileMenus(std::string file,const char* get);
-
-void PrintTable(lua_State* L);
-
-void readFileTest(std::string file);
-
-class Entidad;
-MOTOR_API Entidad* readPrefab(std::string file);
-
-
-
-
