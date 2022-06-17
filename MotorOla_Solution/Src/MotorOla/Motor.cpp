@@ -156,7 +156,6 @@ void Motor::mainLoop()
 
 		// Actualizar las fisicas de las entidades
 		pm().runPhysX();
-
 		// Actualiza las entidades (lo cual llama a actualizar cada uno de sus componentes)
 		SceneManager::GetInstance()->updateEntidades();
 
@@ -173,7 +172,7 @@ void Motor::mainLoop()
 		OgreManager::GetInstance()->update();
 
 		// Se eliminan las entidades marcadas
-		SceneManager::GetInstance()->deleteEntities();
+		SceneManager::GetInstance()->removeEntities();
 		//Singleton<EntidadManager>::instance()->refresh();
 
 		// Se cargan nuevas entidades
