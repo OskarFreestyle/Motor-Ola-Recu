@@ -34,8 +34,6 @@
 
 Motor::Motor()
 {
-	// Inicia los managers
-	std::cout << "MOTOR VACIO INICIADO CORRECTAMENTE\n";
 }
 
 Motor::~Motor()
@@ -43,6 +41,7 @@ Motor::~Motor()
 	// Libera la libreria dinamica (el juego)
 	FreeLibrary(hDLL);
 	// Destruye los managers en orden inverso a la creaci�n (PC: puede que esto no sea necesario porque al cerrar se borran solos)
+	if (LuaReader::GetInstance() != nullptr) delete LuaReader::GetInstance();
 	if (OverlayManager::GetInstance() != nullptr) delete OverlayManager::GetInstance();
 	if (OgreManager::GetInstance() != nullptr) delete OgreManager::GetInstance();
 	if (InputManager::GetInstance() != nullptr) delete InputManager::GetInstance();
@@ -51,54 +50,20 @@ Motor::~Motor()
 	if (AudioManager::GetInstance() != nullptr) delete AudioManager::GetInstance();
 	if (SceneManager::GetInstance() != nullptr) delete SceneManager::GetInstance();
 	if (ComponenteFactoria::GetInstance() != nullptr) delete ComponenteFactoria::GetInstance();
-
 #if (defined _DEBUG)
 	std::cout << "--------- MOTOR BORRADO CORRECTAMENTE ----------\n";
 #endif
-
 }
 
-bool Motor::initSystems()
+bool Motor::initMotor()
 {
-	// Intenta iniciar todos los singletons del motor
-	try {
-		// Ya cambiados
-		ComponenteFactoria::Init();
-		SceneManager::Init();
-		AudioManager::Init();
-		LoadResources::Init();
-		PhysxManager::Init();
-		InputManager::Init();
-		OgreManager::Init();
-		OverlayManager::Init(OgreManager::GetInstance(), this);
-		LuaReader::Init();
-		
-		std::cout << "Singletons iniciados correctamente\n";
-	}
-	catch (std::exception e) {
-#if (defined _DEBUG)
-		std::cout << e.what();
-#endif
-		return false;
-	}
+	// Primero inicia los managers
+	initManagers();
 
-	// Quitar
-	initSystemss();
-
-	return true;
-}
-
-void Motor::initSystemss()
-{
-	// Inicia los sistemas
-	//Singleton<LoadResources>::instance()->init();
-	//Singleton<OgreManager>::instance()->init();
-	//Singleton<OverlayManager>::instance()->init(Singleton<OgreManager>::instance(),this);
-	//pm().init();
-
-	// Se registran los componentes que conoce el motor
+	// Segundo registra los componentes del motor
 	registryComponents();
 
+	// por último intenta cargar la DLL del juego
 #if (defined _DEBUG)
 	std::cout << "ANTES DE CARGAR JUEGO TRY\n";
 #endif
@@ -112,6 +77,35 @@ void Motor::initSystemss()
 		loadTestMotorGame();
 	}
 	std::cout << "DESPUES DE CARGAR JUEGO TRY\n";
+
+	return true;
+}
+
+bool Motor::initManagers()
+{
+	// Intenta iniciar todos los singletons del motor
+	try {
+		// Ya cambiados
+		ComponenteFactoria::Init();
+		SceneManager::Init();
+		AudioManager::Init();
+		LoadResources::Init();
+		PhysxManager::Init();
+		InputManager::Init();
+		OgreManager::Init();
+		OverlayManager::Init(OgreManager::GetInstance(), this);
+		LuaReader::Init();
+	}
+	catch (std::exception e) {
+#if (defined _DEBUG)
+		std::cout << e.what();
+#endif
+		return false;
+	}
+
+#if (defined _DEBUG)
+	std::cout << "---------- MANAGERS INICIADOS CORRECTAMENTE ----------\n";
+#endif
 }
 
 void Motor::registryComponents()
@@ -126,12 +120,16 @@ void Motor::registryComponents()
 	catch (const char* error) {
 		std::cout << "Error registrando los componentes del motor: \n" << error << "\n";
 	}
+
+#if (defined _DEBUG)
+	std::cout << "---------- COMPONENTES REGISTRADOS ----------\n";
+#endif
 }
 
 void Motor::mainLoop()
 {
 #ifdef _DEBUG
-	std::cout << "------------------- COMIENZA EL BUCLE PRINCIPAL -------------------\n";
+	std::cout << "---------- COMIENZA EL BUCLE PRINCIPAL ----------\n";
 #endif
 	//Actualiza el motor. Bucle input->update/fisicas->render
 	SDL_Event event;
@@ -223,6 +221,7 @@ bool Motor::loadScene(std::string name) {
 	}
 	return true;
 }
+
 bool Motor::loadMenu(std::string name,const char*get) {
 	try {
 		// Borra las entidades de la escena actual
@@ -233,7 +232,7 @@ bool Motor::loadMenu(std::string name,const char*get) {
 		std::string sceneRoute = LoadResources::GetInstance()->scene(name).c_str();
 
 		// Lee la escena cargando todas las entidades y sus componentes
-		LuaReader::GetInstance()->readFileMenus(sceneRoute,get);
+		LuaReader::GetInstance()->readFileMenus(sceneRoute, get);
 	}
 	catch (std::exception e) {
 #if (defined _DEBUG)

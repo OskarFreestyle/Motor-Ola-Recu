@@ -10,14 +10,14 @@ int main()
 #if _DEBUG
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
-    std::cout << "APLICACION INICIADA\n";
+    std::cout << "---------- APLICACION INICIADA ----------\n";
 
     bool hayError = false;      
     Motor* m = nullptr;
     
     // Inicia el Motor
     try {
-        std::cout << "NEW MOTOR\n";
+        std::cout << "---------- NEW MOTOR ----------\n";
         m = new Motor();
     }
     catch (const char* error) {
@@ -28,8 +28,8 @@ int main()
     
     // Intenta iniciar los sistemas principales
     try {
-        std::cout << "MOTOR INIT SISTEMS\n";
-        m->initSystems();
+        std::cout << "---------- MOTOR INIT SISTEMS ----------\n";
+        m->initMotor();
     }
     catch (const char* error) {
         std::cout << "Error iniciando el motor\n";
