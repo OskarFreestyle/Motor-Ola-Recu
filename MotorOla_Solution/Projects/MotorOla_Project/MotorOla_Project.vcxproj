@@ -37,6 +37,7 @@
     <ClCompile Include="..\..\Src\MotorOla\Collider.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\dllmain.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\InputManager.cpp" />
+    <ClCompile Include="..\..\Src\MotorOla\Light.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\LoadResources.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\LuaReader.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\Mesh.cpp" />
@@ -66,6 +67,7 @@
     <ClInclude Include="..\..\Src\MotorOla\Entidad.h" />
     <ClInclude Include="..\..\Src\MotorOla\framework.h" />
     <ClInclude Include="..\..\Src\MotorOla\InputManager.h" />
+    <ClInclude Include="..\..\Src\MotorOla\Light.h" />
     <ClInclude Include="..\..\Src\MotorOla\LoadResources.h" />
     <ClInclude Include="..\..\Src\MotorOla\LuaReader.h" />
     <ClInclude Include="..\..\Src\MotorOla\OgreManager.h" />

@@ -3,8 +3,6 @@
 #include <limits.h>
 #include "Motor.h"
 
-#include "LuaReader.h"
-
 // Ogre
 #include <Ogre.h>
 #include <OgreEntity.h>
@@ -19,18 +17,21 @@
 #include "OverlayManager.h"
 #include "PhysxManager.h"
 #include "SceneManager.h"
+#include "LuaReader.h"
+#include "ComponenteFactoria.h"
 
-// Componentes
+// Entidades y Componentes
 #include "Entidad.h"
 #include "Componente.h"
-#include "ComponenteFactoria.h"
 #include "ComponenteRegistro.h"
 #include "Transform.h"
 #include "Mesh.h"
+#include "Light.h"
 #include "AudioSource.h"
 #include "Collider.h"
 #include "Camera.h"
 #include "RigidBody.h"
+
 #include <iostream>
 
 Motor::Motor()
@@ -116,6 +117,7 @@ void Motor::registryComponents()
 		ComponenteRegistro::ComponenteRegistro<Transform>("transform");
 		ComponenteRegistro::ComponenteRegistro<Mesh>("mesh");
 		ComponenteRegistro::ComponenteRegistro<Camera>("camera");
+		ComponenteRegistro::ComponenteRegistro<Light>("light");
 		ComponenteRegistro::ComponenteRegistro<Collider>("collider");
 		ComponenteRegistro::ComponenteRegistro<RigidBody>("rigidbody");
 	}
@@ -173,7 +175,6 @@ void Motor::mainLoop()
 
 		// Se eliminan las entidades marcadas
 		SceneManager::GetInstance()->removeEntities();
-		//Singleton<EntidadManager>::instance()->refresh();
 
 		// Se cargan nuevas entidades
 		SceneManager::GetInstance()->loadEntities();
