@@ -26,19 +26,11 @@ class OverlayManager;
 
 typedef HRESULT(CALLBACK* LPFNDLLFUNC1)(DWORD, UINT*);
 
+const int FPS = 60;
+const int frameDelay = 1000 / FPS;
+
 class MOTOR_API Motor
 {
-private:
-
-	bool stop = false;
-
-	int channel = 0;
-
-	// Contador auxiliar
-	int frame = 0;
-
-	HINSTANCE hDLL;               // Handle to DLL
-
 public:
 	Motor();
 	~Motor();
@@ -70,6 +62,7 @@ public:
 	/// </summary>
 	void mainLoop();
 
+	inline double getDeltaTime() const { return deltaTime / 1000.0f; };
 
 	/// <summary>
 	/// Carga una escena del juego
@@ -86,5 +79,19 @@ public:
 	// Getters and Setters
 	void setStop(bool s);
 	bool getStop();
-};
 
+private:
+	// Para recoger los eventos del Input
+	SDL_Event event;
+
+	bool stop = false;
+
+	int channel = 0;
+
+	// Contador auxiliar
+	Uint32 frameStart;
+	Uint32 frameTime;
+	Uint32 deltaTime;	// in miliseconds
+
+	HINSTANCE hDLL;               // Handle to DLL
+};
