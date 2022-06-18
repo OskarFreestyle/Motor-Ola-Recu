@@ -138,10 +138,15 @@ void Motor::mainLoop()
 	std::cout << "---------- COMIENZA EL BUCLE PRINCIPAL ----------\n";
 #endif
 	//Actualiza el motor. Bucle input->update/fisicas->render
-	SDL_Event event;
 	stop = false;
 
+	int numFrames = 0;
+	int aux = 0;
+
 	while (!stop) {
+		// Tiempo cuando se inicia el frame
+		frameStart = SDL_GetTicks();
+
 		// Recoge un puntero con el vector de entidades;
 		std::vector<Entidad*>* currEntities = SceneManager::GetInstance()->getEntities();
 
@@ -177,6 +182,28 @@ void Motor::mainLoop()
 
 		// Se cargan nuevas entidades
 		SceneManager::GetInstance()->loadEntities();
+
+		// Obtenemos el tiempo del frame
+		frameTime = (SDL_GetTicks() - frameStart);
+
+		// Limitamos el frameRate
+		if (frameDelay > frameTime) {
+			SDL_Delay(frameDelay - frameTime);
+		}
+
+		// Actualizamos deltaTime
+		deltaTime = (SDL_GetTicks() - frameStart);
+
+		// QUITAR
+		std::cout << "GetDeltaTime: " << getDeltaTime() << "\n";
+		
+		numFrames++;
+
+		if (numFrames >= 60) {
+			numFrames -= 60;
+			aux++;
+			std::cout << "Segundos: " << aux << "\n";
+		}
 	}
 }
 
