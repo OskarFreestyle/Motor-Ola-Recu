@@ -68,6 +68,9 @@
     <ClCompile Include="..\..\Src\MotorOla\Light.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\MotorOla\Button.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\MotorOla\AudioManager.h">
@@ -147,6 +150,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\MotorOla\Light.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\MotorOla\Button.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

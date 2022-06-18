@@ -58,7 +58,7 @@ void LuaReader::readFile(std::string file) {
 	std::printf("now calling lua\n\n");
 #endif
 	// Intenta abrir el archivo .lua
-	if (!luaL_loadfile(l, file.c_str()) && lua_pcall(l, 0, 0, 0)) {
+	if (!luaL_loadfile(l, file.c_str()) &&  lua_pcall(l, 0, 0, 0)) {
 		std::cout << lua_tostring(l, -1) << "\n";
 		std::cout << "Error reading .lua\n";
 		throw std::exception("Lua file was not able to be loaded\n");

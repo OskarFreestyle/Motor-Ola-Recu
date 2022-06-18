@@ -30,6 +30,7 @@
 #include "AudioSource.h"
 #include "Collider.h"
 #include "Camera.h"
+#include "Button.h"
 #include "RigidBody.h"
 
 #include <iostream>
@@ -120,6 +121,7 @@ void Motor::registryComponents()
 		ComponenteRegistro::ComponenteRegistro<Light>("light");
 		ComponenteRegistro::ComponenteRegistro<Collider>("collider");
 		ComponenteRegistro::ComponenteRegistro<RigidBody>("rigidbody");
+		ComponenteRegistro::ComponenteRegistro<Button>("button");
 	}
 	catch (const char* error) {
 		std::cout << "Error registrando los componentes del motor: \n" << error << "\n";

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -32,6 +32,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\Src\MotorOla\AudioManager.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\AudioSource.cpp" />
+    <ClCompile Include="..\..\Src\MotorOla\Button.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\Camera.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\ContactReportCallback.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\Collider.cpp" />
@@ -57,6 +58,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\Src\MotorOla\AudioManager.h" />
     <ClInclude Include="..\..\Src\MotorOla\AudioSource.h" />
+    <ClInclude Include="..\..\Src\MotorOla\Button.h" />
     <ClInclude Include="..\..\Src\MotorOla\Camera.h" />
     <ClInclude Include="..\..\Src\MotorOla\ContactReportCallback.h" />
     <ClInclude Include="..\..\Src\MotorOla\Collider.h" />

@@ -3,6 +3,7 @@
 #include "InputManager.h"
 #include "Motor.h"
 #include "OgreManager.h"
+#include "Button.h"
 
 OverlayManager* OverlayManager::_singleton = nullptr;
 
@@ -52,6 +53,7 @@ void OverlayManager::update() {
 		{
 			(*it)->setMaterialName((*it)->getMaterialName());
 			if (ih().getMouseButtonState(ih().LEFT)) {
+				
 				callbacks.at((*it))(motor);
 				dado = true;
 			}
@@ -96,7 +98,7 @@ void OverlayManager::creaBoton(float x, float y, const std::string& textoBoton,c
 	
 }
 
-void OverlayManager::setCallBackToButton(std::string p, CallBackOnClick* click)
+void OverlayManager::setCallBackToButton(std::string p, CallBackOnClick click)
 {
 	Ogre::OverlayManager& overlayManager = Ogre::OverlayManager::getSingleton();
 	Ogre::PanelOverlayElement* panel = static_cast<Ogre::PanelOverlayElement*>(overlayManager.getOverlayElement(p));

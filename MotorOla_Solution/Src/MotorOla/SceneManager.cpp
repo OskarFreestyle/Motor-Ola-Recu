@@ -88,7 +88,10 @@ Entidad* SceneManager::getEntityByID(int id)
 void SceneManager::removeEntities() {
 	// Borra todas las entidades marcadas
 	for (Entidad* e : _entidadesToRemove) {
-		if (e) delete e;
+		if (e!=nullptr) {
+			delete e;
+			e = nullptr;
+		}
 	}
 	_entidadesToRemove.clear();
 }
