@@ -1,7 +1,7 @@
 #pragma once
 #include "Componente.h"
 class Motor;
-using CallBackOnClick = void(Motor* m);
+//using CallBackOnClick = void(Motor* m);
 
 
 class Button :public Componente
@@ -13,12 +13,13 @@ public:
 		EXIT=2
 	};
 	Button() {};
-	~Button() {};
+	~Button();
 	bool init(const std::map<std::string, std::string>& mapa) override;
+	virtual void update();
 	
 private:
-	float x; 
-	float y; 
+	float posX; 
+	float posY; 
 	std::string texto; 
 	std::string nombrePanel;  
 	std::string nombreTexto; 
@@ -26,11 +27,18 @@ private:
 	std::string material; 
 	float dimX;
 	float dimY;
-	Type t;
+	Type type;
 	std::string nextScene = "";
-	static void changeScene(Motor* m);
-	static void volume(Motor* m);
-	static void exit(Motor* m);
+	/// <summary>
+	/// Comprueba si se pulsa el botón
+	/// </summary>
+	/// <returns></returns>
+	bool isClicked();
+	/// <summary>
+	/// Funcionalidades 
+	/// </summary>
+	virtual void onClick();
+	
 	
 
 };

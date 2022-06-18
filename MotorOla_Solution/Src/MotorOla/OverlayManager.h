@@ -50,7 +50,7 @@ public:
 
 	void initOverlay(OgreManager* om_, Motor* m);
 
-	void update();
+	//void update();
 
 	void creaBoton(float x,float y,const std::string& texto, const std::string& nombrePanel, const std::string& nombreTexto,float tamLetra,const std::string& material,float dimX,float dimY/*, CallBackOnClick* click_*/);
 	void setCallBackToButton(std::string p, CallBackOnClick click_);

@@ -41,7 +41,7 @@ void OverlayManager::initOverlay(OgreManager* om, Motor* m)
 	motor = m;
 }
 
-void OverlayManager::update() {
+/*void OverlayManager::update() {
     
 	auto it=botones.begin();
 	bool dado = false;
@@ -65,7 +65,7 @@ void OverlayManager::update() {
 			it++;
 		}	
 	}
-}
+}*/
 
 void OverlayManager::creaBoton(float x, float y, const std::string& textoBoton,const std::string& nombrePanel,const std::string& nombreTexto,float tamLetra, const std::string& material, float dimX, float dimY/*, CallBackOnClick* click_*/)
 {
@@ -223,5 +223,6 @@ void OverlayManager::clear()
 {
 	return motor;
 }
+
 
 

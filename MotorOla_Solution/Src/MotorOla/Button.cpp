@@ -3,9 +3,13 @@
 #include "SceneManager.h"
 #include "AudioManager.h"
 #include "Motor.h"
+#include "InputManager.h"
 
-std::string nS = " ";
 
+//std::string nS = " ";
+Button::~Button() {
+	OverlayManager::GetInstance()->clear();
+}
 
 bool Button::init(const std::map<std::string, std::string>& mapa) {
 	if (mapa.find("positionX") == mapa.end() || mapa.find("positionY") == mapa.end() || mapa.find("texto") == mapa.end() || mapa.find("nombrePanel") == mapa.end() ||
@@ -15,9 +19,9 @@ bool Button::init(const std::map<std::string, std::string>& mapa) {
 	
 
 	std::string s = mapa.at("positionX");
-	x = std::stof(s);
+	posX = std::stof(s);
 	s = mapa.at("positionY");
-	y = std::stof(s);
+	posY = std::stof(s);
 
 	s = mapa.at("texto");
 	texto = s;
@@ -35,48 +39,63 @@ bool Button::init(const std::map<std::string, std::string>& mapa) {
 	s = mapa.at("dimensionY");
 	dimY = std::stof(s);
 	
-	OverlayManager::GetInstance()->creaBoton(x, y, texto, nombrePanel, nombreTexto, tamLetra, material, dimX, dimY);
+	OverlayManager::GetInstance()->creaBoton(posX, posY, texto, nombrePanel, nombreTexto, tamLetra, material, dimX, dimY);
 	s = mapa.at("type");
 	if (s == "CHANGE_SCENE") {
-		t = Type::CHANGE_SCENE;
+		type = Type::CHANGE_SCENE;
 		s = mapa.at("nextScene");
 		nextScene = s;
-		nS = nextScene;
-		OverlayManager::GetInstance()->setCallBackToButton(nombrePanel,changeScene);
+		//nS = nextScene;
+		//OverlayManager::GetInstance()->setCallBackToButton(nombrePanel,changeScene);
 		
 	}
 	else if (s == "VOLUME") {
-		t = Type::VOLUME;
-		OverlayManager::GetInstance()->setCallBackToButton(nombrePanel, volume);
+		type = Type::VOLUME;
+		//OverlayManager::GetInstance()->setCallBackToButton(nombrePanel, volume);
 	}
 	else if (s == "EXIT") {
-		t = Type::EXIT;
-		OverlayManager::GetInstance()->setCallBackToButton(nombrePanel,exit);
+		type = Type::EXIT;
+		//OverlayManager::GetInstance()->setCallBackToButton(nombrePanel,exit);
 
 	}
+	std::cout << "Tipo: " << type << "\n";
+	std::cout << nextScene << "\n";
 	_inicializado = true;
 
 	return true;
 }
 
-void Button::changeScene(Motor* m)
+void Button::update()
 {
-	OverlayManager::GetInstance()->clear();
-	SceneManager::GetInstance()->newScene(nS);
-	//SceneManager::GetInstance()->loadEntities();
-}
- void Button::volume(Motor*m) {
-	if (AudioManager::GetInstance()->getMute()) {
-		AudioManager::GetInstance()->setMute(false);
+	if (isClicked()) {
+		onClick();
 	}
-	else {
-		AudioManager::GetInstance()->setMute(true);
-	}
-	
+
 }
 
-void Button::exit(Motor* m)
+
+bool Button::isClicked() {
+	return (ih().getMouseButtonState(ih().LEFT)) &&
+		(ih().getMousePos().first > posX * OgreManager::GetInstance()->getWindowWidth() && ih().getMousePos().first < (posX + dimX)* OgreManager::GetInstance()->getWindowWidth() &&
+			ih().getMousePos().second>posY * OgreManager::GetInstance()->getWindowHeight() && ih().getMousePos().second < (posY + dimY)* OgreManager::GetInstance()->getWindowHeight());
+
+}
+
+void Button::onClick()
 {
-	OverlayManager::GetInstance()->getMotor()->setStop(true);
-	
+	switch (type) {
+	case Type::CHANGE_SCENE:
+		SceneManager::GetInstance()->newScene(nextScene);
+		break;
+	case Type::VOLUME:
+		AudioManager::GetInstance()->setMute(!AudioManager::GetInstance()->getMute());
+		break;
+	case Type::EXIT:
+		OverlayManager::GetInstance()->getMotor()->setStop(true);
+		break;
+	default:
+		break;
+
+
+	}
 }

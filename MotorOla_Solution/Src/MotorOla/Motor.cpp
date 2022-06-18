@@ -165,9 +165,9 @@ void Motor::mainLoop()
 
 		// TODO creo que quitar en un futuro cuando los overlays sean componentes
 		// Actualiza los transforms de las entitys despues de las fisicas
-		if (OverlayManager::GetInstance() != nullptr) {
+		/*if (OverlayManager::GetInstance() != nullptr) {
 			OverlayManager::GetInstance()->update();
-		}
+		}*/
 
 		// Renderiza un frame
 		OgreManager::GetInstance()->update();
