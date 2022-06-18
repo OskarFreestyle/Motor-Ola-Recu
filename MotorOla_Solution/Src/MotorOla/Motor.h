@@ -32,6 +32,17 @@ const int frameDelay = 1000 / FPS;
 class MOTOR_API Motor
 {
 public:
+	/// <summary>
+	/// Devuelve una instancia de la clase.
+	/// </summary>
+	inline static Motor* GetInstance() { return _singleton; }
+
+	/// <summary>
+	/// Inicializa la clase SceneManager con los parametros dados si no se ha inicializado antes.
+	/// Devuelve true si se inicializa por primera vez y false si ya habia sido inicializada.
+	/// </summary>
+	static bool Init();
+
 	Motor();
 	~Motor();
 
@@ -62,6 +73,10 @@ public:
 	/// </summary>
 	void mainLoop();
 
+	/// <summary>
+	/// Devuelve el deltaTime en segundos
+	/// </summary>
+	/// <returns>Devuelve el deltaTime</returns>
 	inline double getDeltaTime() const { return deltaTime / 1000.0f; };
 
 	/// <summary>
@@ -79,6 +94,9 @@ public:
 	// Getters and Setters
 	void setStop(bool s);
 	bool getStop();
+
+protected:
+	static Motor* _singleton;
 
 private:
 	// Para recoger los eventos del Input

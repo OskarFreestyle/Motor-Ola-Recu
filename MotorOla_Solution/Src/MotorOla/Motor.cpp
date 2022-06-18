@@ -35,8 +35,21 @@
 
 #include <iostream>
 
+Motor* Motor::_singleton = nullptr;
+
+bool Motor::Init()
+{
+	// Si ya existe devuelve false
+	if (_singleton != nullptr) return false;
+
+	// Si lo tiene que crear devuelve true
+	_singleton = new Motor();
+	return true;
+}
+
 Motor::Motor()
 {
+
 }
 
 Motor::~Motor()

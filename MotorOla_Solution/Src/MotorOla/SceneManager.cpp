@@ -27,10 +27,8 @@ void SceneManager::updateEntidades()
 	for (Entidad* e : _entidades) {
 		// Si no esta pausada se actualiza (actualiza sus todos sus componentes) 
 		if (!e->getPaused()) {
-			//cout << "Entidad actualizada"<<e->getName()<<"\n";
 			e->update();
 		}
-		//else cout << "Entidad pausada\n";
 	}
 
 }

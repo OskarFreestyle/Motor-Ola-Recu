@@ -1,5 +1,5 @@
 #include <iostream>
-#include <Motor.h>
+#include <MotorOla.h>
 
 #if _DEBUG
     #include "utils/checkML.h"
@@ -12,13 +12,14 @@ int main()
 #endif
     std::cout << "---------- APLICACION INICIADA ----------\n";
 
-    bool hayError = false;      
-    Motor* m = nullptr;
+    bool hayError = false;
+    
+    MotorOla* m = nullptr;
     
     // Inicia el Motor
     try {
         std::cout << "---------- NEW MOTOR ----------\n";
-        m = new Motor();
+        m = new MotorOla();
     }
     catch (const char* error) {
         std::cout << "Error creando el motor\n";
@@ -29,7 +30,7 @@ int main()
     // Intenta iniciar los sistemas principales
     try {
         std::cout << "---------- MOTOR INIT SISTEMS ----------\n";
-        m->initMotor();
+        m->initMotorOla();
     }
     catch (const char* error) {
         std::cout << "Error iniciando el motor\n";
@@ -41,7 +42,7 @@ int main()
     // Pone en marcha el bucle principal del Motor
     try {
         std::cout << "MOTOR START MAIN LOOP\n";
-        m->mainLoop();
+        m->initLoop();
     }
     catch (const char* error) {
         std::cout << "Error durante el bucle principal del motor\n";

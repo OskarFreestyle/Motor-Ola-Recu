@@ -45,6 +45,7 @@
     <ClCompile Include="..\..\Src\MotorOla\ComponenteFactoria.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\Motor.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\Entidad.cpp" />
+    <ClCompile Include="..\..\Src\MotorOla\MotorOla.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\OgreManager.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\pch.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\PhysxManager.cpp" />
@@ -72,6 +73,7 @@
     <ClInclude Include="..\..\Src\MotorOla\Light.h" />
     <ClInclude Include="..\..\Src\MotorOla\LoadResources.h" />
     <ClInclude Include="..\..\Src\MotorOla\LuaReader.h" />
+    <ClInclude Include="..\..\Src\MotorOla\MotorOla.h" />
     <ClInclude Include="..\..\Src\MotorOla\OgreManager.h" />
     <ClInclude Include="..\..\Src\MotorOla\Mesh.h" />
     <ClInclude Include="..\..\Src\MotorOla\pch.h" />

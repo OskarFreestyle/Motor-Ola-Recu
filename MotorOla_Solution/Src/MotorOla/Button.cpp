@@ -5,8 +5,6 @@
 #include "Motor.h"
 #include "InputManager.h"
 
-
-//std::string nS = " ";
 Button::~Button() {
 	OverlayManager::GetInstance()->clear();
 }
@@ -15,8 +13,6 @@ bool Button::init(const std::map<std::string, std::string>& mapa) {
 	if (mapa.find("positionX") == mapa.end() || mapa.find("positionY") == mapa.end() || mapa.find("texto") == mapa.end() || mapa.find("nombrePanel") == mapa.end() ||
 		mapa.find("nombreTexto") == mapa.end() || mapa.find("tamLetra") == mapa.end() || mapa.find("material") == mapa.end()||mapa.find("dimensionX")==mapa.end()||mapa.find("dimensionY")==mapa.end(),
 		mapa.find("type")==mapa.end(),mapa.find("nextScene")==mapa.end()) return false;
-
-	
 
 	std::string s = mapa.at("positionX");
 	posX = std::stof(s);
@@ -45,24 +41,17 @@ bool Button::init(const std::map<std::string, std::string>& mapa) {
 		type = Type::CHANGE_SCENE;
 		s = mapa.at("nextScene");
 		nextScene = s;
-		//nS = nextScene;
-		//OverlayManager::GetInstance()->setCallBackToButton(nombrePanel,changeScene);
-		
 	}
 	else if (s == "VOLUME") {
 		type = Type::VOLUME;
-		//OverlayManager::GetInstance()->setCallBackToButton(nombrePanel, volume);
 	}
 	else if (s == "EXIT") {
 		type = Type::EXIT;
-		//OverlayManager::GetInstance()->setCallBackToButton(nombrePanel,exit);
-
 	}
-	std::cout << "Tipo: " << type << "\n";
-	std::cout << nextScene << "\n";
+
 	_inicializado = true;
 
-	return true;
+	return _inicializado;
 }
 
 void Button::update()
@@ -70,7 +59,6 @@ void Button::update()
 	if (isClicked()) {
 		onClick();
 	}
-
 }
 
 
@@ -78,7 +66,6 @@ bool Button::isClicked() {
 	return (ih().getMouseButtonState(ih().LEFT)) &&
 		(ih().getMousePos().first > posX * OgreManager::GetInstance()->getWindowWidth() && ih().getMousePos().first < (posX + dimX)* OgreManager::GetInstance()->getWindowWidth() &&
 			ih().getMousePos().second>posY * OgreManager::GetInstance()->getWindowHeight() && ih().getMousePos().second < (posY + dimY)* OgreManager::GetInstance()->getWindowHeight());
-
 }
 
 void Button::onClick()
@@ -91,11 +78,9 @@ void Button::onClick()
 		AudioManager::GetInstance()->setMute(!AudioManager::GetInstance()->getMute());
 		break;
 	case Type::EXIT:
-		OverlayManager::GetInstance()->getMotor()->setStop(true);
+		Motor::GetInstance()->setStop(true);
 		break;
 	default:
 		break;
-
-
 	}
 }
