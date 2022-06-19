@@ -46,7 +46,9 @@ std::string TextComponent::getTexto()
 	return texto;
 }
 
-void TextComponent::setTexto(const std::string& s)
+void TextComponent::setTexto(const std::string& s,const std::string& textName, const std::string& panelName)
 {
 	texto = s;
+	Ogre::TextAreaOverlayElement* t = OverlayManager::GetInstance()->getTexto(panelName,textName);
+	if (t != nullptr)t->setCaption(texto);
 }
