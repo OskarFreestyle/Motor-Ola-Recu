@@ -11,8 +11,8 @@ Button::~Button() {
 
 bool Button::init(const std::map<std::string, std::string>& mapa) {
 	if (mapa.find("positionX") == mapa.end() || mapa.find("positionY") == mapa.end() || mapa.find("texto") == mapa.end() || mapa.find("nombrePanel") == mapa.end() ||
-		mapa.find("nombreTexto") == mapa.end() || mapa.find("tamLetra") == mapa.end() || mapa.find("material") == mapa.end()||mapa.find("dimensionX")==mapa.end()||mapa.find("dimensionY")==mapa.end(),
-		mapa.find("type")==mapa.end(),mapa.find("nextScene")==mapa.end()) return false;
+		mapa.find("nombreTexto") == mapa.end() || mapa.find("tamLetra") == mapa.end() || mapa.find("material") == mapa.end()||mapa.find("dimensionX")==mapa.end()||mapa.find("dimensionY")==mapa.end()||
+		mapa.find("type")==mapa.end()||mapa.find("nextScene")==mapa.end()) return false;
 
 	std::string s = mapa.at("positionX");
 	posX = std::stof(s);

@@ -31,6 +31,8 @@
 #include "Collider.h"
 #include "Camera.h"
 #include "Button.h"
+#include "TextComponent.h"
+#include "ImageComponent.h"
 #include "RigidBody.h"
 
 #include <iostream>
@@ -135,6 +137,8 @@ void Motor::registryComponents()
 		ComponenteRegistro::ComponenteRegistro<Collider>("collider");
 		ComponenteRegistro::ComponenteRegistro<RigidBody>("rigidbody");
 		ComponenteRegistro::ComponenteRegistro<Button>("button");
+		ComponenteRegistro::ComponenteRegistro<TextComponent>("texto");
+		ComponenteRegistro::ComponenteRegistro<ImageComponent>("image");
 	}
 	catch (const char* error) {
 		std::cout << "Error registrando los componentes del motor: \n" << error << "\n";
@@ -207,8 +211,7 @@ void Motor::mainLoop()
 		// Actualizamos deltaTime
 		deltaTime = (SDL_GetTicks() - frameStart);
 
-		// QUITAR
-		std::cout << "GetDeltaTime: " << getDeltaTime() << "\n";
+		
 		
 		numFrames++;
 
