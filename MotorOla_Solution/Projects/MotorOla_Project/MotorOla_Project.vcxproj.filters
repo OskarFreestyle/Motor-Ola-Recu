@@ -1,189 +1,213 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="..\..\Src\MotorOla\Entidad.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\..\Src\MotorOla\ecs\AudioSource.cpp">
+      <Filter>Source Files\ecs</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\MotorOla\InputManager.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\..\Src\MotorOla\ecs\Button.cpp">
+      <Filter>Source Files\ecs</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\MotorOla\OgreManager.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\..\Src\MotorOla\ecs\Camera.cpp">
+      <Filter>Source Files\ecs</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\MotorOla\Transform.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\..\Src\MotorOla\ecs\Collider.cpp">
+      <Filter>Source Files\ecs</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\MotorOla\Mesh.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\..\Src\MotorOla\ecs\Entidad.cpp">
+      <Filter>Source Files\ecs</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\MotorOla\LoadResources.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\..\Src\MotorOla\ecs\ImageComponent.cpp">
+      <Filter>Source Files\ecs</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\MotorOla\AudioSource.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\..\Src\MotorOla\ecs\Light.cpp">
+      <Filter>Source Files\ecs</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\MotorOla\ComponenteFactoria.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\..\Src\MotorOla\ecs\Mesh.cpp">
+      <Filter>Source Files\ecs</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\MotorOla\PhysxManager.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\..\Src\MotorOla\ecs\RigidBody.cpp">
+      <Filter>Source Files\ecs</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\MotorOla\utils\Vectola3D.cpp">
-      <Filter>Utils</Filter>
+    <ClCompile Include="..\..\Src\MotorOla\ecs\TextComponent.cpp">
+      <Filter>Source Files\ecs</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\MotorOla\OverlayManager.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\..\Src\MotorOla\ecs\Transform.cpp">
+      <Filter>Source Files\ecs</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\MotorOla\LuaReader.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\..\Src\MotorOla\motor\Motor.cpp">
+      <Filter>Source Files\motor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\MotorOla\motor\MotorOla.cpp">
+      <Filter>Source Files\motor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\MotorOla\managers\AudioManager.cpp">
+      <Filter>Source Files\managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\MotorOla\managers\ComponenteFactoria.cpp">
+      <Filter>Source Files\managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\MotorOla\managers\InputManager.cpp">
+      <Filter>Source Files\managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\MotorOla\managers\LoadResources.cpp">
+      <Filter>Source Files\managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\MotorOla\managers\LuaReader.cpp">
+      <Filter>Source Files\managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\MotorOla\managers\OgreManager.cpp">
+      <Filter>Source Files\managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\MotorOla\managers\OverlayManager.cpp">
+      <Filter>Source Files\managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\MotorOla\managers\PhysxManager.cpp">
+      <Filter>Source Files\managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\MotorOla\managers\SceneManager.cpp">
+      <Filter>Source Files\managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\MotorOla\utils\ContactReportCallback.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\MotorOla\utils\dllmain.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\MotorOla\utils\pch.cpp">
+      <Filter>Source Files\utils</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\MotorOla\utils\Quaterniola.cpp">
-      <Filter>Utils</Filter>
+      <Filter>Source Files\utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\MotorOla\Collider.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\..\Src\MotorOla\utils\Vectola3D.cpp">
+      <Filter>Source Files\utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\MotorOla\RigidBody.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\MotorOla\Motor.cpp" />
-    <ClCompile Include="..\..\Src\MotorOla\ContactReportCallback.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\MotorOla\dllmain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\MotorOla\pch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\MotorOla\SceneManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\MotorOla\AudioManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\MotorOla\Camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\MotorOla\Light.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\MotorOla\Button.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\MotorOla\MotorOla.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\MotorOla\TextComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\MotorOla\ImageComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\MotorOla\Componente.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Src\MotorOla\AudioManager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\Src\MotorOla\includes\ecs\AudioSource.h">
+      <Filter>Header Files\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\MotorOla\Componente.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\Src\MotorOla\includes\ecs\Button.h">
+      <Filter>Header Files\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\MotorOla\ECS.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\Src\MotorOla\includes\ecs\Camera.h">
+      <Filter>Header Files\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\MotorOla\Entidad.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\Src\MotorOla\includes\ecs\Collider.h">
+      <Filter>Header Files\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\MotorOla\InputManager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\Src\MotorOla\includes\ecs\Componente.h">
+      <Filter>Header Files\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\MotorOla\OgreManager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\Src\MotorOla\includes\ecs\ComponenteRegistro.h">
+      <Filter>Header Files\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\MotorOla\Transform.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\Src\MotorOla\includes\ecs\ECS.h">
+      <Filter>Header Files\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\MotorOla\Mesh.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\Src\MotorOla\includes\ecs\Entidad.h">
+      <Filter>Header Files\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\MotorOla\ComponenteFactoria.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\Src\MotorOla\includes\ecs\ImageComponent.h">
+      <Filter>Header Files\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\MotorOla\ComponenteRegistro.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\Src\MotorOla\includes\ecs\Light.h">
+      <Filter>Header Files\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\MotorOla\LoadResources.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\Src\MotorOla\includes\ecs\Mesh.h">
+      <Filter>Header Files\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\MotorOla\AudioSource.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\Src\MotorOla\includes\ecs\RigidBody.h">
+      <Filter>Header Files\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\MotorOla\PhysxManager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\Src\MotorOla\includes\ecs\TextComponent.h">
+      <Filter>Header Files\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\MotorOla\utils\Vectola3D.h">
-      <Filter>Utils</Filter>
+    <ClInclude Include="..\..\Src\MotorOla\includes\ecs\Transform.h">
+      <Filter>Header Files\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\MotorOla\OverlayManager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\Src\MotorOla\includes\motor\Motor.h">
+      <Filter>Header Files\motor</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\MotorOla\LuaReader.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\Src\MotorOla\includes\motor\MotorOla.h">
+      <Filter>Header Files\motor</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\MotorOla\utils\Quaterniola.h">
-      <Filter>Utils</Filter>
+    <ClInclude Include="..\..\Src\MotorOla\includes\managers\AudioManager.h">
+      <Filter>Header Files\managers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\MotorOla\Motor.h" />
-    <ClInclude Include="..\..\Src\MotorOla\Collider.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\Src\MotorOla\includes\managers\ComponenteFactoria.h">
+      <Filter>Header Files\managers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\MotorOla\RigidBody.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\Src\MotorOla\includes\managers\InputManager.h">
+      <Filter>Header Files\managers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\MotorOla\ContactReportCallback.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\Src\MotorOla\includes\managers\LoadResources.h">
+      <Filter>Header Files\managers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\MotorOla\framework.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\Src\MotorOla\includes\managers\LuaReader.h">
+      <Filter>Header Files\managers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\MotorOla\pch.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\Src\MotorOla\includes\managers\OgreManager.h">
+      <Filter>Header Files\managers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\MotorOla\utils\checkML.h">
-      <Filter>Utils</Filter>
+    <ClInclude Include="..\..\Src\MotorOla\includes\managers\OverlayManager.h">
+      <Filter>Header Files\managers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\MotorOla\SceneManager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\Src\MotorOla\includes\managers\PhysxManager.h">
+      <Filter>Header Files\managers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\MotorOla\Camera.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\Src\MotorOla\includes\managers\SceneManager.h">
+      <Filter>Header Files\managers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\MotorOla\Light.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\Src\MotorOla\includes\utils\checkML.h">
+      <Filter>Header Files\utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\MotorOla\Button.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\Src\MotorOla\includes\utils\ContactReportCallback.h">
+      <Filter>Header Files\utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\MotorOla\MotorOla.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\Src\MotorOla\includes\utils\framework.h">
+      <Filter>Header Files\utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\MotorOla\TextComponent.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\Src\MotorOla\includes\utils\pch.h">
+      <Filter>Header Files\utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\MotorOla\ImageComponent.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\Src\MotorOla\includes\utils\Quaterniola.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\MotorOla\includes\utils\Vectola3D.h">
+      <Filter>Header Files\utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
       <UniqueIdentifier>{80a05fec-7544-4098-9cbd-ce1819b41110}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Utils">
-      <UniqueIdentifier>{4a9995c5-5b3f-4394-89c7-242f0e9c0ebb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files">
       <UniqueIdentifier>{ce6a659a-2325-471e-856d-53d97f474e9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ecs">
+      <UniqueIdentifier>{1658f075-2e0c-40b9-ad30-3193cbd57786}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ecs">
+      <UniqueIdentifier>{bfdf7d18-cc52-46ac-ab11-fb4481a78b83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\motor">
+      <UniqueIdentifier>{245e2c06-a234-4283-8dde-5f5954a0869f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\motor">
+      <UniqueIdentifier>{1f1046ad-05a5-42a2-af43-d4a9153d18ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\managers">
+      <UniqueIdentifier>{566acf09-9f7a-4871-b053-ccdf81e8288e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\managers">
+      <UniqueIdentifier>{cb99467c-db2f-44e5-8e47-be80c811291e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\utils">
+      <UniqueIdentifier>{b63d7831-748c-4153-9c41-676dadf6abe6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\utils">
+      <UniqueIdentifier>{70352b1b-dd72-4420-88a3-bd564b4e3a8b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

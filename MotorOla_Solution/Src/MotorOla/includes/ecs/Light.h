@@ -2,7 +2,7 @@
 #include "Componente.h"
 #include <OgreLight.h>
 #include <OgreSceneNode.h>
-#include "utils/Vectola3D.h"
+#include "Vectola3D.h"
 
 class Light : public Componente {
 public:

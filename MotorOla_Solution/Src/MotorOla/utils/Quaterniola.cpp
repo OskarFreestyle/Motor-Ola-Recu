@@ -1,4 +1,4 @@
-#include "utils/Quaterniola.h"
+#include "Quaterniola.h"
 
 // needed for visual studio
 #ifndef M_PI

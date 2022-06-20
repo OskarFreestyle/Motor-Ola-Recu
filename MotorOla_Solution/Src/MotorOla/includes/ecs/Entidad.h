@@ -6,8 +6,8 @@
 #endif
 #include <vector>
 #include "Componente.h"
-#include "utils/Vectola3D.h"
-#include "utils/Quaterniola.h"
+#include "Vectola3D.h"
+#include "Quaterniola.h"
 
 class Entidad
 {

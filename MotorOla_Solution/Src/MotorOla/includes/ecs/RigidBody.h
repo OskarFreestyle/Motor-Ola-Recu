@@ -9,7 +9,7 @@
 
 using namespace physx;
 
-class RigidBody : public Componente
+class MOTOR_API RigidBody : public Componente
 {
 public:
 	// OBLIGATORIO EN CADA COMPONENTE
@@ -21,14 +21,14 @@ public:
 	bool init(const std::map<std::string, std::string>& mapa);
 
 	// Getter
-	MOTOR_API PxRigidDynamic* getBody() { return body; };
-	MOTOR_API PxRigidStatic* getStBody() { return stBody; };
-	MOTOR_API PxVec3 getVelocity() { return _vel; };
-	MOTOR_API PxVec3 getAngularVelocity() { return body->getAngularVelocity(); };
+	PxRigidDynamic* getBody() { return body; };
+	PxRigidStatic* getStBody() { return stBody; };
+	PxVec3 getVelocity() { return _vel; };
+	PxVec3 getAngularVelocity() { return body->getAngularVelocity(); };
 
 	// Setter
-	MOTOR_API void setVelocity(PxVec3 v);
-	MOTOR_API void setAngularVelocity(PxVec3 av);
+	void setVelocity(PxVec3 v);
+	void setAngularVelocity(PxVec3 av);
 
 private:
 	PxRigidDynamic* body = nullptr;

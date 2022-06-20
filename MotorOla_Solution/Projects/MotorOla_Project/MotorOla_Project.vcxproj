@@ -30,69 +30,66 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Src\MotorOla\AudioManager.cpp" />
-    <ClCompile Include="..\..\Src\MotorOla\AudioSource.cpp" />
-    <ClCompile Include="..\..\Src\MotorOla\Button.cpp" />
-    <ClCompile Include="..\..\Src\MotorOla\Camera.cpp" />
-    <ClCompile Include="..\..\Src\MotorOla\Componente.cpp" />
-    <ClCompile Include="..\..\Src\MotorOla\ContactReportCallback.cpp" />
-    <ClCompile Include="..\..\Src\MotorOla\Collider.cpp" />
-    <ClCompile Include="..\..\Src\MotorOla\dllmain.cpp" />
-    <ClCompile Include="..\..\Src\MotorOla\ImageComponent.cpp" />
-    <ClCompile Include="..\..\Src\MotorOla\InputManager.cpp" />
-    <ClCompile Include="..\..\Src\MotorOla\Light.cpp" />
-    <ClCompile Include="..\..\Src\MotorOla\LoadResources.cpp" />
-    <ClCompile Include="..\..\Src\MotorOla\LuaReader.cpp" />
-    <ClCompile Include="..\..\Src\MotorOla\Mesh.cpp" />
-    <ClCompile Include="..\..\Src\MotorOla\ComponenteFactoria.cpp" />
-    <ClCompile Include="..\..\Src\MotorOla\Motor.cpp" />
-    <ClCompile Include="..\..\Src\MotorOla\Entidad.cpp" />
-    <ClCompile Include="..\..\Src\MotorOla\MotorOla.cpp" />
-    <ClCompile Include="..\..\Src\MotorOla\OgreManager.cpp" />
-    <ClCompile Include="..\..\Src\MotorOla\pch.cpp" />
-    <ClCompile Include="..\..\Src\MotorOla\PhysxManager.cpp" />
-    <ClCompile Include="..\..\Src\MotorOla\OverlayManager.cpp" />
-    <ClCompile Include="..\..\Src\MotorOla\RigidBody.cpp" />
-    <ClCompile Include="..\..\Src\MotorOla\SceneManager.cpp" />
-    <ClCompile Include="..\..\Src\MotorOla\TextComponent.cpp" />
-    <ClCompile Include="..\..\Src\MotorOla\Transform.cpp" />
+    <ClCompile Include="..\..\Src\MotorOla\ecs\AudioSource.cpp" />
+    <ClCompile Include="..\..\Src\MotorOla\ecs\Button.cpp" />
+    <ClCompile Include="..\..\Src\MotorOla\ecs\Camera.cpp" />
+    <ClCompile Include="..\..\Src\MotorOla\ecs\Collider.cpp" />
+    <ClCompile Include="..\..\Src\MotorOla\ecs\Entidad.cpp" />
+    <ClCompile Include="..\..\Src\MotorOla\ecs\ImageComponent.cpp" />
+    <ClCompile Include="..\..\Src\MotorOla\ecs\Light.cpp" />
+    <ClCompile Include="..\..\Src\MotorOla\ecs\Mesh.cpp" />
+    <ClCompile Include="..\..\Src\MotorOla\ecs\RigidBody.cpp" />
+    <ClCompile Include="..\..\Src\MotorOla\ecs\TextComponent.cpp" />
+    <ClCompile Include="..\..\Src\MotorOla\ecs\Transform.cpp" />
+    <ClCompile Include="..\..\Src\MotorOla\managers\AudioManager.cpp" />
+    <ClCompile Include="..\..\Src\MotorOla\managers\ComponenteFactoria.cpp" />
+    <ClCompile Include="..\..\Src\MotorOla\managers\InputManager.cpp" />
+    <ClCompile Include="..\..\Src\MotorOla\managers\LoadResources.cpp" />
+    <ClCompile Include="..\..\Src\MotorOla\managers\LuaReader.cpp" />
+    <ClCompile Include="..\..\Src\MotorOla\managers\OgreManager.cpp" />
+    <ClCompile Include="..\..\Src\MotorOla\managers\OverlayManager.cpp" />
+    <ClCompile Include="..\..\Src\MotorOla\managers\PhysxManager.cpp" />
+    <ClCompile Include="..\..\Src\MotorOla\managers\SceneManager.cpp" />
+    <ClCompile Include="..\..\Src\MotorOla\motor\Motor.cpp" />
+    <ClCompile Include="..\..\Src\MotorOla\motor\MotorOla.cpp" />
+    <ClCompile Include="..\..\Src\MotorOla\utils\ContactReportCallback.cpp" />
+    <ClCompile Include="..\..\Src\MotorOla\utils\dllmain.cpp" />
+    <ClCompile Include="..\..\Src\MotorOla\utils\pch.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\utils\Quaterniola.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\utils\Vectola3D.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Src\MotorOla\AudioManager.h" />
-    <ClInclude Include="..\..\Src\MotorOla\AudioSource.h" />
-    <ClInclude Include="..\..\Src\MotorOla\Button.h" />
-    <ClInclude Include="..\..\Src\MotorOla\Camera.h" />
-    <ClInclude Include="..\..\Src\MotorOla\ContactReportCallback.h" />
-    <ClInclude Include="..\..\Src\MotorOla\Collider.h" />
-    <ClInclude Include="..\..\Src\MotorOla\Componente.h" />
-    <ClInclude Include="..\..\Src\MotorOla\ComponenteFactoria.h" />
-    <ClInclude Include="..\..\Src\MotorOla\ComponenteRegistro.h" />
-    <ClInclude Include="..\..\Src\MotorOla\ECS.h" />
-    <ClInclude Include="..\..\Src\MotorOla\Entidad.h" />
-    <ClInclude Include="..\..\Src\MotorOla\framework.h" />
-    <ClInclude Include="..\..\Src\MotorOla\ImageComponent.h" />
-    <ClInclude Include="..\..\Src\MotorOla\InputManager.h" />
-    <ClInclude Include="..\..\Src\MotorOla\Light.h" />
-    <ClInclude Include="..\..\Src\MotorOla\LoadResources.h" />
-    <ClInclude Include="..\..\Src\MotorOla\LuaReader.h" />
-    <ClInclude Include="..\..\Src\MotorOla\MotorOla.h" />
-    <ClInclude Include="..\..\Src\MotorOla\OgreManager.h" />
-    <ClInclude Include="..\..\Src\MotorOla\Mesh.h" />
-    <ClInclude Include="..\..\Src\MotorOla\pch.h" />
-    <ClInclude Include="..\..\Src\MotorOla\PhysxManager.h" />
-    <ClInclude Include="..\..\Src\MotorOla\OverlayManager.h" />
-    <ClInclude Include="..\..\Src\MotorOla\RigidBody.h" />
-    <ClInclude Include="..\..\Src\MotorOla\SceneManager.h" />
-    <ClInclude Include="..\..\Src\MotorOla\TextComponent.h" />
-    <ClInclude Include="..\..\Src\MotorOla\Transform.h" />
-    <ClInclude Include="..\..\Src\MotorOla\utils\checkML.h" />
-    <ClInclude Include="..\..\Src\MotorOla\utils\Quaterniola.h" />
-    <ClInclude Include="..\..\Src\MotorOla\utils\Vectola3D.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\Src\MotorOla\Motor.h" />
+    <ClInclude Include="..\..\Src\MotorOla\includes\ecs\AudioSource.h" />
+    <ClInclude Include="..\..\Src\MotorOla\includes\ecs\Button.h" />
+    <ClInclude Include="..\..\Src\MotorOla\includes\ecs\Camera.h" />
+    <ClInclude Include="..\..\Src\MotorOla\includes\ecs\Collider.h" />
+    <ClInclude Include="..\..\Src\MotorOla\includes\ecs\Componente.h" />
+    <ClInclude Include="..\..\Src\MotorOla\includes\ecs\ComponenteRegistro.h" />
+    <ClInclude Include="..\..\Src\MotorOla\includes\ecs\ECS.h" />
+    <ClInclude Include="..\..\Src\MotorOla\includes\ecs\Entidad.h" />
+    <ClInclude Include="..\..\Src\MotorOla\includes\ecs\ImageComponent.h" />
+    <ClInclude Include="..\..\Src\MotorOla\includes\ecs\Light.h" />
+    <ClInclude Include="..\..\Src\MotorOla\includes\ecs\Mesh.h" />
+    <ClInclude Include="..\..\Src\MotorOla\includes\ecs\RigidBody.h" />
+    <ClInclude Include="..\..\Src\MotorOla\includes\ecs\TextComponent.h" />
+    <ClInclude Include="..\..\Src\MotorOla\includes\ecs\Transform.h" />
+    <ClInclude Include="..\..\Src\MotorOla\includes\managers\AudioManager.h" />
+    <ClInclude Include="..\..\Src\MotorOla\includes\managers\ComponenteFactoria.h" />
+    <ClInclude Include="..\..\Src\MotorOla\includes\managers\InputManager.h" />
+    <ClInclude Include="..\..\Src\MotorOla\includes\managers\LoadResources.h" />
+    <ClInclude Include="..\..\Src\MotorOla\includes\managers\LuaReader.h" />
+    <ClInclude Include="..\..\Src\MotorOla\includes\managers\OgreManager.h" />
+    <ClInclude Include="..\..\Src\MotorOla\includes\managers\OverlayManager.h" />
+    <ClInclude Include="..\..\Src\MotorOla\includes\managers\PhysxManager.h" />
+    <ClInclude Include="..\..\Src\MotorOla\includes\managers\SceneManager.h" />
+    <ClInclude Include="..\..\Src\MotorOla\includes\motor\Motor.h" />
+    <ClInclude Include="..\..\Src\MotorOla\includes\motor\MotorOla.h" />
+    <ClInclude Include="..\..\Src\MotorOla\includes\utils\checkML.h" />
+    <ClInclude Include="..\..\Src\MotorOla\includes\utils\ContactReportCallback.h" />
+    <ClInclude Include="..\..\Src\MotorOla\includes\utils\framework.h" />
+    <ClInclude Include="..\..\Src\MotorOla\includes\utils\pch.h" />
+    <ClInclude Include="..\..\Src\MotorOla\includes\utils\Quaterniola.h" />
+    <ClInclude Include="..\..\Src\MotorOla\includes\utils\Vectola3D.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
@@ -212,13 +209,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>MOTOR_EXPORTS;_DEBUG;_CONSOLE;WIN64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\Ogre\Build\SDL-main\include\;$(SolutionDir)Dependencies\Ogre\Build\SDL2-2.0.20\include\;$(SolutionDir)Dependencies\Ogre\Build\SDL2-build\include\;$(SolutionDir)Dependencies\Ogre\Src\OgreMain\include;$(SolutionDir)Dependencies\Ogre\Build\include;$(SolutionDir)Src\MotorOla\;$(SolutionDir)Dependencies\FMOD\inc;$(SolutionDir)Dependencies\PhysX-4.1\Src\physx\include;$(SolutionDir)Dependencies\PhysX-4.1\Src\pxshared\include;$(SolutionDir)Dependencies\Lua\include;$(SolutionDir)Dependencies\Ogre\Src\Components\Overlay\include\;$(SolutionDir)Dependencies\PhysX-4.1\Src\physx\source\foundation\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\Ogre\Build\SDL-main\include\;$(SolutionDir)Dependencies\Ogre\Build\SDL2-2.0.20\include\;$(SolutionDir)Dependencies\Ogre\Build\SDL2-build\include\;$(SolutionDir)Dependencies\Ogre\Src\OgreMain\include;$(SolutionDir)Dependencies\Ogre\Build\include;$(SolutionDir)Dependencies\FMOD\inc;$(SolutionDir)Dependencies\PhysX-4.1\Src\physx\include;$(SolutionDir)Dependencies\PhysX-4.1\Src\pxshared\include;$(SolutionDir)Dependencies\Lua\include;$(SolutionDir)Dependencies\Ogre\Src\Components\Overlay\include\;$(SolutionDir)Dependencies\PhysX-4.1\Src\physx\source\foundation\include;$(SolutionDir)Src\MotorOla\includes\ecs;$(SolutionDir)Src\MotorOla\includes\motor;$(SolutionDir)Src\MotorOla\includes\managers;$(SolutionDir)Src\MotorOla\includes\utils;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>OgreProject_d.lib;OgreMain_d.lib;SDL2d.lib;SDL2maind.lib;fmod_vc.lib;fmodL_vc.lib;PhysXProject_d.lib;OgreOverlay_d.lib</AdditionalDependencies>
+      <AdditionalDependencies>OgreMain_d.lib;SDL2d.lib;SDL2maind.lib;fmod_vc.lib;fmodL_vc.lib;PhysXProject_d.lib;OgreOverlay_d.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(solutionDir)Dependencies\Ogre\Build\lib\$(Configuration)\;$(solutionDir)Dependencies\Ogre\Build\$(Platform)\lib\$(Configuration)\;$(solutionDir)Dependencies\Ogre\Build\SDL2-build\$(Configuration)\;$(solutionDir)Dependencies\FMOD\libreria\$(Platform);$(solutionDir)Dependencies\PhysX-4.1\Build\$(Platform)\lib\$(Configuration)\;$(solutionDir)Dependencies\PhysX-4.1\Src\physx\bin\win.x86_64.vc142.mt\$(Configuration)\;$(solutionDir)Dependencies\PhysX-4.1\Src\physx\snippets\graphics\lib\win64\glut;$(solutionDir)Dependencies\Lua\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ProjectReference>
@@ -233,7 +230,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>MOTOR_EXPORTS;NDEBUG;_CONSOLE;WIN64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(solutionDir)Dependencies\Ogre\Build\SDL-main\include\;$(solutionDir)Dependencies\Ogre\Build\SDL2-2.0.20\include\;$(solutionDir)Dependencies\Ogre\Build\SDL2-build\include\;$(solutionDir)Dependencies\Ogre\Src\OgreMain\include;$(solutionDir)Dependencies\Ogre\Build\include;$(solutionDir)Src\MotorOla\;$(solutionDir)Dependencies\FMOD\inc;$(SolutionDir)Dependencies\PhysX-4.1\Src\physx\include;$(SolutionDir)Dependencies\PhysX-4.1\Src\pxshared\include;$(SolutionDir)Dependencies\Lua\include;$(solutionDir)Dependencies\Ogre\Src\Components\Overlay\include\;$(SolutionDir)Dependencies\PhysX-4.1\Src\physx\source\foundation\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(solutionDir)Dependencies\Ogre\Build\SDL-main\include\;$(solutionDir)Dependencies\Ogre\Build\SDL2-2.0.20\include\;$(solutionDir)Dependencies\Ogre\Build\SDL2-build\include\;$(solutionDir)Dependencies\Ogre\Src\OgreMain\include;$(solutionDir)Dependencies\Ogre\Build\include;$(solutionDir)Dependencies\FMOD\inc;$(SolutionDir)Dependencies\PhysX-4.1\Src\physx\include;$(SolutionDir)Dependencies\PhysX-4.1\Src\pxshared\include;$(SolutionDir)Dependencies\Lua\include;$(solutionDir)Dependencies\Ogre\Src\Components\Overlay\include\;$(SolutionDir)Dependencies\PhysX-4.1\Src\physx\source\foundation\include;$(SolutionDir)Src\MotorOla\includes\managers;$(SolutionDir)Src\MotorOla\includes\motor;$(SolutionDir)Src\MotorOla\includes\ecs;$(SolutionDir)Src\MotorOla\includes\utils;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>

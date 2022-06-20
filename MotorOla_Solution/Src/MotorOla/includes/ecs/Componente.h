@@ -2,7 +2,7 @@
 #include "ECS.h"
 #include <map>
 #include <string>
-#include "utils/Vectola3D.h"
+#include "Vectola3D.h"
 
 class Entidad;
 

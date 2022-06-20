@@ -6,7 +6,6 @@
 #include <OgreViewport.h>
 #include <OgreSceneManager.h>
 #include <OgreRenderWindow.h>
-//#include "MotorLoop.h"
 
 Camera::Camera() : _cam(nullptr), _camNode(nullptr), _viewport(nullptr) {
 

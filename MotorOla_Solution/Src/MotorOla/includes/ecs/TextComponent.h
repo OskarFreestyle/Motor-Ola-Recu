@@ -5,6 +5,7 @@
 #define MOTOR_API __declspec(dllimport)
 #endif
 #include "Componente.h"
+
 class MOTOR_API TextComponent :public Componente
 {
 public:
