@@ -3,12 +3,12 @@
 
 #if _DEBUG
     #include "checkML.h"
-#endif
-
-int main()
-{
-#if _DEBUG
+int main(){
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+#else
+#include <windows.h>
+int WINAPI
+WinMain(HINSTANCE zhInstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdShow) {
 #endif
     std::cout << "---------- APLICACION INICIADA ----------\n";
 

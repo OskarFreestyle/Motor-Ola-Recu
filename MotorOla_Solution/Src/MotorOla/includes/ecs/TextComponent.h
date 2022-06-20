@@ -25,6 +25,6 @@ private:
 	std::string nombrePanel;
 	float dimX;
 	float dimY;
-	std::string color;//Solo puede ser Red o Black
+	std::string color; //Solo puede ser Red o Black
 };
 

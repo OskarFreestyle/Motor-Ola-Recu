@@ -43,8 +43,6 @@ bool TextComponent::init(const std::map<std::string, std::string>& mapa)
 	return _inicializado;
 }
 
-
-
 std::string TextComponent::getTexto()
 {
 	return texto;
