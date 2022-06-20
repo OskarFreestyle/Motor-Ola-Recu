@@ -4,6 +4,8 @@
 #include "AudioManager.h"
 #include "Motor.h"
 #include "InputManager.h"
+#include "AudioSource.h"
+#include "Entidad.h"
 
 Button::~Button() {
 	//OverlayManager::GetInstance()->clear();
@@ -70,10 +72,16 @@ bool Button::isClicked() {
 
 void Button::onClick()
 {
+	// Si tiene algun audio asociado, suena
+	if (_entity->hasComponent<AudioSource>()) {
+		_entity->getComponent<AudioSource>()->play();
+	}
+
+	// Realiza la accion correspondiente
 	switch (type) {
 	case Type::CHANGE_SCENE:
 		OverlayManager::GetInstance()->clear();
-		SceneManager::GetInstance()->newScene(nextScene);
+		SceneManager::GetInstance()->newScene(nextScene);	// Escena pasada por carga de datos
 		break;
 	case Type::VOLUME:
 		AudioManager::GetInstance()->setMute(!AudioManager::GetInstance()->getMute());

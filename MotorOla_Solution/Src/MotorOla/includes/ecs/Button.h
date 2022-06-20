@@ -38,8 +38,5 @@ private:
 	/// Funcionalidades 
 	/// </summary>
 	virtual void onClick();
-	
-	
-
 };
 

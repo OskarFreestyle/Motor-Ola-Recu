@@ -6,13 +6,15 @@ using namespace std;
 class AudioSource :	public Componente
 {
 public:
-	AudioSource(int channel, AudioManager*a,const char* s);
+	AudioSource() {};
 	~AudioSource();
+	bool init(const std::map<std::string, std::string>& mapa) override;
 
 	void play();
 	void pause();
 private:
-	AudioManager* aud;
+	std::string _audioFileName;
 	int _channel;
+	bool _loop;
 };
 

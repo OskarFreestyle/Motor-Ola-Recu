@@ -133,6 +133,7 @@ void Motor::registryComponents()
 {
 	// Apuntar aqui todos los componentes del motor (apuntar solo despues de refactorizar)
 	try {
+		ComponenteRegistro::ComponenteRegistro<AudioSource>("audioSource");
 		ComponenteRegistro::ComponenteRegistro<Transform>("transform");
 		ComponenteRegistro::ComponenteRegistro<Mesh>("mesh");
 		ComponenteRegistro::ComponenteRegistro<Camera>("camera");
