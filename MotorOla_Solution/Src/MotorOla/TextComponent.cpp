@@ -1,5 +1,7 @@
 #include "TextComponent.h"
 #include "OverlayManager.h"
+#include "Entidad.h"
+#include <string>
 
 TextComponent::~TextComponent()
 {
@@ -41,6 +43,8 @@ bool TextComponent::init(const std::map<std::string, std::string>& mapa)
 	return _inicializado;
 }
 
+
+
 std::string TextComponent::getTexto()
 {
 	return texto;
@@ -52,3 +56,5 @@ void TextComponent::setTexto(const std::string& s,const std::string& textName, c
 	Ogre::TextAreaOverlayElement* t = OverlayManager::GetInstance()->getTexto(panelName,textName);
 	if (t != nullptr)t->setCaption(texto);
 }
+
+

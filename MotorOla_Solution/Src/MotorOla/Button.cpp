@@ -6,7 +6,7 @@
 #include "InputManager.h"
 
 Button::~Button() {
-	OverlayManager::GetInstance()->clear();
+	//OverlayManager::GetInstance()->clear();
 }
 
 bool Button::init(const std::map<std::string, std::string>& mapa) {
@@ -72,6 +72,7 @@ void Button::onClick()
 {
 	switch (type) {
 	case Type::CHANGE_SCENE:
+		OverlayManager::GetInstance()->clear();
 		SceneManager::GetInstance()->newScene(nextScene);
 		break;
 	case Type::VOLUME:

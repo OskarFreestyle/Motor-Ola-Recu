@@ -83,6 +83,29 @@ Entidad* SceneManager::getEntityByID(int id)
 	return ent;
 }
 
+Entidad* SceneManager::getEntityByName(const std::string& name)
+{
+	// Busca entre las entidades activas
+	Entidad* ent = nullptr;
+	auto it = _entidades.begin();
+	while (ent == nullptr && it != _entidades.end()) {
+		if ((*it)->getName() == name)
+			ent = *it;
+		++it;
+	}
+
+	//Si no se encuentra, entre las entidades a crear
+	if (ent == nullptr) {
+		auto it = _entidadesToLoad.begin();
+		while (ent == nullptr && it != _entidadesToLoad.end()) {
+			if ((*it)->getName() == name)
+				ent = *it;
+			++it;
+		}
+	}
+	return ent;
+}
+
 void SceneManager::removeEntities() {
 	// Borra todas las entidades marcadas
 	for (Entidad* e : _entidadesToRemove) {

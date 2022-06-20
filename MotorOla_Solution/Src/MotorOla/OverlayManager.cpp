@@ -10,12 +10,12 @@ OverlayManager* OverlayManager::_singleton = nullptr;
 OverlayManager::~OverlayManager()
 {
 	Ogre::OverlayManager& overlayManager = Ogre::OverlayManager::getSingleton();
-	overlayManager.destroy("PanelOverlay");
+	overlayManager.destroyAllOverlayElements();
 	botones.clear();
 	paneles.clear();
 	textos.clear();
 	callbacks.clear();
-	overlayManager.destroyAllOverlayElements();
+	overlayManager.destroy("PanelOverlay");
 }
 
 bool OverlayManager::Init(OgreManager* om_, Motor* m)

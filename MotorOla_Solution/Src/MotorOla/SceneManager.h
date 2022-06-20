@@ -39,6 +39,10 @@ public:
 	/// Devuelve una entidad dado su id, si no la encuentra devuelve nullptr. Busca en la lista de la escena y/o en la lista de entidades permanentes
 	/// </summary>
 	Entidad* getEntityByID(int id);
+	/// <summary>
+	/// Devuelve una entidad dado su nombre, si no la encuentra devuelve nullptr. Busca en la lista de la escena y/o en la lista de entidades permanentes
+	/// </summary>
+	Entidad* getEntityByName(const std::string& name);
 
 	/// <summary>
 	/// Elimina una entidad de la lista y la destruye.

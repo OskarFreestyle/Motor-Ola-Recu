@@ -34,6 +34,7 @@
     <ClCompile Include="..\..\Src\MotorOla\AudioSource.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\Button.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\Camera.cpp" />
+    <ClCompile Include="..\..\Src\MotorOla\Componente.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\ContactReportCallback.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\Collider.cpp" />
     <ClCompile Include="..\..\Src\MotorOla\dllmain.cpp" />
