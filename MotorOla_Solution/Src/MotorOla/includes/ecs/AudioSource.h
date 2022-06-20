@@ -12,9 +12,12 @@ public:
 
 	void play();
 	void pause();
+	void stop();
+
 private:
 	std::string _audioFileName;
 	int _channel;
 	bool _loop;
+	bool _startOnPlay;
 };
 

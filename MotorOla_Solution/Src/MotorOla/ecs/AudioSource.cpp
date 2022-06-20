@@ -4,10 +4,12 @@
 
 AudioSource::~AudioSource()
 {
+	stop();
 }
 
 bool AudioSource::init(const std::map<std::string, std::string>& mapa) {
-	if (mapa.find("audioFileName") == mapa.end() || mapa.find("channel") == mapa.end() || mapa.find("loop") == mapa.end()) return false;
+	if (mapa.find("audioFileName") == mapa.end() || mapa.find("channel") == mapa.end()
+		|| mapa.find("loop") == mapa.end() || mapa.find("startOnPlay") == mapa.end()) return false;
 
 	_audioFileName = mapa.at("audioFileName");
 
@@ -18,7 +20,16 @@ bool AudioSource::init(const std::map<std::string, std::string>& mapa) {
 	else if (s == "false") _loop = false;
 	else return false;
 
+	s = mapa.at("startOnPlay");
+	if (s == "true") _startOnPlay = true;
+	else if (s == "false") _startOnPlay = false;
+	else return false;
+
+	// Se carga siempre
 	AudioManager::GetInstance()->loadMusic(_channel, LoadResources::GetInstance()->aud(_audioFileName).c_str());
+
+	// Se reproduce si esta marcada startOnPlay
+	if (_startOnPlay) play();
 
 	_inicializado = true;
 
@@ -31,6 +42,11 @@ void AudioSource::play()
 }
 
 void AudioSource::pause()
+{
+	AudioManager::GetInstance()->togglePause(_channel);
+}
+
+void AudioSource::stop()
 {
 	AudioManager::GetInstance()->stopMusic(_channel);
 }
