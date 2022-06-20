@@ -33,6 +33,11 @@ public:
 		return getComponent<T>() != nullptr;
 	}
 
+	//template<typename T>
+	//bool hasInitComponent() {
+	//	return (getComponent<T>() != nullptr && getComponent<T>());
+	//}
+
 	/// <summary>
 /// Devuelve un componente de la entidad, o nullptr si no lo tiene. Coste: O(N) :(
 /// </summary>

@@ -1,6 +1,7 @@
 #include "Collider.h"
 #include "PhysxManager.h"
 #include "RigidBody.h"
+#include "Transform.h"
 
 #if _DEBUG
 	const bool debugCom = false;
@@ -17,6 +18,9 @@ Collider::~Collider()
 
 bool Collider::init(const std::map<std::string, std::string>& mapa)
 {
+	// Comprueba que exista el componente transform y este inicializado
+	if (!_entity->hasComponent<Transform>() || !_entity->getComponent<Transform>()->getInitialized()) return false;
+
 	// comprobar que la sección existe
 	if (mapa.find("type") == mapa.end())
 		return false;
@@ -27,7 +31,6 @@ bool Collider::init(const std::map<std::string, std::string>& mapa)
 
 	// identifica el tipo de geometría
 	std::string typeString = mapa.at("type");
-	
 
 	if (typeString == "sphere") {
 		// comprobar que la sección existe
@@ -69,7 +72,9 @@ bool Collider::init(const std::map<std::string, std::string>& mapa)
 			return false;
 
 		// Crea la forma del collider (cubo)
-		geometry = new PxBoxGeometry(PxVec3(dimX, dimY, dimZ) * 50); /// ¿escala?
+		geometry = new PxBoxGeometry(PxVec3(dimX * _entity->getComponent<Transform>()->getScale().getX(),
+			dimY * _entity->getComponent<Transform>()->getScale().getY(), 
+			dimZ * _entity->getComponent<Transform>()->getScale().getZ()) * 50); /// ¿escala?
 	}
 	
 
@@ -101,6 +106,10 @@ bool Collider::init(const std::map<std::string, std::string>& mapa)
 	else
 		if (debugCom) std::cout << "Collider: no body, no shape attach...\n";
 #endif
+
+	std::cout << "Collider " << _entity->getName() << "\n";
+
+	_inicializado = true;
 
 	return true;
 }

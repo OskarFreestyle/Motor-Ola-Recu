@@ -20,7 +20,12 @@ RigidBody::~RigidBody()
 
 bool RigidBody::init(const std::map<std::string, std::string>& mapa)
 {
-	// Recoge si existe el componente transform
+	// Comprueba que exista el componente transform y este inicializado
+	if (!_entity->hasComponent<Transform>() || !_entity->getComponent<Transform>()->getInitialized()) return false;
+
+	// Comprueba que exista el componente collider y este inicializado
+	if (!_entity->hasComponent<Collider>() || !_entity->getComponent<Collider>()->getInitialized()) return false;
+
 	Transform* tr = getEntidad()->getComponent<Transform>();
 
 	// Valores para guardar los datos leidos
@@ -28,7 +33,7 @@ bool RigidBody::init(const std::map<std::string, std::string>& mapa)
 	float oriX=0.f, oriY=0.f, oriZ=0.f, oriW=1.f;
 	float velX=0.f, velY=0.f, velZ=0.f;
 
-	// Valores auxiliares para guardar el tama�o de cada string
+	// Valores auxiliares para guardar el tamano de cada string
 	std::string::size_type sact = 0, stot = 0;
 	std::string tempString; // string auxiliar para guardar la subcadena actual
 
@@ -37,7 +42,7 @@ bool RigidBody::init(const std::map<std::string, std::string>& mapa)
 		// comprobar que la secci�n existe
 		if (mapa.find("position") != mapa.end())
 		{
-			// Lee los datos de la posici�n
+			// Lee los datos de la posicion
 			std::string posString = mapa.at("position");
 			posX = stof(posString, &sact); stot = sact + 1; sact = 0;
 			tempString = posString.substr(stot);
@@ -156,6 +161,8 @@ bool RigidBody::init(const std::map<std::string, std::string>& mapa)
 	// A�ade la entidad asociado al manager de phyx
 	int id_ = getEntidad()->getID();
 	pm().addEntityID(id_);
+
+	std::cout << "Rigidbody " << _entity->getName() << " cargado con posicion " << _pos << "\n";
 
 	return true;
 }

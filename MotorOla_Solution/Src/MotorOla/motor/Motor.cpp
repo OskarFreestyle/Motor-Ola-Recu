@@ -189,12 +189,6 @@ void Motor::mainLoop()
 		// Actualiza las entidades (lo cual llama a actualizar cada uno de sus componentes)
 		SceneManager::GetInstance()->updateEntidades();
 
-		// TODO creo que quitar en un futuro cuando los overlays sean componentes
-		// Actualiza los transforms de las entitys despues de las fisicas
-		/*if (OverlayManager::GetInstance() != nullptr) {
-			OverlayManager::GetInstance()->update();
-		}*/
-
 		// Renderiza un frame
 		OgreManager::GetInstance()->update();
 
@@ -222,7 +216,7 @@ void Motor::mainLoop()
 		if (numFrames >= 60) {
 			numFrames -= 60;
 			aux++;
-			std::cout << "Segundos: " << aux << "\n";
+			//std::cout << "Segundos: " << aux << "\n";
 		}
 	}
 }
