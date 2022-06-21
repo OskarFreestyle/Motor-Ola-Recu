@@ -17,19 +17,19 @@ public:
 	virtual void start() {};
 	virtual void update() {};
 
-	//Para triggers
+	// Para triggers
 	virtual void onTriggerStart(Entidad* other) {};
 	virtual void onTriggerStay(Entidad* other) {};
 	virtual void onTriggerEnd(Entidad* other) {};
 
-	//Para las Colisiones
+	// Para las Colisiones
 	virtual void onCollisionStart(Entidad* other) {};
 	virtual void onCollisionStay(Entidad* other) {};
 	virtual void onCollisionEnd(Entidad* other) {};
 
 	virtual void draw() {};
 
-	inline void setActive(bool state) { _active = state; }
+	inline virtual void setActive(bool state) { _active = state; }
 	inline void setInitialized(bool state) { _inicializado = state; }
 	
 	inline bool getActive() const { return _active; }

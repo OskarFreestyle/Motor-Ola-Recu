@@ -1,13 +1,15 @@
 #pragma once
 #include "Componente.h"
+
 class ImageComponent :public Componente
 {
 public:
 	ImageComponent() {};
 	~ImageComponent();
 	bool init(const std::map<std::string, std::string>& mapa) override;
-	
 
+	void setActive(bool state);
+	
 private:
 	float posX;
 	float posY;
@@ -15,6 +17,5 @@ private:
 	std::string material;
 	float dimX;
 	float dimY;
-	
 };
 

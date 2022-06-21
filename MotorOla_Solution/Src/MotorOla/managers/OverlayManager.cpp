@@ -182,9 +182,9 @@ MOTOR_API void OverlayManager::changeTextColor(std::string panelName, std::strin
 MOTOR_API Ogre::PanelOverlayElement* OverlayManager::getPanel(std::string name)
 {
 	Ogre::PanelOverlayElement* panel = nullptr;
-	auto it = textos.begin();
+	auto it = paneles.begin();
 	bool find = false;
-	while (!find && it != textos.end()) {
+	while (!find && it != paneles.end()) {
 		if ((*it)->getName() == name) {
 			panel = (*it);
 			find = true;

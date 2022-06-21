@@ -25,8 +25,13 @@ bool ImageComponent::init(const std::map<std::string, std::string>& mapa)
 
 	OverlayManager::GetInstance()->creaPanel(posX, posY,nombrePanel,material, dimX, dimY);
 	
-
 	_inicializado = true;
 
 	return _inicializado;
+}
+
+void ImageComponent::setActive(bool state)
+{
+	_active = state;
+	OverlayManager::GetInstance()->getPanel(nombrePanel)->setVisible(state);
 }

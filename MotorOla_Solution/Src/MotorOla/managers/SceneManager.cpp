@@ -7,9 +7,14 @@ SceneManager* SceneManager::_singleton = nullptr;
 
 SceneManager::~SceneManager() {
 	// Vaciamos todos los vectores de entidades
-	for (Entidad* e : _entidades) if (e != nullptr) delete e;
+	for (Entidad* e : _entidades) 
+		if (e != nullptr) delete e;
+
+	_entidades.clear();
 	for (Entidad* r : _entidadesToRemove) if (r != nullptr) delete r;
+	_entidadesToRemove.clear();
 	for (Entidad* l : _entidadesToLoad) if (l != nullptr) delete l;
+	_entidadesToLoad.clear();
 }
 
 bool SceneManager::Init() {

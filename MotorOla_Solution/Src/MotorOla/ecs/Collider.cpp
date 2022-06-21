@@ -14,6 +14,10 @@ Collider::Collider()
 
 Collider::~Collider()
 {
+	if (shape) {
+		shape->release();
+		shape = nullptr;
+	}
 }
 
 bool Collider::init(const std::map<std::string, std::string>& mapa)

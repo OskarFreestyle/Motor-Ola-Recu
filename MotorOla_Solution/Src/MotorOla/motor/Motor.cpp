@@ -64,10 +64,10 @@ Motor::~Motor()
 	if (LuaReader::GetInstance() != nullptr) delete LuaReader::GetInstance();
 	if (OverlayManager::GetInstance() != nullptr) delete OverlayManager::GetInstance();
 	if (InputManager::GetInstance() != nullptr) delete InputManager::GetInstance();
-	if (PhysxManager::GetInstance() != nullptr) delete PhysxManager::GetInstance();
 	if (LoadResources::GetInstance() != nullptr) delete LoadResources::GetInstance();
 	if (AudioManager::GetInstance() != nullptr) delete AudioManager::GetInstance();
 	if (SceneManager::GetInstance() != nullptr) delete SceneManager::GetInstance();
+	if (PhysxManager::GetInstance() != nullptr) delete PhysxManager::GetInstance();
 	if (OgreManager::GetInstance() != nullptr) delete OgreManager::GetInstance();
 	if (ComponenteFactoria::GetInstance() != nullptr) delete ComponenteFactoria::GetInstance();
 	
