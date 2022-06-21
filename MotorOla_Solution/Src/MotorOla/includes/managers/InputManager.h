@@ -95,6 +95,10 @@ public:
 		return _isKeyUpEvent;
 	}
 
+	inline bool iskeyContinuos(SDL_Scancode key) {
+		return _kbState[key] == 1;
+	}
+
 	inline bool isKeyDown(SDL_Scancode key) {
 		return keyDownEvent() && _kbState[key] == 1;
 	}

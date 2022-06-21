@@ -18,10 +18,12 @@ RigidBody::~RigidBody()
 	if (body) {
 		std::cout << "This is dynamic\n";
 		body->release();
+		body = nullptr;
 	}
 	if (stBody) {
 		std::cout << "This is static\n";
-		//stBody->release();	// Also delete the shape
+		stBody->release();	// Also delete the shape
+		stBody = nullptr;
 	}
 }
 
