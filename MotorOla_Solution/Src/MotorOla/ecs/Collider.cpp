@@ -48,7 +48,7 @@ bool Collider::init(const std::map<std::string, std::string>& mapa)
 			return false;
 
 		// Crea la forma del collider (esfera)
-		geometry = new PxSphereGeometry(rad * 100); /// ¿la escala es igual respecto a Ogre?
+		geometry = new PxSphereGeometry(rad * _entity->getComponent<Transform>()->getScale().getX() * 100); /// ¿la escala es igual respecto a Ogre?
 	}
 	else if (typeString == "box") {
 		// comprobar que la sección existe
@@ -67,14 +67,14 @@ bool Collider::init(const std::map<std::string, std::string>& mapa)
 		float dimY = stof(yString);
 		std::string zString = mapa.at("z");
 		float dimZ = stof(zString);
-		//
+		
 		if (dimX < 0 || dimY < 0 || dimZ < 0)
 			return false;
 
 		// Crea la forma del collider (cubo)
 		geometry = new PxBoxGeometry(PxVec3(dimX * _entity->getComponent<Transform>()->getScale().getX(),
 			dimY * _entity->getComponent<Transform>()->getScale().getY(), 
-			dimZ * _entity->getComponent<Transform>()->getScale().getZ()) * 50); /// ¿escala?
+			dimZ * _entity->getComponent<Transform>()->getScale().getZ()) * BOX_SCALE); /// ¿escala?
 	}
 	
 

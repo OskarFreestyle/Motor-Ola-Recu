@@ -8,6 +8,7 @@
 #include "PxShape.h"
 
 using namespace physx;
+const float BOX_SCALE = 50.0f;
 
 class Collider : public Componente
 {

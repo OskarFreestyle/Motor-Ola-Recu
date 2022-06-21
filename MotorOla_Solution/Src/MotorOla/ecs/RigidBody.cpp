@@ -14,8 +14,15 @@ RigidBody::RigidBody()
 
 RigidBody::~RigidBody()
 {
-	if (body) body->release();
-	if (stBody) stBody->release();
+	std::cout << _entity->getName() << "\n";
+	if (body) {
+		std::cout << "This is dynamic\n";
+		body->release();
+	}
+	if (stBody) {
+		std::cout << "This is static\n";
+		//stBody->release();	// Also delete the shape
+	}
 }
 
 bool RigidBody::init(const std::map<std::string, std::string>& mapa)

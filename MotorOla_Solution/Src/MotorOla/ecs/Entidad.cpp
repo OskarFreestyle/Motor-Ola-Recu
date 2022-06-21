@@ -6,6 +6,7 @@
 #include "RigidBody.h"
 #include "Mesh.h"
 #include "ComponenteFactoria.h"
+#include "SceneManager.h"
 
 
 Entidad::Entidad() : 
@@ -124,10 +125,17 @@ bool Entidad::init()
 
 Entidad* Entidad::instantiate(std::string name, Vectola3D position, Quaterniola rotation)
 {
+	// Busca la ruta del prefab
 	std::string path = LoadResources::GetInstance()->prefab(name);
+
+	// Crea la entidad 
 	Entidad* ent = LuaReader::GetInstance()->readPrefab(path);
+	
+	// Pone las posiciones en Transform
 	ent->getComponent<Transform>()->setPosition(position);
 	ent->getComponent<Transform>()->setRotation(rotation);
+
+	// Las actualiza en Rigidbody
 	if (ent->getComponent<RigidBody>() != nullptr) {
 		pm().setGlobalToPhysxTR(*ent, *ent->getComponent<RigidBody>()->getBody());
 	}
