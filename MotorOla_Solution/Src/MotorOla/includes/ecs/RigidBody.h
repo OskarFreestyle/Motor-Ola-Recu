@@ -39,5 +39,11 @@ private:
 	PxQuat _ori = PxQuat(PxIdentity);	// orientation
 	PxVec3 _vel = PxVec3(PxZero);		// velocity
 
-	bool lockX = true;
+	// Constrains
+	bool lockPosX = false;
+	bool lockPosY = false;
+	bool lockPosZ = false;
+	bool lockRotX = false;
+	bool lockRotY = false;
+	bool lockRotZ = false;
 };

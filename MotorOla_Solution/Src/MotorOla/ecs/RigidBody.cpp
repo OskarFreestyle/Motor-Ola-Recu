@@ -171,6 +171,53 @@ bool RigidBody::init(const std::map<std::string, std::string>& mapa)
 
 	std::cout << "Rigidbody " << _entity->getName() << " cargado con posicion " << _pos << "\n";
 
+
+	if (mapa.find("lockPosX") != mapa.end())
+	{
+		tempString = mapa.at("lockPosX");
+		if (tempString == "true") lockPosX = true;
+		else if (tempString == "false") lockPosX = false;
+		else return false;
+		body->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::eLOCK_LINEAR_X, lockPosX);
+	}
+	if (mapa.find("lockRotX") != mapa.end()) {
+		tempString = mapa.at("lockRotX");
+		if (tempString == "true") lockRotX = true;
+		else if (tempString == "false") lockRotX = false;
+		else return false;
+		body->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::eLOCK_ANGULAR_X, lockRotX);
+	}
+	if (mapa.find("lockPosY") != mapa.end())
+	{
+		tempString = mapa.at("lockPosY");
+		if (tempString == "true") lockPosY = true;
+		else if (tempString == "false") lockPosY = false;
+		else return false;
+		body->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::eLOCK_LINEAR_Y, lockPosY);
+	}
+	if (mapa.find("lockRotY") != mapa.end()) {
+		tempString = mapa.at("lockRotY");
+		if (tempString == "true") lockRotY = true;
+		else if (tempString == "false") lockRotY = false;
+		else return false;
+		body->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::eLOCK_ANGULAR_Y, lockRotY);
+	}	
+	if (mapa.find("lockPosZ") != mapa.end())
+	{
+		tempString = mapa.at("lockPosZ");
+		if (tempString == "true") lockPosZ = true;
+		else if (tempString == "false") lockPosZ = false;
+		else return false;
+		body->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::eLOCK_LINEAR_Z, lockPosZ);
+	}
+	if (mapa.find("lockRotZ") != mapa.end()) {
+		tempString = mapa.at("lockRotZ");
+		if (tempString == "true") lockRotZ = true;
+		else if (tempString == "false") lockRotZ = false;
+		else return false;
+		body->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::eLOCK_ANGULAR_Z, lockRotZ);
+	}
+
 	return true;
 }
 
