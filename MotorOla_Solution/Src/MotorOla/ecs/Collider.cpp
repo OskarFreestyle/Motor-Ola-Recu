@@ -107,8 +107,6 @@ bool Collider::init(const std::map<std::string, std::string>& mapa)
 		if (debugCom) std::cout << "Collider: no body, no shape attach...\n";
 #endif
 
-	std::cout << "Collider " << _entity->getName() << "\n";
-
 	_inicializado = true;
 
 	return true;

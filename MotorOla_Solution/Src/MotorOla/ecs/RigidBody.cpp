@@ -171,9 +171,6 @@ bool RigidBody::init(const std::map<std::string, std::string>& mapa)
 	int id_ = getEntidad()->getID();
 	pm().addEntityID(id_);
 
-	std::cout << "Rigidbody " << _entity->getName() << " cargado con posicion " << _pos << "\n";
-
-
 	if (mapa.find("lockPosX") != mapa.end())
 	{
 		tempString = mapa.at("lockPosX");

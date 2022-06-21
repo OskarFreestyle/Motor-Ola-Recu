@@ -43,7 +43,7 @@ bool SceneManager::addEntity(Entidad* ent) {
 	if (it != _entidadesToLoad.end()) return false;
 
 #if (defined _DEBUG)
-	std::cout << "Entidad añadida\n";
+	//std::cout << "Entidad añadida\n";
 #endif
 
 	// Despues añade esa entidad a la lista de entidades que crear

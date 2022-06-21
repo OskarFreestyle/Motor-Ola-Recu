@@ -35,7 +35,7 @@ void Entidad::update()
 {
 	for (auto& c : components)
 	{
-		c->update();
+		if(c->getActive()) c->update();
 	}
 }
 

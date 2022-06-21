@@ -49,8 +49,6 @@ bool Transform::init(const std::map<std::string, std::string>& mapa)
 
 	_inicializado = true;
 
-	std::cout << "Transform " << _entity->getName() << " cargado con posicion " << getPosition() << "\n";
-
 	return true;
 }
 
