@@ -25,7 +25,7 @@ Entidad::~Entidad()
 	//for (int i = 0; i < n; i++)
 	//{
 	//	if (components.at(i) != nullptr) {
-	//		components.at(i).reset();
+	//	components.at(i).reset();
 	//		components.at(i) = nullptr;
 	//	}
 	//}

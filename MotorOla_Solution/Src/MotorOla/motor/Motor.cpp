@@ -56,8 +56,7 @@ Motor::Motor()
 
 Motor::~Motor()
 {
-	// Libera la libreria dinamica (el juego)
-	FreeLibrary(hDLL);
+	
 	// Destruye los managers en orden inverso a la creaci�n (PC: puede que esto no sea necesario porque al cerrar se borran solos)
 
 	
@@ -70,6 +69,8 @@ Motor::~Motor()
 	if (PhysxManager::GetInstance() != nullptr) delete PhysxManager::GetInstance();
 	if (OgreManager::GetInstance() != nullptr) delete OgreManager::GetInstance();
 	if (ComponenteFactoria::GetInstance() != nullptr) delete ComponenteFactoria::GetInstance();
+	// Libera la libreria dinamica (el juego)
+	FreeLibrary(hDLL);
 	
 #if (defined _DEBUG)
 	std::cout << "--------- MOTOR BORRADO CORRECTAMENTE ----------\n";
