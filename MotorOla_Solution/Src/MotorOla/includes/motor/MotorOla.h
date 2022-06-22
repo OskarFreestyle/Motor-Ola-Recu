@@ -5,6 +5,7 @@
 #define MOTOR_API __declspec(dllimport)
 #endif
 
+
 class MOTOR_API MotorOla
 {
 public:

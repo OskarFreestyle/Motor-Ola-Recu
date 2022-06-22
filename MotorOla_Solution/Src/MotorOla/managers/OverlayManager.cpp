@@ -14,7 +14,6 @@ OverlayManager::~OverlayManager()
 	botones.clear();
 	paneles.clear();
 	textos.clear();
-	callbacks.clear();
 	overlayManager.destroy("PanelOverlay");
 }
 
@@ -98,12 +97,7 @@ void OverlayManager::creaBoton(float x, float y, const std::string& textoBoton,c
 	
 }
 
-void OverlayManager::setCallBackToButton(std::string p, CallBackOnClick click)
-{
-	Ogre::OverlayManager& overlayManager = Ogre::OverlayManager::getSingleton();
-	Ogre::PanelOverlayElement* panel = static_cast<Ogre::PanelOverlayElement*>(overlayManager.getOverlayElement(p));
-	callbacks.insert(std::pair(panel, click));
-}
+
 
 void OverlayManager::creaTexto(float x, float y, const std::string& texto, const std::string& nombreTexto, float tamLetra,const std::string& nombrePanel,float dimX,float dimY)
 {
@@ -215,7 +209,6 @@ void OverlayManager::clear()
 	botones.clear();
 	paneles.clear();
 	textos.clear();
-	callbacks.clear();
 	overlayManager.destroyAllOverlayElements();
 }
 

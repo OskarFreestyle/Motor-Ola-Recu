@@ -5,7 +5,9 @@
 #else
 #define MOTOR_API __declspec(dllimport)
 #endif
-
+#if _DEBUG
+#include "checkML.h"
+#endif
 #include <map>
 #include <string>
 #include <filesystem>

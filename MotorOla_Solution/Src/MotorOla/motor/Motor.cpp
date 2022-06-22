@@ -70,6 +70,17 @@ Motor::~Motor()
 	if (OgreManager::GetInstance() != nullptr) delete OgreManager::GetInstance();
 	if (ComponenteFactoria::GetInstance() != nullptr) delete ComponenteFactoria::GetInstance();
 	// Libera la libreria dinamica (el juego)
+	if (NULL != hDLL)
+	{
+		LPFNDLLFUNC1 lpfnDllFunc1;    // Function pointer
+		lpfnDllFunc1 = (LPFNDLLFUNC1)GetProcAddress(hDLL, "deleteGame");
+		if (NULL != lpfnDllFunc1)
+		{
+			lpfnDllFunc1(NULL, NULL);
+		}
+		else throw "Function LoadGame not found in DLL";
+	}
+	
 	FreeLibrary(hDLL);
 	
 #if (defined _DEBUG)
@@ -266,26 +277,7 @@ bool Motor::loadScene(std::string name) {
 	return true;
 }
 
-bool Motor::loadMenu(std::string name,const char*get) {
-	try {
-		// Borra las entidades de la escena actual
-		SceneManager::GetInstance()->pauseScene();
-		//Singleton<EntidadManager>::instance()->pauseEntidades();
 
-		// Devuelve la ruta de la escena
-		std::string sceneRoute = LoadResources::GetInstance()->scene(name).c_str();
-
-		// Lee la escena cargando todas las entidades y sus componentes
-		LuaReader::GetInstance()->readFileMenus(sceneRoute, get);
-	}
-	catch (std::exception e) {
-#if (defined _DEBUG)
-		std::cerr << e.what();
-#endif
-		return false;
-	}
-	return true;
-}
 
 void Motor::loadTestMotorGame() 
 {

@@ -4,6 +4,7 @@
 #else
 #define MOTOR_API __declspec(dllimport)
 #endif
+
 #include <vector>
 #include "Componente.h"
 #include "Vectola3D.h"

@@ -2,6 +2,9 @@
 
 #include "ComponenteFactoria.h"
 #include "ECS.h"
+#if _DEBUG
+#include "checkML.h"
+#endif
 
 /// <summary>
 /// Registro de los nuevos componentes, ejemplo:

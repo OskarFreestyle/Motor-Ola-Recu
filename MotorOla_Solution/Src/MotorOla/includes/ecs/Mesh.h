@@ -3,6 +3,9 @@
 #include <OgreSceneNode.h>
 #include <OgreSceneManager.h>
 #include <OgreEntity.h>
+#if _DEBUG
+#include "checkML.h"
+#endif
 
 class Mesh : public Componente
 {

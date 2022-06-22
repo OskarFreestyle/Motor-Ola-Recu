@@ -4,6 +4,9 @@
 #else
 #define MOTOR_API __declspec(dllimport)
 #endif
+#if _DEBUG
+#include "checkML.h"
+#endif
 #include "Componente.h"
 
 class MOTOR_API TextComponent :public Componente

@@ -6,6 +6,7 @@
 #define MOTOR_API __declspec(dllimport)
 #endif
 
+
 #define SDL_MAIN_HANDLED
 #include <SDL.h>
 #include <string>
@@ -84,7 +85,6 @@ public:
 	/// </summary>
 	/// <param name="name">name es el archivo "scene.lua"</param>
 	bool loadScene(std::string name);
-	bool loadMenu(std::string name,const char* get);
 
 	/// <summary>
 	/// Funcion para hacer pruebas dentro del motor

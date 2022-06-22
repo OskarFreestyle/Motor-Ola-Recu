@@ -1,5 +1,8 @@
 #pragma once
 #include "Componente.h"
+#if _DEBUG
+#include "checkML.h"
+#endif
 class Motor;
 //using CallBackOnClick = void(Motor* m);
 

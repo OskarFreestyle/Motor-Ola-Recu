@@ -5,6 +5,9 @@
 #else
 #define MOTOR_API __declspec(dllimport)
 #endif
+#if _DEBUG
+#include "checkML.h"
+#endif
 
 
 #include <string>
@@ -48,7 +51,6 @@ public:
 	//void update();
 
 	void creaBoton(float x,float y,const std::string& texto, const std::string& nombrePanel, const std::string& nombreTexto,float tamLetra,const std::string& material,float dimX,float dimY/*, CallBackOnClick* click_*/);
-	void setCallBackToButton(std::string p, CallBackOnClick click_);
 	void creaTexto(float x, float y, const std::string& texto, const std::string& nombreTexto, float tamLetra,const std::string& nombrePanel,float dimX,float dimY);
 	void creaPanel(float x, float y,  const std::string& nombrePanel, const std::string& material, float dimX, float dimY);
 	Ogre::TextAreaOverlayElement* getTexto(std::string panelName, std::string textName);
@@ -76,7 +78,6 @@ private:
 	std::vector< Ogre::PanelOverlayElement*>botones;
 	std::vector< Ogre::PanelOverlayElement*>paneles;
 	std::vector< Ogre::PanelOverlayElement*>textos;
-	std::map < Ogre::PanelOverlayElement*,CallBackOnClick*>callbacks;
 	Ogre::Overlay* mOverlay=nullptr;
 	
 	OgreManager* og;
