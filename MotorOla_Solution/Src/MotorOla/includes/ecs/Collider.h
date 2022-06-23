@@ -27,7 +27,7 @@ public:
 
 private:
 	PxShape* shape = nullptr;
-
+	PxGeometry* geometry = nullptr;
 	// forma geometrica por defecto
 	PxGeometryType::Enum _type = PxGeometryType::eBOX;
 };

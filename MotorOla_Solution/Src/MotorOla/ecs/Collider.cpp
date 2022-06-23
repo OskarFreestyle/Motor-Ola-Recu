@@ -14,10 +14,15 @@ Collider::Collider()
 
 Collider::~Collider()
 {
+	if (geometry) {
+		delete geometry;
+		geometry = nullptr;
+	}
 	if (shape) {
 		shape->release();
 		shape = nullptr;
 	}
+
 }
 
 bool Collider::init(const std::map<std::string, std::string>& mapa)
@@ -30,7 +35,7 @@ bool Collider::init(const std::map<std::string, std::string>& mapa)
 		return false;
 
 	// variables principales
-	PxGeometry* geometry = nullptr;
+	
 	PxMaterial* material = pm().getMaterial();	// Establece el tipo de material
 
 	// identifica el tipo de geometría
@@ -110,7 +115,7 @@ bool Collider::init(const std::map<std::string, std::string>& mapa)
 	else
 		if (debugCom) std::cout << "Collider: no body, no shape attach...\n";
 #endif
-
+	
 	_inicializado = true;
 
 	return true;
