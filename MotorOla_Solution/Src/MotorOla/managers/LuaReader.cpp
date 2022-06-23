@@ -233,6 +233,8 @@ Entidad* LuaReader::readPrefab(std::string file) {
 		ent->init();
 
 		lua_pop(l, 1);
+
+		lua_close(l);
 		// Entity is no longer here, only key to be removed by lua_next
 		return ent;
 	}
