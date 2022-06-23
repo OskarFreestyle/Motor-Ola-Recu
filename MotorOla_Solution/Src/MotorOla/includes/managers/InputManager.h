@@ -149,6 +149,9 @@ protected:
 private:
 	InputManager() {
 		_kbState = SDL_GetKeyboardState(0);
+		for (int i = 0;i < 3;i++) {
+			_mbState[i] = 0;
+		}
 		clearState();
 	}
 
