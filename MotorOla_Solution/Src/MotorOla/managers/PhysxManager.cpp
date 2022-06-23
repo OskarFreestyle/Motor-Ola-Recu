@@ -185,10 +185,11 @@ void PhysxManager::update(bool interactive, double t)
 void PhysxManager::close(bool interactive)
 {
 	PX_UNUSED(interactive);
-
+	if (mMaterial != NULL)PX_RELEASE(mMaterial);
 	if (mScene != NULL) PX_RELEASE(mScene);
 	PX_RELEASE(mDispatcher);
-	PxCloseExtensions();
+	PX_RELEASE(mCuda);
+	PX_RELEASE(mCooking);
 	PX_RELEASE(mPhysics);
 
 	if (mPvd)
@@ -198,7 +199,7 @@ void PhysxManager::close(bool interactive)
 		PX_RELEASE(transport);
 	}
 
-	PX_RELEASE(mCuda);
+	
 	PX_RELEASE(mFoundation);
 }
 
