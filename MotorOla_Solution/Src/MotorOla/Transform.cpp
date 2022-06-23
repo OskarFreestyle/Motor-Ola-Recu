@@ -4,10 +4,8 @@
 #include "EntidadManager.h"
 #include "Entidad.h"
 
-Transform::Transform() :
-	_position(), _scale({ 1,1,1 }), _rotation()
+Transform::Transform() : _position(), _scale({ 1,1,1 }), _rotation()
 {
-	
 }
 
 Transform::~Transform()
@@ -16,11 +14,7 @@ Transform::~Transform()
 
 bool Transform::init(const std::map<std::string, std::string>& mapa)
 {
-	if (mapa.find("parent") == mapa.end()
-		|| mapa.find("position") == mapa.end()
-		|| mapa.find("rotation") == mapa.end()
-		|| mapa.find("scale") == mapa.end())
-			return false;
+	if (mapa.find("parent") == mapa.end() || mapa.find("position") == mapa.end() || mapa.find("rotation") == mapa.end() || mapa.find("scale") == mapa.end()) return false;
 	std::string::size_type sz = 0, sa = 0;
 
 	std::string parentString = mapa.at("parent");
