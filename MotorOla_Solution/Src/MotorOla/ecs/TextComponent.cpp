@@ -20,6 +20,7 @@ bool TextComponent::init(const std::map<std::string, std::string>& mapa)
 
 	s = mapa.at("texto");
 	texto = s;
+	textoIni = texto;
 
 	s = mapa.at("nombreTexto");
 	nombreTexto = s;
@@ -47,7 +48,10 @@ std::string TextComponent::getTexto()
 {
 	return texto;
 }
-
+std::string TextComponent::getTextoIni()
+{
+	return textoIni;
+}
 void TextComponent::setTexto(const std::string& s,const std::string& textName, const std::string& panelName)
 {
 	texto = s;

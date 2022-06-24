@@ -17,12 +17,14 @@ public:
 	bool init(const std::map<std::string, std::string>& mapa) override;
 	std::string getTexto();
 	void setTexto(const std::string& s,const std::string& textName,const std::string& panelName);
+	std::string getTextoIni();
 
 
 private:
 	float posX;
 	float posY;
 	std::string texto;
+	std::string textoIni;
 	std::string nombreTexto;
 	float tamLetra;
 	std::string nombrePanel;
