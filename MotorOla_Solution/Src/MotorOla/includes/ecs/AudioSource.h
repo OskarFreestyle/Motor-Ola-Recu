@@ -1,4 +1,9 @@
 #pragma once
+#ifdef MOTOR_EXPORTS
+#define MOTOR_API __declspec(dllexport)
+#else
+#define MOTOR_API __declspec(dllimport)
+#endif
 #include "Componente.h"
 #if _DEBUG
 #include "checkML.h"
@@ -6,7 +11,7 @@
 class AudioManager;
 using namespace std;
 
-class AudioSource :	public Componente
+class MOTOR_API AudioSource :	public Componente
 {
 public:
 	AudioSource() {};
