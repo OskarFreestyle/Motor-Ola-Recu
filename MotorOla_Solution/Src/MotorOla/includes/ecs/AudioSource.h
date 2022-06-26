@@ -20,7 +20,7 @@ public:
 
 	void play();
 	void pause();
-	void stop();
+	void stopMusicComponent();
 
 private:
 	std::string _audioFileName;

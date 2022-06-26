@@ -41,6 +41,7 @@ public:
 	int getCont();
 	bool getMute();
 	void setMute(bool m);
+	void stopAllChannels();
 	FMOD::Channel* getChannel(int i);
 
 protected:

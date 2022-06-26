@@ -127,6 +127,13 @@ void AudioManager::setMute(bool m)
 	}
 }
 
+void AudioManager::stopAllChannels()
+{
+	for (int i = 0;i < 24;i++) {
+		stopMusic(i);
+	}
+}
+
 FMOD::Channel* AudioManager::getChannel(int i)
 {
 	return channel[i];

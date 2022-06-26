@@ -80,6 +80,7 @@ void Button::onClick()
 	// Realiza la accion correspondiente
 	switch (type) {
 	case Type::CHANGE_SCENE:
+		AudioManager::GetInstance()->stopAllChannels();
 		OverlayManager::GetInstance()->clear();
 		SceneManager::GetInstance()->newScene(nextScene);	// Escena pasada por carga de datos
 		break;

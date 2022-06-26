@@ -4,7 +4,7 @@
 
 AudioSource::~AudioSource()
 {
-	stop();
+	//stopMusicComponent();
 }
 
 bool AudioSource::init(const std::map<std::string, std::string>& mapa) {
@@ -46,7 +46,7 @@ void AudioSource::pause()
 	AudioManager::GetInstance()->togglePause(_channel);
 }
 
-void AudioSource::stop()
+void AudioSource::stopMusicComponent()
 {
 	AudioManager::GetInstance()->stopMusic(_channel);
 }
