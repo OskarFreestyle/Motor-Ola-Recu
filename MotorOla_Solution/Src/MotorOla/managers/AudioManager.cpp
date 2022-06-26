@@ -115,7 +115,7 @@ bool AudioManager::getMute()
 void AudioManager::setMute(bool m)
 {
 	mute = m;
-	for (int i = 0; i < AudioManager::GetInstance()->getCont(); i++) {
+	/*for (int i = 0; i < AudioManager::GetInstance()->getCont(); i++) {
 		if (AudioManager::GetInstance()->getMute() == false) {
 			if (AudioManager::GetInstance()->getChannel(i) != nullptr)
 				AudioManager::GetInstance()->setVolume(i, 1);
@@ -124,7 +124,7 @@ void AudioManager::setMute(bool m)
 			if (AudioManager::GetInstance()->getChannel(i) != nullptr)
 				AudioManager::GetInstance()->setVolume(i, 0);
 		}
-	}
+	}*/
 }
 
 void AudioManager::stopAllChannels()

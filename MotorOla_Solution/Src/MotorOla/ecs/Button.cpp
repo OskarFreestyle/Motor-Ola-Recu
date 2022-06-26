@@ -73,21 +73,25 @@ bool Button::isClicked() {
 void Button::onClick()
 {
 	// Si tiene algun audio asociado, suena
-	if (_entity->hasComponent<AudioSource>()) {
+	if (_entity->hasComponent<AudioSource>()&& !AudioManager::GetInstance()->getMute()) {
 		_entity->getComponent<AudioSource>()->play();
 	}
 
 	// Realiza la accion correspondiente
 	switch (type) {
 	case Type::CHANGE_SCENE:
+		//ih().refresh();
 		AudioManager::GetInstance()->stopAllChannels();
 		OverlayManager::GetInstance()->clear();
 		SceneManager::GetInstance()->newScene(nextScene);	// Escena pasada por carga de datos
 		break;
 	case Type::VOLUME:
+		//ih().refresh();
+		std::cout << "VOLUME\n";
 		AudioManager::GetInstance()->setMute(!AudioManager::GetInstance()->getMute());
 		break;
 	case Type::EXIT:
+		//ih().refresh();
 		Motor::GetInstance()->setStop(true);
 		break;
 	default:

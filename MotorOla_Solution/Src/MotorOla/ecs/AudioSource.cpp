@@ -29,7 +29,7 @@ bool AudioSource::init(const std::map<std::string, std::string>& mapa) {
 	AudioManager::GetInstance()->loadMusic(_channel, LoadResources::GetInstance()->aud(_audioFileName).c_str());
 
 	// Se reproduce si esta marcada startOnPlay
-	if (_startOnPlay) play();
+	if (_startOnPlay&& !AudioManager::GetInstance()->getMute()) play();
 
 	_inicializado = true;
 
@@ -38,6 +38,7 @@ bool AudioSource::init(const std::map<std::string, std::string>& mapa) {
 
 void AudioSource::play()
 {
+	if(!AudioManager::GetInstance()->getMute())
 	AudioManager::GetInstance()->playMusic(_channel, _loop);
 }
 
