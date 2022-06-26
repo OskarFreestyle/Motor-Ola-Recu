@@ -134,6 +134,9 @@ public:
 	inline int getMouseButtonState(MOUSEBUTTON b) {
 		return _mbState[b];
 	}
+	inline void MouseButtonUp(MOUSEBUTTON b) {
+		_mbState[b] = 0;
+	}
 
 	inline std::pair<Sint32, Sint32> getMousePosInGame() {
 		std::pair<Sint32, Sint32>p;

@@ -80,18 +80,20 @@ void Button::onClick()
 	// Realiza la accion correspondiente
 	switch (type) {
 	case Type::CHANGE_SCENE:
-		//ih().refresh();
+		ih().MouseButtonUp(ih().LEFT);
 		AudioManager::GetInstance()->stopAllChannels();
 		OverlayManager::GetInstance()->clear();
 		SceneManager::GetInstance()->newScene(nextScene);	// Escena pasada por carga de datos
 		break;
 	case Type::VOLUME:
 		//ih().refresh();
+		ih().MouseButtonUp(ih().LEFT);
 		std::cout << "VOLUME\n";
 		AudioManager::GetInstance()->setMute(!AudioManager::GetInstance()->getMute());
 		break;
 	case Type::EXIT:
 		//ih().refresh();
+		ih().MouseButtonUp(ih().LEFT);
 		Motor::GetInstance()->setStop(true);
 		break;
 	default:
