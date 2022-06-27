@@ -4,7 +4,6 @@
 #include <bitset>
 #include <memory>
 
-
 class Entidad;
 class Componente;
 using ComponentID = std::size_t;

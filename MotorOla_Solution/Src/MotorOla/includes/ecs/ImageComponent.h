@@ -4,7 +4,7 @@
 #include "checkML.h"
 #endif
 
-class ImageComponent :public Componente
+class ImageComponent : public Componente
 {
 public:
 	ImageComponent() {};

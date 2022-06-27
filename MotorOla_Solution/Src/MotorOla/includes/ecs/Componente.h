@@ -4,7 +4,6 @@
 #include <string>
 #include "Vectola3D.h"
 
-
 class Entidad;
 
 class Componente

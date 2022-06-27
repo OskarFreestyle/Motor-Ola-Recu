@@ -40,10 +40,10 @@ public:
 	//}
 
 	/// <summary>
-/// Devuelve un componente de la entidad, o nullptr si no lo tiene. Coste: O(N) :(
-/// </summary>
-/// <typeparam name="T"></typeparam>
-/// <returns></returns>
+	/// Devuelve un componente de la entidad, o nullptr si no lo tiene. Coste: O(N) :(
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
+	/// <returns></returns>
 	template<typename T>
 	T* getComponent() {
 		T* ret = nullptr;

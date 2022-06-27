@@ -1,11 +1,6 @@
 ::Este .bat hay que ejecutarlo desde el Developer Command Prompt de Visual Studio que se puede encontrar en la pestaña tools de visual
 ::en Command Line
 
-:: Se crea la carpeta Bin para meter las dlls
-::mkdir Bin
-
-
-
 :: BUILD OGRE
 :: Entra en la carpeta de dependencias
 cd Dependencies

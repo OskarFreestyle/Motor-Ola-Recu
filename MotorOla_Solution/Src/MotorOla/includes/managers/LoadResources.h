@@ -5,9 +5,11 @@
 #else
 #define MOTOR_API __declspec(dllimport)
 #endif
+
 #if _DEBUG
 #include "checkML.h"
 #endif
+
 #include <map>
 #include <string>
 #include <filesystem>
@@ -15,11 +17,8 @@
 using namespace std::filesystem;
 using namespace std;
 
-
 //RUTA PARA BUSCAR LOS ASSETS
-//static const std::string ASSETS = "./Assets";	// Codigo unico para la entrega, perdonanos Pedro P.
-static const std::string ASSETS = "../../Exes/Assets/";
-
+static const std::string ASSETS = ".\\Assets";
 
 class MOTOR_API LoadResources {
 public:
@@ -53,6 +52,7 @@ private:
 	map<string, string>textures;//.png,.jpg,.bmp
 	map<string, string>scenes;//.lua
 	map<string, string>prefabs;
+
 	//Si hay otro tipo añadir el map
 	void search(path p);
 	void load(path p, size_t end, size_t pathLenght);
