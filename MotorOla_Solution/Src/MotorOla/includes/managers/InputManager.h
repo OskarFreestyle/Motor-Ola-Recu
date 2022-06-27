@@ -15,6 +15,7 @@
 
 #include "OgreManager.h"
 
+
 // Instead of a Singleton class, we could make it part of
 // SDLUtils as well.
 

@@ -34,6 +34,7 @@
 #include "TextComponent.h"
 #include "ImageComponent.h"
 #include "RigidBody.h"
+#include <time.h>
 
 #include <iostream>
 
@@ -90,6 +91,8 @@ Motor::~Motor()
 
 bool Motor::initMotor()
 {
+	//Inicia la semilla de aleatoriedad
+	srand(time(NULL));
 	// Primero inicia los managers
 	initManagers();
 

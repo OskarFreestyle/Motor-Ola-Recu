@@ -88,7 +88,6 @@ void Button::onClick()
 	case Type::VOLUME:
 		//ih().refresh();
 		ih().MouseButtonUp(ih().LEFT);
-		std::cout << "VOLUME\n";
 		AudioManager::GetInstance()->setMute(!AudioManager::GetInstance()->getMute());
 		break;
 	case Type::EXIT:
