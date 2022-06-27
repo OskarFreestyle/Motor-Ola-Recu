@@ -14,7 +14,7 @@
 #include <array>
 
 #include "OgreManager.h"
-
+#include "Motor.h"
 
 // Instead of a Singleton class, we could make it part of
 // SDLUtils as well.
@@ -70,6 +70,9 @@ public:
 			break;
 		case SDL_WINDOWEVENT:
 			handleWindowEvent(event);
+			break;
+		case SDL_QUIT:
+			Motor::GetInstance()->setStop(true);
 			break;
 		default:
 			break;

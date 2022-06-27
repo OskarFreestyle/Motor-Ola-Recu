@@ -61,8 +61,6 @@ bool Button::init(const std::map<std::string, std::string>& mapa) {
 void Button::update()
 {
 	if (!isClick && isClicked()) {
-
-		//onClick();
 		// Si tiene algun audio asociado, suena
 		if (_entity->hasComponent<AudioSource>() && !AudioManager::GetInstance()->getMute()) {
 			_entity->getComponent<AudioSource>()->play();
@@ -71,6 +69,7 @@ void Button::update()
 		inClick = clock();
 	}
 	if (isClick && inClick+clickDelay<clock()) {
+		isClick = false;
 		onClick();
 	}
 }
@@ -84,13 +83,10 @@ bool Button::isClicked() {
 
 void Button::onClick()
 {
-	isClick = false;
-
 	// Realiza la accion correspondiente
 	switch (type) {
 	case Type::CHANGE_SCENE:
 		ih().MouseButtonUp(ih().LEFT);
-
 		AudioManager::GetInstance()->stopAllChannels();
 		OverlayManager::GetInstance()->clear();
 		SceneManager::GetInstance()->newScene(nextScene);	// Escena pasada por carga de datos

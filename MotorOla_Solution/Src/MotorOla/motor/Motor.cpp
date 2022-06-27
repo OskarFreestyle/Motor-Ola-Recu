@@ -149,15 +149,15 @@ void Motor::registryComponents()
 	// Apuntar aqui todos los componentes del motor (apuntar solo despues de refactorizar)
 	try {
 		ComponenteRegistro::ComponenteRegistro<AudioSource>("audioSource");
-		ComponenteRegistro::ComponenteRegistro<Transform>("transform");
-		ComponenteRegistro::ComponenteRegistro<Mesh>("mesh");
-		ComponenteRegistro::ComponenteRegistro<Camera>("camera");
-		ComponenteRegistro::ComponenteRegistro<Light>("light");
-		ComponenteRegistro::ComponenteRegistro<Collider>("collider");
-		ComponenteRegistro::ComponenteRegistro<RigidBody>("rigidbody");
 		ComponenteRegistro::ComponenteRegistro<Button>("button");
-		ComponenteRegistro::ComponenteRegistro<TextComponent>("texto");
+		ComponenteRegistro::ComponenteRegistro<Camera>("camera");
+		ComponenteRegistro::ComponenteRegistro<Collider>("collider");
 		ComponenteRegistro::ComponenteRegistro<ImageComponent>("image");
+		ComponenteRegistro::ComponenteRegistro<Light>("light");
+		ComponenteRegistro::ComponenteRegistro<Mesh>("mesh");
+		ComponenteRegistro::ComponenteRegistro<RigidBody>("rigidbody");
+		ComponenteRegistro::ComponenteRegistro<TextComponent>("texto");
+		ComponenteRegistro::ComponenteRegistro<Transform>("transform");
 	}
 	catch (const char* error) {
 		std::cout << "Error registrando los componentes del motor: \n" << error << "\n";
@@ -173,11 +173,9 @@ void Motor::mainLoop()
 #ifdef _DEBUG
 	std::cout << "---------- COMIENZA EL BUCLE PRINCIPAL ----------\n";
 #endif
+
 	//Actualiza el motor. Bucle input->update/fisicas->render
 	stop = false;
-
-	int numFrames = 0;
-	int aux = 0;
 
 	while (!stop) {
 		// Tiempo cuando se inicia el frame
@@ -188,15 +186,9 @@ void Motor::mainLoop()
 
 		// Borra el Input del frame anterior
 		ih().clearState();
-		// Recoge el Input para este frame
-		while (SDL_PollEvent(&event))
-			ih().update(event);
 
-		// Cierra la aplicacion con ESCAPE
-		if (ih().isKeyDown(SDL_SCANCODE_ESCAPE)) {
-			stop = true;
-			continue;
-		}
+		// Recoge el Input para este frame
+		while (SDL_PollEvent(&event)) ih().update(event);
 
 		// Actualizar las fisicas de las entidades
 		pm().runPhysX();
@@ -217,22 +209,10 @@ void Motor::mainLoop()
 		frameTime = (SDL_GetTicks() - frameStart);
 
 		// Limitamos el frameRate
-		if (frameDelay > frameTime) {
-			SDL_Delay(frameDelay - frameTime);
-		}
+		if (frameDelay > frameTime) SDL_Delay(frameDelay - frameTime);
 
 		// Actualizamos deltaTime
 		deltaTime = (SDL_GetTicks() - frameStart);
-
-		
-		
-		numFrames++;
-
-		if (numFrames >= 60) {
-			numFrames -= 60;
-			aux++;
-			//std::cout << "Segundos: " << aux << "\n";
-		}
 	}
 }
 
@@ -263,7 +243,6 @@ bool Motor::loadScene(std::string name) {
 	try {
 		// Borra las entidades de la escena actual
 		SceneManager::GetInstance()->pauseScene();
-		//Singleton<EntidadManager>::instance()->pauseEntidades();
 
 		// Devuelve la ruta de la escena
 		std::string sceneRoute = LoadResources::GetInstance()->scene(name).c_str();
