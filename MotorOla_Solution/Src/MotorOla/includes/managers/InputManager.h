@@ -155,11 +155,14 @@ protected:
 
 private:
 	InputManager() {
-		_kbState = SDL_GetKeyboardState(0);
-		for (int i = 0;i < 3;i++) {
-			_mbState[i] = 0;
+		try {
+			_kbState = SDL_GetKeyboardState(0);
+			for (int i = 0; i < 3; i++) {
+				_mbState[i] = 0;
+			}
+			clearState();
 		}
-		clearState();
+		catch (...) { throw std::exception("Error iniciando InputManager\n"); }
 	}
 
 	inline void onKeyDown(const SDL_Event&) {

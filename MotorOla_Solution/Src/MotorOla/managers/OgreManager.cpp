@@ -38,7 +38,13 @@ bool OgreManager::Init() {
 
 	// Si lo tiene que crear devuelve true
 	_singleton = new OgreManager();
-	_singleton->initOgre();
+	
+	try {
+		_singleton->initOgre();
+	}
+	catch (...) { throw std::exception("Error iniciando OgreManager\n"); }
+
+
 	return true;
 }
 
@@ -54,22 +60,8 @@ void OgreManager::initOgre()
 
 	// Agregado una prueba
 	_sceneManager = _root->createSceneManager();
-	//
-	//// Luz de prueba
-	//Ogre::Light* luz = _sceneManager->createLight("Luz");	//Cada luz tiene que tener un nombre diferente
-	//luz->setType(Ogre::Light::LT_DIRECTIONAL);
-	//luz->setDiffuseColour(1, 1, 1);
 
-	//Ogre::SceneNode* mLightNode = _sceneManager->getRootSceneNode()->createChildSceneNode("nLuz");
-	//mLightNode->attachObject(luz);
-	//mLightNode->setDirection(Ogre::Vector3(0.4, 0.2, -1));
-
-	//// Luz ambiente en la escena
-	//_sceneManager->setAmbientLight(Ogre::ColourValue(0.4f, 0.0f, 1.0f));
-	//
 	_root->getSceneManager("SceneManagerInstance1")->addRenderQueueListener(_overlaySystem);
-	
-	std::cout << "OgreManager iniciado\n";
 }
 
 void OgreManager::update()

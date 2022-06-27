@@ -30,13 +30,12 @@ void AudioManager::loadMusic(int channel, const char* fileName)
 {
 	if (channelUsed[channel]) return;
 
-	std::cout << "Cargado nuevo sonido\n";
-
 	result = system->createSound(
 		fileName, // path al archivo de sonido
 		FMOD_DEFAULT,
 		0,
 		&sound[channel]);
+
 	checkError(result);
 	cont++;
 	channelUsed[channel] = true;
@@ -103,7 +102,6 @@ void AudioManager::checkError(FMOD_RESULT result)
 {
 	if (result != FMOD_OK) {
 		std::cout << FMOD_ErrorString(result) << "\n";
-		
 	}
 }
 

@@ -14,7 +14,6 @@ RigidBody::RigidBody()
 
 RigidBody::~RigidBody()
 {
-	std::cout << _entity->getName() << "\n";
 	if (body) {
 		body->release();
 		body = nullptr;

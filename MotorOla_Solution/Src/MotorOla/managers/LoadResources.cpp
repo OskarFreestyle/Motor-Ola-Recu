@@ -17,7 +17,12 @@ bool LoadResources::Init() {
 
 	// Si lo tiene que crear devuelve true
 	_singleton = new LoadResources();
-	_singleton->search(ASSETS);
+
+	try {
+		_singleton->search(ASSETS);
+	}
+	catch (...) { throw std::exception("Error iniciando LoadResources\n"); }
+
 	return true;
 }
 
@@ -55,7 +60,6 @@ void LoadResources::search(path p)
 {
 	// Recorre los directorios cargando los archivos en los diferentes map
 	for (const auto& it : directory_iterator(p)) {
-		std::cout << "\n";
 		size_t end = it.path().string().find_last_of(".");
 		if (end > 4) {
 			load(it.path(), end, p.string().length());

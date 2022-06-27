@@ -23,6 +23,7 @@ bool SceneManager::Init() {
 
 	// Si lo tiene que crear devuelve true
 	_singleton = new SceneManager();
+
 	return true;
 }
 

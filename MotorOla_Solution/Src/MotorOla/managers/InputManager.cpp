@@ -8,5 +8,6 @@ bool InputManager::Init() {
 
 	// Si lo tiene que crear devuelve true
 	_singleton = new InputManager();
+
 	return true;
 }

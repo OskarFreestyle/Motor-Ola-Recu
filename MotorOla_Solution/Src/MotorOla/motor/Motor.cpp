@@ -52,15 +52,11 @@ bool Motor::Init()
 
 Motor::Motor()
 {
-
 }
 
 Motor::~Motor()
 {
-	
 	// Destruye los managers en orden inverso a la creaci�n (PC: puede que esto no sea necesario porque al cerrar se borran solos)
-
-	
 	if (LuaReader::GetInstance() != nullptr) delete LuaReader::GetInstance();
 	if (OverlayManager::GetInstance() != nullptr) delete OverlayManager::GetInstance();
 	if (InputManager::GetInstance() != nullptr) delete InputManager::GetInstance();
@@ -70,8 +66,9 @@ Motor::~Motor()
 	if (PhysxManager::GetInstance() != nullptr) delete PhysxManager::GetInstance();
 	if (OgreManager::GetInstance() != nullptr) delete OgreManager::GetInstance();
 	if (ComponenteFactoria::GetInstance() != nullptr) delete ComponenteFactoria::GetInstance();
+
 	// Libera la libreria dinamica (el juego)
-	if (NULL != hDLL)
+	if (hDLL != NULL)
 	{
 		LPFNDLLFUNC1 lpfnDllFunc1;    // Function pointer
 		lpfnDllFunc1 = (LPFNDLLFUNC1)GetProcAddress(hDLL, "deleteGame");
@@ -80,44 +77,33 @@ Motor::~Motor()
 			lpfnDllFunc1(NULL, NULL);
 		}
 		else throw "Function LoadGame not found in DLL";
+
+		FreeLibrary(hDLL);
 	}
 	
-	FreeLibrary(hDLL);
 	
 #if (defined _DEBUG)
 	std::cout << "--------- MOTOR BORRADO CORRECTAMENTE ----------\n";
 #endif
 }
 
-bool Motor::initMotor()
+void Motor::initMotor()
 {
 	//Inicia la semilla de aleatoriedad
 	srand(time(NULL));
+
 	// Primero inicia los managers
 	initManagers();
 
 	// Segundo registra los componentes del motor
 	registryComponents();
 
-	// por último intenta cargar la DLL del juego
-#if (defined _DEBUG)
-	std::cout << "ANTES DE CARGAR JUEGO TRY\n";
-#endif
-
 	// El motor intenta cargar un juego, pero si hay algun error se arranca con la funcion loadTestMotorGame
-	try {
-		loadDLLGame();
-	}
-	catch (const char* error) {
-		std::cout << "Error: " << error << "\n";
-		loadTestMotorGame();
-	}
-	std::cout << "DESPUES DE CARGAR JUEGO TRY\n";
+	loadDLLGame();
 
-	return true;
 }
 
-bool Motor::initManagers()
+void Motor::initManagers()
 {
 	// Intenta iniciar todos los singletons del motor
 	try {
@@ -132,11 +118,9 @@ bool Motor::initManagers()
 		OverlayManager::Init(OgreManager::GetInstance(), this);
 		LuaReader::Init();
 	}
-	catch (std::exception e) {
-#if (defined _DEBUG)
-		std::cout << e.what();
-#endif
-		return false;
+	catch (std::exception& error) {
+		std::cout << "Error: " << error.what() << "\n";
+		throw std::exception("Error iniciando los managers\n");
 	}
 
 #if (defined _DEBUG)
@@ -159,13 +143,36 @@ void Motor::registryComponents()
 		ComponenteRegistro::ComponenteRegistro<TextComponent>("texto");
 		ComponenteRegistro::ComponenteRegistro<Transform>("transform");
 	}
-	catch (const char* error) {
-		std::cout << "Error registrando los componentes del motor: \n" << error << "\n";
+	catch (...) {
+		throw std::exception("Error registrando los componentes del motor\n");
 	}
 
 #if (defined _DEBUG)
 	std::cout << "---------- COMPONENTES REGISTRADOS ----------\n";
 #endif
+}
+
+void Motor::loadDLLGame()
+{
+	LPFNDLLFUNC1 lpfnDllFunc1;    // Function pointer
+	HRESULT hrReturnVal;
+	std::cout << "Entra en loadDLL\n";
+#ifdef NDEBUG
+	hDLL = LoadLibrary(L".\\Juego");	// typedef const wchar_t* LPCWSTR, L"..." para indicar que se trata de un long char
+#else
+	hDLL = LoadLibrary(L".\\Juego_d");	// typedef const wchar_t* LPCWSTR, L"..." para indicar que se trata de un long char
+#endif
+
+	if (NULL != hDLL)
+	{
+		lpfnDllFunc1 = (LPFNDLLFUNC1)GetProcAddress(hDLL, "LoadGame");
+		if (NULL != lpfnDllFunc1)
+		{
+			lpfnDllFunc1(NULL, NULL);
+		}
+		else throw std::exception("Function LoadGame not found in DLL");
+	}
+	else throw std::exception("DLL not found");
 }
 
 void Motor::mainLoop()
@@ -216,29 +223,6 @@ void Motor::mainLoop()
 	}
 }
 
-void Motor::loadDLLGame()
-{
-	LPFNDLLFUNC1 lpfnDllFunc1;    // Function pointer
-	HRESULT hrReturnVal;
-	std::cout<<"Entra en loadDLL\n";
-#ifdef NDEBUG
-	hDLL = LoadLibrary(L".\\Juego");	// typedef const wchar_t* LPCWSTR, L"..." para indicar que se trata de un long char
-#else
-	hDLL = LoadLibrary(L".\\Juego_d");	// typedef const wchar_t* LPCWSTR, L"..." para indicar que se trata de un long char
-#endif
-
-	if (NULL != hDLL)
-	{
-		lpfnDllFunc1 = (LPFNDLLFUNC1)GetProcAddress(hDLL, "LoadGame");
-		if (NULL != lpfnDllFunc1)
-		{
-			lpfnDllFunc1(NULL, NULL);
-		}
-		else throw "Function LoadGame not found in DLL";
-	}
-	else throw "DLL not found";
-}
-
 bool Motor::loadScene(std::string name) {
 	try {
 		// Borra las entidades de la escena actual
@@ -259,20 +243,4 @@ bool Motor::loadScene(std::string name) {
 	return true;
 }
 
-
-
-void Motor::loadTestMotorGame() 
-{
-	loadScene("TestScene.lua");
-}
-
-bool Motor::getStop()
-{
-	return stop;
-}
-
-void Motor::setStop(bool s)
-{
-	stop = s;
-}
 

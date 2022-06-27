@@ -24,7 +24,11 @@ bool OverlayManager::Init(OgreManager* om_, Motor* m)
 
 	// Si lo tiene que crear devuelve true
 	_singleton = new OverlayManager();
-	_singleton->initOverlay(om_, m);
+
+	try {
+		_singleton->initOverlay(om_, m);
+	}
+	catch (...) { throw std::exception("Error iniciando OverlayManager\n"); }
 
 	return true;
 }

@@ -51,13 +51,13 @@ public:
 	/// Inicia todos los singletons del motor, registra los componentes y carga la DLL del juego
 	/// </summary>
 	/// <returns>Devuelve True si todo es correcto</returns>
-	bool initMotor();
+	void initMotor();
 
 	/// <summary>
 	/// Inicia los singletons del motor
 	/// </summary>
 	/// <returns></returns>
-	bool initManagers();
+	void initManagers();
 
 	/// <summary>
 	/// Registra todos los componentes del motor
@@ -86,14 +86,9 @@ public:
 	/// <param name="name">name es el archivo "scene.lua"</param>
 	bool loadScene(std::string name);
 
-	/// <summary>
-	/// Funcion para hacer pruebas dentro del motor
-	/// </summary>
-	void loadTestMotorGame();
-
 	// Getters and Setters
-	void setStop(bool s);
-	bool getStop();
+	void setStop(bool s) { stop = s; }
+	bool getStop() { return stop; }
 
 protected:
 	static Motor* _singleton;

@@ -21,34 +21,38 @@ WinMain(HINSTANCE zhInstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdS
         std::cout << "---------- NEW MOTOR ----------\n";
         m = new MotorOla();
     }
-    catch (const char* error) {
+    catch (std::exception& error) {
         std::cout << "Error creando el motor\n";
-        std::cout << "Error: " << error << "\n";
+        std::cout << "Error: " << error.what() << "\n";
         hayError = true;
     }
     
-    // Intenta iniciar los sistemas principales
-    try {
-        std::cout << "---------- MOTOR INIT SISTEMS ----------\n";
-        m->initMotorOla();
-    }
-    catch (const char* error) {
-        std::cout << "Error iniciando el motor\n";
-        std::cout << "Error: " << error << "\n";
-        hayError = true;
-        system("pause");
+    if (!hayError) {
+        // Intenta iniciar los sistemas principales
+        try {
+            std::cout << "---------- MOTOR INIT SISTEMS ----------\n";
+            m->initMotorOla();
+        }
+        catch (std::exception& error) {
+            std::cout << "Error iniciando el motor\n";
+            std::cout << "Error: " << error.what() << "\n";
+            hayError = true;
+            system("pause");
+        }
     }
 
-    // Pone en marcha el bucle principal del Motor
-    try {
-        std::cout << "MOTOR START MAIN LOOP\n";
-        m->initLoop();
-    }
-    catch (const char* error) {
-        std::cout << "Error durante el bucle principal del motor\n";
-        std::cout << "Error: " << error << "\n";
-        hayError = true;
-        system("pause");
+    if (!hayError) {
+        // Pone en marcha el bucle principal del Motor
+        try {
+            std::cout << "MOTOR START MAIN LOOP\n";
+            m->initLoop();
+        }
+        catch (std::exception& error) {
+            std::cout << "Error durante el bucle principal del motor\n";
+            std::cout << "Error: " << error.what() << "\n";
+            hayError = true;
+            system("pause");
+        }
     }
     
     // Libera la memoria del Motor y los sistemas principales

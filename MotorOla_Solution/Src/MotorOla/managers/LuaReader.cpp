@@ -41,6 +41,7 @@ bool LuaReader::Init()
 
 	// Si lo tiene que crear devuelve true
 	_singleton = new LuaReader();
+
 	return true;
 }
 

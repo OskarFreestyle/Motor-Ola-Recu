@@ -24,9 +24,7 @@ PhysxManager::PhysxManager()
 
 PhysxManager::~PhysxManager()
 {
-	std::cout << "\n - Cerrando PhysXmanager - \n";
 	close(false);
-	std::cout << " - - - - - - - - - - - - - \n";
 }
 
 
@@ -494,16 +492,18 @@ void PhysxManager::debugAllBodies()
 	}
 }
 
-////----
-float stepTime = 0.0f;
-
 bool PhysxManager::Init() {
 	// Si ya existe devuelve false
 	if (_singleton != nullptr) return false;
 
 	// Si lo tiene que crear devuelve true
 	_singleton = new PhysxManager();
-	_singleton->initPhysx();
+
+	try {
+		_singleton->initPhysx();
+	}
+	catch (...) { throw std::exception("Error iniciando PhysxManager\n"); }
+
 	return true;
 }
 
