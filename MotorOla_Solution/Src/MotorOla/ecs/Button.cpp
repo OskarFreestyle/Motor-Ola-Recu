@@ -14,7 +14,7 @@ Button::~Button() {
 bool Button::init(const std::map<std::string, std::string>& mapa) {
 	if (mapa.find("positionX") == mapa.end() || mapa.find("positionY") == mapa.end() || mapa.find("texto") == mapa.end() || mapa.find("nombrePanel") == mapa.end() ||
 		mapa.find("nombreTexto") == mapa.end() || mapa.find("tamLetra") == mapa.end() || mapa.find("material") == mapa.end()||mapa.find("dimensionX")==mapa.end()||mapa.find("dimensionY")==mapa.end()||
-		mapa.find("type")==mapa.end()||mapa.find("nextScene")==mapa.end()) return false;
+		mapa.find("type")==mapa.end()||mapa.find("nextScene")==mapa.end()|| mapa.find("clickDelay") == mapa.end()) return false;
 
 	std::string s = mapa.at("positionX");
 	posX = std::stof(s);
@@ -50,6 +50,8 @@ bool Button::init(const std::map<std::string, std::string>& mapa) {
 	else if (s == "EXIT") {
 		type = Type::EXIT;
 	}
+	s = mapa.at("clickDelay");
+	clickDelay = std::stof(s);
 
 	_inicializado = true;
 
@@ -58,7 +60,17 @@ bool Button::init(const std::map<std::string, std::string>& mapa) {
 
 void Button::update()
 {
-	if (isClicked()) {
+	if (!isClick && isClicked()) {
+
+		//onClick();
+		// Si tiene algun audio asociado, suena
+		if (_entity->hasComponent<AudioSource>() && !AudioManager::GetInstance()->getMute()) {
+			_entity->getComponent<AudioSource>()->play();
+		}
+		isClick = true;
+		inClick = clock();
+	}
+	if (isClick && inClick+clickDelay<clock()) {
 		onClick();
 	}
 }
@@ -72,15 +84,13 @@ bool Button::isClicked() {
 
 void Button::onClick()
 {
-	// Si tiene algun audio asociado, suena
-	if (_entity->hasComponent<AudioSource>()&& !AudioManager::GetInstance()->getMute()) {
-		_entity->getComponent<AudioSource>()->play();
-	}
+	isClick = false;
 
 	// Realiza la accion correspondiente
 	switch (type) {
 	case Type::CHANGE_SCENE:
 		ih().MouseButtonUp(ih().LEFT);
+
 		AudioManager::GetInstance()->stopAllChannels();
 		OverlayManager::GetInstance()->clear();
 		SceneManager::GetInstance()->newScene(nextScene);	// Escena pasada por carga de datos
