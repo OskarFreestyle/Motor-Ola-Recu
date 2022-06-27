@@ -38,8 +38,9 @@ bool AudioSource::init(const std::map<std::string, std::string>& mapa) {
 
 void AudioSource::play()
 {
+	// Comprueba que no haya mute
 	if(!AudioManager::GetInstance()->getMute())
-	AudioManager::GetInstance()->playMusic(_channel, _loop);
+		AudioManager::GetInstance()->playMusic(_channel, _loop);
 }
 
 void AudioSource::pause()

@@ -155,7 +155,6 @@ void LuaReader::readFile(std::string file) {
 			if (!entInits[i] && ents[i]->init()) {
 				++initedEnts;
 				entInits[i] = true;
-				std::cout << "Entidad " << i << " iniciada\n";
 				SceneManager::GetInstance()->addEntity(ents[i]);
 			}
 			++i;

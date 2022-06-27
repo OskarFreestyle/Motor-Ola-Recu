@@ -62,9 +62,7 @@ void Button::update()
 {
 	if (!isClick && isClicked()) {
 		// Si tiene algun audio asociado, suena
-		if (_entity->hasComponent<AudioSource>() && !AudioManager::GetInstance()->getMute()) {
-			_entity->getComponent<AudioSource>()->play();
-		}
+		if (_entity->hasComponent<AudioSource>()) _entity->getComponent<AudioSource>()->play();
 		isClick = true;
 		inClick = clock();
 	}
