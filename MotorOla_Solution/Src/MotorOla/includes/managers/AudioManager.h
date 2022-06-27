@@ -12,6 +12,8 @@
 #include <fmod_errors.h>
 #include <map>
 
+const int NUM_CHANNELS = 24;
+
 class MOTOR_API AudioManager {
 public:
 	~AudioManager();
@@ -48,6 +50,7 @@ protected:
 	static AudioManager* _singleton;
 
 	AudioManager() {
+		for (int i = 0; i < NUM_CHANNELS; i++) channelUsed[i] = false;
 		result = System_Create(&system);
 		checkError(result);
 		result = system->init(128, FMOD_INIT_NORMAL, 0);
@@ -57,8 +60,9 @@ protected:
 private:
 	FMOD::System* system = nullptr;
 	FMOD_RESULT result = FMOD_OK;
-	FMOD::Channel* channel[24];
-	FMOD::Sound* sound[24];
+	FMOD::Channel* channel[NUM_CHANNELS];
+	FMOD::Sound* sound[NUM_CHANNELS];
+	bool channelUsed[NUM_CHANNELS];
 	bool mute = false;
 	int cont = 0;
 };

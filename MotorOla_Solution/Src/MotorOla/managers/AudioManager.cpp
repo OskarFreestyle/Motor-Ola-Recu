@@ -28,6 +28,10 @@ void AudioManager::update()
 
 void AudioManager::loadMusic(int channel, const char* fileName)
 {
+	if (channelUsed[channel]) return;
+
+	std::cout << "Cargado nuevo sonido\n";
+
 	result = system->createSound(
 		fileName, // path al archivo de sonido
 		FMOD_DEFAULT,
@@ -35,6 +39,7 @@ void AudioManager::loadMusic(int channel, const char* fileName)
 		&sound[channel]);
 	checkError(result);
 	cont++;
+	channelUsed[channel] = true;
 }
 
 void AudioManager::playMusic(int chan, bool loops)
@@ -115,21 +120,11 @@ bool AudioManager::getMute()
 void AudioManager::setMute(bool m)
 {
 	mute = m;
-	/*for (int i = 0; i < AudioManager::GetInstance()->getCont(); i++) {
-		if (AudioManager::GetInstance()->getMute() == false) {
-			if (AudioManager::GetInstance()->getChannel(i) != nullptr)
-				AudioManager::GetInstance()->setVolume(i, 1);
-		}
-		else {
-			if (AudioManager::GetInstance()->getChannel(i) != nullptr)
-				AudioManager::GetInstance()->setVolume(i, 0);
-		}
-	}*/
 }
 
 void AudioManager::stopAllChannels()
 {
-	for (int i = 0;i < 24;i++) {
+	for (int i = 0; i < NUM_CHANNELS; i++) {
 		stopMusic(i);
 	}
 }
