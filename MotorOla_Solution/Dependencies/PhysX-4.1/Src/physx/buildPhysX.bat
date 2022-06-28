@@ -1,3 +1,5 @@
+echo buildPhysX.bat
+
 mkdir ..\..\Build\public
 copy compiler\public\CMakeLists.txt ..\..\Build\public\CMakeLists.txt
 call generate_projects.bat

@@ -6,7 +6,6 @@
 #define MOTOR_API __declspec(dllimport)
 #endif
 
-
 #include <PxPhysicsAPI.h>
 #include <vector>
 #include <cassert>

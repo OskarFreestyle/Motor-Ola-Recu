@@ -104,5 +104,5 @@ private:
 	Uint32 frameTime;
 	Uint32 deltaTime;	// in miliseconds
 
-	HINSTANCE hDLL;               // Handle to DLL
+	HINSTANCE hDLL;     // Handle to DLL
 };
