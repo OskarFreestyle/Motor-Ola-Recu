@@ -9,10 +9,10 @@
 .vs/
 
 # /bin
-#[Bb]in/
+[Bb]in/
 
 # fichero autogenerados ( temporales )
-# *.exe
+*.exe
 *.dll
 *.lib
 *.pdb
