@@ -55,9 +55,6 @@ void LuaReader::readFile(std::string file) {
 	l = luaL_newstate();
 	openlualibs(l);
 
-#if _DEBUG
-	std::printf("now calling lua\n\n");
-#endif
 	// Intenta abrir el archivo .lua
 	if (!luaL_loadfile(l, file.c_str()) &&  lua_pcall(l, 0, 0, 0)) {
 		std::cout << lua_tostring(l, -1) << "\n";
@@ -67,8 +64,6 @@ void LuaReader::readFile(std::string file) {
 
 	// Intenta leer la escena
 	try {
-		std::cout << "LuaGettingLevel "  << lua_getglobal(l, "GetLevel") << "\n";
-
 		// Si no encuentra la function que devuelve la tabla
 		if (lua_pcall(l, 0, 1, 0) != LUA_OK) {
 			std::cout << lua_tostring(l,-1) << "\nError reading GetLevel in .lua\n";	
@@ -144,9 +139,7 @@ void LuaReader::readFile(std::string file) {
 		}
 
 		lua_pop(l, 2);
-#if _DEBUG
-		std::printf("\ndo something else\n\n");
-#endif
+
 		lua_close(l);
 
 		int i = 0;
@@ -167,17 +160,11 @@ void LuaReader::readFile(std::string file) {
 	}
 }
 
-
-
-
-
 Entidad* LuaReader::readPrefab(std::string file) {
 	lua_State* l;
 	l = luaL_newstate();
 	openlualibs(l);
-#if _DEBUG
-	std::printf("now calling lua\n\n");
-#endif
+
 	if (!luaL_loadfile(l, file.c_str()) && lua_pcall(l, 0, 0, 0)) {
 		throw std::exception("Lua file was not able to be loaded");
 	}
