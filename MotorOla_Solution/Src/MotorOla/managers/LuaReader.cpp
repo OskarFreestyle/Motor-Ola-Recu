@@ -45,17 +45,13 @@ bool LuaReader::Init()
 	return true;
 }
 
-void LuaReader::readFile(std::string file) {
-	// Vector de entidades que creamos y vector auxiliar para marcarlas iniciadas
-	std::vector<Entidad*> ents;
-	std::vector<bool> entInits;
-
+void LuaReader::readScene(std::string file) {
 	// Preparamos un LuaState para leer el fichero
 	lua_State* l;
 	l = luaL_newstate();
 	openlualibs(l);
 
-	// Intenta abrir el archivo .lua
+	// Intenta abrir el archivo .lua y lanzamos excepcion si hay error
 	if (!luaL_loadfile(l, file.c_str()) &&  lua_pcall(l, 0, 0, 0)) {
 		std::cout << lua_tostring(l, -1) << "\n";
 		std::cout << "Error reading .lua\n";
@@ -64,27 +60,38 @@ void LuaReader::readFile(std::string file) {
 
 	// Intenta leer la escena
 	try {
+		// Busca el nivel
+		lua_getglobal(l, "GetLevel");
+
 		// Si no encuentra la function que devuelve la tabla
 		if (lua_pcall(l, 0, 1, 0) != LUA_OK) {
 			std::cout << lua_tostring(l,-1) << "\nError reading GetLevel in .lua\n";	
 			throw std::exception("Lua function GetLevel was not able to be loaded");
 		}
 
-		// Luego la luz ambiente
-		lua_getfield(l, -1, "ambient");
-		std::string aux2 = lua_tostring(l, -1);
+		// Variables auxiliares para leer la escena
+		std::string auxString;
 		std::string::size_type sz = 0, sa = 0;
-		float a = std::stof(aux2, &sz); float b = std::stof(aux2.substr(sz + 1), &sa); float c = std::stof(aux2.substr(sz + sa + 2));
+		float a, b, c;
+
+		// Luz Ambiente
+		lua_getfield(l, -1, "ambient");
+		auxString = lua_tostring(l, -1);
+		a = std::stof(auxString, &sz); b = std::stof(auxString.substr(sz + 1), &sa); c = std::stof(auxString.substr(sz + sa + 2));
 		OgreManager::GetInstance()->getSceneManager()->setAmbientLight(Ogre::ColourValue(a, b, c));
 		lua_pop(l, 1);
 
-		// Modifica la gravedad de la escena
+		// Gravedad
 		lua_getfield(l, -1, "gravity");
-		std::string aux3 = lua_tostring(l, -1);
+		auxString = lua_tostring(l, -1);
 		sz = 0, sa = 0;
-		a = std::stof(aux3, &sz); b = std::stof(aux3.substr(sz + 1), &sa); c = std::stof(aux3.substr(sz + sa + 2));
+		a = std::stof(auxString, &sz); b = std::stof(auxString.substr(sz + 1), &sa); c = std::stof(auxString.substr(sz + sa + 2));
 		pm().getScene()->setGravity(PxVec3(a, b, c));
 		lua_pop(l, 1);
+
+		// Vector de entidades que creamos y vector auxiliar para marcarlas iniciadas
+		std::vector<Entidad*> ents;
+		std::vector<bool> entInits;
 
 		// Después lee todas las entidades y los componentes de cada una
 		lua_getfield(l, -1, "entidades");
@@ -108,9 +115,7 @@ void LuaReader::readFile(std::string file) {
 			entInits.push_back(false);
 			SceneManager::GetInstance()->addEntity(ent);
 
-			// Components
-			// Calls a similar while loop, creating a set<string, string> with each pair
-			// Knows which component is by key name and a translator function
+			// Despues lee los componentes
 			lua_getfield(l, -1, "components");
 			lua_pushnil(l);
 			while (lua_next(l, 5) != 0) { // stack: mapa-entities-indEntity-Entity-compTabla
@@ -119,7 +124,9 @@ void LuaReader::readFile(std::string file) {
 
 				std::map<std::string, std::string> compMap;
 				lua_pushnil(l);
-				while (lua_next(l, 7) != 0) { // stack: mapa-entities-indEntity-Entity-compTabla-indComp-Component
+
+				// Lee cada atributo del componente y genera un mapa
+				while (lua_next(l, 7) != 0) {
 					char* attrName = (char*)lua_tostring(l, -2);
 					std::string s1(attrName);
 					char* attrValue = (char*)lua_tostring(l, -1);
@@ -128,20 +135,21 @@ void LuaReader::readFile(std::string file) {
 					lua_pop(l, 1);
 				}
 
-				// Funcion de traduccion
+				// Añade el componente a la entidad
 				ent->addComponent(compName, compMap);
 				lua_pop(l, 1);
 			}
 
 			lua_pop(l, 1);
-			// Entity is no longer here, only key to be removed by lua_next
 			lua_pop(l, 1);
 		}
 
 		lua_pop(l, 2);
 
+		// Cierra el LuaState
 		lua_close(l);
 
+		// Bucle para inicializar las entidades y sus componentes
 		int i = 0;
 		int numEnts = ents.size();
 		int initedEnts = 0;
@@ -149,52 +157,45 @@ void LuaReader::readFile(std::string file) {
 			if (!entInits[i] && ents[i]->init()) {
 				++initedEnts;
 				entInits[i] = true;
-				SceneManager::GetInstance()->addEntity(ents[i]);
 			}
 			++i;
 			i %= numEnts;
 		}
 	}
 	catch (...) {
-		throw std::exception("Lua file has incorrect formatting\n");
+		throw std::exception("Error leyendo una escena de lua\n");
 	}
 }
 
 Entidad* LuaReader::readPrefab(std::string file) {
+	// Preparamos un LuaState para leer el fichero
 	lua_State* l;
 	l = luaL_newstate();
 	openlualibs(l);
 
+	// Intenta abrir el archivo .prefab y lanzamos excepcion si hay error
 	if (!luaL_loadfile(l, file.c_str()) && lua_pcall(l, 0, 0, 0)) {
-		throw std::exception("Lua file was not able to be loaded");
+		throw std::exception("Lua prefab was not able to be loaded");
 	}
-	try {
-		lua_getglobal(l, "GetPrefab");
-		int err = lua_pcall(l, 0, 1, 0); // GetPrefab()
 
-		// Entity is here
-		// Name
+	// Intenta leer el prefab
+	try {
+
+		lua_getglobal(l, "GetPrefab");
+		int err = lua_pcall(l, 0, 1, 0);
+
 		lua_getfield(l, -1, "name");
 		char* name = (char*)lua_tostring(l, -1);
 		lua_pop(l, 1);
 
-		// ID
 		lua_getfield(l, -1, "id");
 		int id = lua_tonumber(l, -1);
-		lua_pop(l, 1);
-
-		// showCursor
-		lua_getfield(l, -1, "cursor");
-		int cursor = lua_tonumber(l, -1);
-		lua_pop(l, 1);
-		
+		lua_pop(l, 1);		
 
 		Entidad* ent = new Entidad(name, id);
 		SceneManager::GetInstance()->addEntity(ent);
 
-		// Components
-		// Calls a similar while loop, creating a set<string, string> with each pair
-		// Knows which component is by key name and a translator function
+		// Lee los componentes
 		lua_getfield(l, -1, "components");
 		lua_pushnil(l);
 		while (lua_next(l, 2) != 0) { // stack: Entity-compTabla
@@ -217,12 +218,13 @@ Entidad* LuaReader::readPrefab(std::string file) {
 			lua_pop(l, 1);
 		}
 
-		ent->init();
-
 		lua_pop(l, 1);
 
 		lua_close(l);
-		// Entity is no longer here, only key to be removed by lua_next
+
+		// Inicia la entidad y sus componentes
+		ent->init();
+
 		return ent;
 	}
 	catch (...) {

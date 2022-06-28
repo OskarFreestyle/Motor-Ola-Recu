@@ -36,7 +36,6 @@ void SceneManager::updateEntidades()
 			e->update();
 		}
 	}
-
 }
 
 bool SceneManager::addEntity(Entidad* ent) {
@@ -146,7 +145,7 @@ void SceneManager::newScene(std::string sceneName) {
 void SceneManager::loadEntities() {
 	// Añade las entidades de la nueva escena al vector de entidades a crear
 	if (_newScene) {
-		LuaReader::GetInstance()->readFile(_sceneNameRoute);
+		LuaReader::GetInstance()->readScene(_sceneNameRoute);
 		_newScene = false;
 	}
 

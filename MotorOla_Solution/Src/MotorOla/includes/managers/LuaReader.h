@@ -18,11 +18,10 @@ public:
     ~LuaReader() {};
     inline static LuaReader* GetInstance() { return _singleton; }
     static bool Init();
-    void readFile(std::string file);
+    void readScene(std::string file);
     Entidad* readPrefab(std::string file);
+
 protected:
     static LuaReader* _singleton;
     LuaReader() {};
-
-
 };

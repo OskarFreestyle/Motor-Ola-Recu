@@ -232,7 +232,7 @@ bool Motor::loadScene(std::string name) {
 		std::string sceneRoute = LoadResources::GetInstance()->scene(name).c_str();
 
 		// Lee la escena cargando todas las entidades y sus componentes
-		LuaReader::GetInstance()->readFile(sceneRoute);
+		LuaReader::GetInstance()->readScene(sceneRoute);
 	}
 	catch (std::exception e) {
 #if (defined _DEBUG)
