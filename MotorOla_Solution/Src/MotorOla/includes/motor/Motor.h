@@ -6,8 +6,6 @@
 #define MOTOR_API __declspec(dllimport)
 #endif
 
-
-#define SDL_MAIN_HANDLED
 #include <SDL.h>
 #include <string>
 #include <iostream>
