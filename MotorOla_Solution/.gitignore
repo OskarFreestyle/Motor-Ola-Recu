@@ -12,8 +12,8 @@
 [Bb]in/
 
 # fichero autogenerados ( temporales )
-*.exe
-*.dll
+#*.exe
+#*.dll
 *.lib
 *.pdb
 *.iobj
