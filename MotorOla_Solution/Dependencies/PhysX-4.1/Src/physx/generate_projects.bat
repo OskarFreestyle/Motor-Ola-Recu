@@ -1,3 +1,5 @@
+echo generate_projects.bat
+
 :: Reset errorlevel status so we are not inheriting this state from the calling process:
 @call :CLEAN_EXIT
 @echo off
@@ -5,21 +7,28 @@
 pushd %~dp0
 set PHYSX_ROOT_DIR=%CD%
 popd
-SET PHYSX_ROOT_DIR=%PHYSX_ROOT_DIR:\=/%
-SET PM_VSWHERE_PATH=%PHYSX_ROOT_DIR%/../externals/VsWhere
-SET PM_CMAKEMODULES_PATH=%PHYSX_ROOT_DIR%/../externals/CMakeModules
-SET PM_PXSHARED_PATH=%PHYSX_ROOT_DIR%/../pxshared
-SET PM_TARGA_PATH=%PHYSX_ROOT_DIR%/../externals/targa
-SET PM_PATHS=%PM_CMAKEMODULES_PATH%;%PM_TARGA_PATH%
 
-::if exist "%PHYSX_ROOT_DIR%/../externals/cmake/x64/bin/cmake.exe" (
-::    SET "PM_CMAKE_PATH=%PHYSX_ROOT_DIR%/../externals/cmake/x64"
-::    GOTO CMAKE_EXTERNAL    
-::)
+echo ---1---
+
+
+SET PHYSX_ROOT_DIR=%PHYSX_ROOT_DIR:\=/%
+
+echo ---2---
+
+SET PM_VSWHERE_PATH=%PHYSX_ROOT_DIR%/../externals/VsWhere
+echo ---3---
+SET PM_CMAKEMODULES_PATH=%PHYSX_ROOT_DIR%/../externals/CMakeModules
+echo ---4---
+SET PM_PXSHARED_PATH=%PHYSX_ROOT_DIR%/../pxshared
+echo ---5---
+SET PM_TARGA_PATH=%PHYSX_ROOT_DIR%/../externals/targa
+echo ---6---
+SET PM_PATHS=%PM_CMAKEMODULES_PATH%;%PM_TARGA_PATH%
+echo ---7---
 
 SET OLD_PTH=%PATH%
-::::ECHO %OLD_PTH%
-PATH=%OLD_PTH%;..\..\..\python-3.9.10-embed-amd64\src;..\..\..\CMake\Src\bin
+SET OLD_PTH=%PATH%
+PATH=%OLD_PTH%;..\..\..\python-3.9.10-embed-amd64;..\..\..\CMake\bin
 
 where /q cmake
 IF ERRORLEVEL 1 (    
@@ -57,7 +66,7 @@ IF ERRORLEVEL 1 (
 
 :SETPY
 :: vvv
-set PM_PYTHON="..\..\..\python-3.9.10-embed-amd64\src\python.exe"
+set PM_PYTHON="..\..\..\python-3.9.10-embed-amd64\python.exe"
 
 IF %1.==. GOTO ADDITIONAL_PARAMS_MISSING
 
@@ -97,8 +106,6 @@ if exist "%Install2019Dir%\VC\Auxiliary\Build\Microsoft.VCToolsVersion.default.t
 
 :ADDITIONAL_PARAMS_MISSING
 pushd %~dp0
-::%PM_PYTHON% "%PHYSX_ROOT_DIR%/buildtools/cmake_generate_projects.py" %1
-::%PM_PYTHON% "%PHYSX_ROOT_DIR%/buildtools/cmake_generate_projects.py" vc16win64
 %PM_PYTHON% "%PHYSX_ROOT_DIR%/buildtools/cmake_generate_projects.py" vc16win64-min
 popd
 if %ERRORLEVEL% neq 0 (

@@ -6,8 +6,6 @@
 #define MOTOR_API __declspec(dllimport)
 #endif
 
-
-#define SDL_MAIN_HANDLED
 #include <SDL.h>
 #include <string>
 #include <iostream>
@@ -106,5 +104,5 @@ private:
 	Uint32 frameTime;
 	Uint32 deltaTime;	// in miliseconds
 
-	HINSTANCE hDLL;               // Handle to DLL
+	HINSTANCE hDLL;     // Handle to DLL
 };

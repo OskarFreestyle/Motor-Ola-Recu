@@ -45,21 +45,21 @@
 # /pojects
 *.vcxproj.user
 
-### /dependecies (ir añadiendo los directorios de bibliotecas nuevas)
+### Bibliotecas ###
 
-## Ogre
+### Ogre ###
 /Dependencies/Ogre/[Bb]uild/
 Ogre.log
 ogre.cfg
 
-## FMOD
+### FMOD ###
 !*/FMOD/libreria/x64/*.dll
 !*/FMOD/libreria/x64/*.lib
 
-## LUA
+### LUA ###
 /Dependencies/x64/
 
-## PhysX-4.1
+### PhysX-4.1 ###
 /Dependencies/PhysX-4.1/[Bb]uild/
 /Dependencies/PhysX-4.1/[Ss]rc/physx/include/PxConfig.h
 

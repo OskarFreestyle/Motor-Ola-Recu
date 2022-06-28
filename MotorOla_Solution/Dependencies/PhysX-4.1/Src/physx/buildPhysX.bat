@@ -1,3 +1,5 @@
+echo buildPhysX.bat
+
 mkdir ..\..\Build\public
 copy compiler\public\CMakeLists.txt ..\..\Build\public\CMakeLists.txt
 call generate_projects.bat
@@ -11,8 +13,8 @@ if exist ..\..\Build\vc16win64\ (
 )
 
 :: CMake hace la Build de PhysX-4.1
-..\..\..\CMake\Src\bin\cmake.exe --build . --config debug
-..\..\..\CMake\Src\bin\cmake.exe --build . --config release 
+..\..\..\CMake\bin\cmake.exe --build . --config debug
+..\..\..\CMake\bin\cmake.exe --build . --config release 
 
 :: Debug -> copia de archivos .dll (falta añadir '_d' en debug para diferenciar los archivos)
 cd ..\..\Src\physx\bin\win.x86_64.vc142.md\debug\
