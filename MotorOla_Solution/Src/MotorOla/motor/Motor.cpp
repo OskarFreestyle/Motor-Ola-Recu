@@ -205,6 +205,8 @@ void Motor::mainLoop()
 
 		// Renderiza un frame
 		OgreManager::GetInstance()->update();
+		//Actualiza el sonido
+		AudioManager::GetInstance()->update();
 
 		// Se eliminan las entidades marcadas
 		SceneManager::GetInstance()->removeEntities();
