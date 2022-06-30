@@ -179,39 +179,26 @@ void Motor::mainLoop()
 	while (!stop) {
 		// Tiempo cuando se inicia el frame
 		frameStart = SDL_GetTicks();
-
-		// Recoge un puntero con el vector de entidades;
-		std::vector<Entidad*>* currEntities = SceneManager::GetInstance()->getEntities();
-
 		// Borra el Input del frame anterior
 		ih().clearState();
-
 		// Recoge el Input para este frame
 		while (SDL_PollEvent(&event)) ih().update(event);
-
 		// Actualizar las fisicas de las entidades
 		pm().runPhysX();
-
 		// Actualiza las entidades (lo cual llama a actualizar cada uno de sus componentes)
 		SceneManager::GetInstance()->updateEntidades();
-
 		// Renderiza un frame
 		OgreManager::GetInstance()->update();
 		//Actualiza el sonido
 		AudioManager::GetInstance()->update();
-
 		// Se eliminan las entidades marcadas
 		SceneManager::GetInstance()->removeEntities();
-
 		// Se cargan nuevas entidades
 		SceneManager::GetInstance()->loadEntities();
-
 		// Obtenemos el tiempo del frame
 		frameTime = (SDL_GetTicks() - frameStart);
-
 		// Limitamos el frameRate
 		if (frameDelay > frameTime) SDL_Delay(frameDelay - frameTime);
-
 		// Actualizamos deltaTime
 		deltaTime = (SDL_GetTicks() - frameStart);
 	}
