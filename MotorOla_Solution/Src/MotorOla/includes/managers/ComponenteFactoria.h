@@ -12,6 +12,7 @@ class Componente;
 
 typedef Componente* (*componentInstanceGenerator) ();
 
+// Factoria abstracta para crear componentes sin especificar sus clases concretas.
 class MOTOR_API ComponenteFactoria {
 public:
 	~ComponenteFactoria() {};

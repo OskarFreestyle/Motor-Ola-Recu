@@ -4,6 +4,7 @@
 #include "checkML.h"
 #endif
 
+// Imagenes para el interfaz
 class ImageComponent : public Componente
 {
 public:
@@ -14,11 +15,11 @@ public:
 	void setActive(bool state);
 	
 private:
-	float posX;
-	float posY;
-	std::string nombrePanel;
-	std::string material;
-	float dimX;
-	float dimY;
+	float _posX;
+	float _posY;
+	float _dimX;
+	float _dimY;
+	std::string _nombrePanel;
+	std::string _material;
 };
 

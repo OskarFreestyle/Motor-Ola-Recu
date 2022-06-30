@@ -11,19 +11,19 @@ bool ImageComponent::init(const std::map<std::string, std::string>& mapa)
 		mapa.find("material") == mapa.end() || mapa.find("dimensionX") == mapa.end() || mapa.find("dimensionY") == mapa.end()) return false;
 
 	std::string s = mapa.at("positionX");
-	posX = std::stof(s);
+	_posX = std::stof(s);
 	s = mapa.at("positionY");
-	posY = std::stof(s);
+	_posY = std::stof(s);
     s = mapa.at("nombrePanel");
-	nombrePanel = s;
+	_nombrePanel = s;
     s = mapa.at("material");
-	material = s;
+	_material = s;
 	s = mapa.at("dimensionX");
-	dimX = std::stof(s);
+	_dimX = std::stof(s);
 	s = mapa.at("dimensionY");
-	dimY = std::stof(s);
+	_dimY = std::stof(s);
 
-	OverlayManager::GetInstance()->creaPanel(posX, posY,nombrePanel,material, dimX, dimY);
+	OverlayManager::GetInstance()->creaPanel(_posX, _posY,_nombrePanel,_material, _dimX, _dimY);
 	
 	_inicializado = true;
 
@@ -33,5 +33,5 @@ bool ImageComponent::init(const std::map<std::string, std::string>& mapa)
 void ImageComponent::setActive(bool state)
 {
 	_active = state;
-	OverlayManager::GetInstance()->getPanel(nombrePanel)->setVisible(state);
+	OverlayManager::GetInstance()->getPanel(_nombrePanel)->setVisible(state);
 }

@@ -4,6 +4,7 @@
 #include "checkML.h"
 #endif
 
+// Luces 
 class Light : public Componente {
 public:
 	// Análogos a los tipos de Ogre
@@ -19,12 +20,7 @@ public:
 	float getConstantAttenuation() { return _light->getAttenuationConstant(); }
 	float getQuadraticAttenuation() { return _light->getAttenuationQuadric(); }
 
-	//Vector4<> getAttenuation() { return _light->getAttenuation(); }
-
 	bool getCastShadows() { return _light->getCastShadows(); }
-
-	//Vector4<> getLightDiffuse() { return _light->getDiffuseColour(); }
-	//Vector4<> getLightSpecular() { return _light->getSpecularColour(); }
 
 	float getSpotlightInnerAngle() { return _light->getSpotlightInnerAngle().valueDegrees(); };
 	float getSpotlightOuterAngle() { return _light->getSpotlightOuterAngle().valueDegrees(); };
@@ -45,10 +41,10 @@ public:
 
 	void setSpotlightInnerAngle(float deg);
 	void setSpotlightOuterAngle(float deg);
+
 protected:
 	void render() override;
 
 	Ogre::Light* _light;
 	Ogre::SceneNode* _lightNode;
-private:
 };

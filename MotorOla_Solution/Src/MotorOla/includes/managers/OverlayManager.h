@@ -14,11 +14,9 @@
 
 class Motor;
 class OgreManager;
-using CallBackOnClick = void(Motor* m);
-//using CallBackOnClick = void();
 
+// Manejador del UI de Ogre
 class MOTOR_API OverlayManager {
-	
 public:
 	virtual ~OverlayManager();
 
@@ -35,8 +33,6 @@ public:
 
 	void initOverlay(OgreManager* om_);
 
-	//void update();
-
 	void creaBoton(float x,float y,const std::string& texto, const std::string& nombrePanel, const std::string& nombreTexto,float tamLetra,const std::string& material,float dimX,float dimY/*, CallBackOnClick* click_*/);
 	void creaTexto(float x, float y, const std::string& texto, const std::string& nombreTexto, float tamLetra,const std::string& nombrePanel,float dimX,float dimY);
 	void creaPanel(float x, float y,  const std::string& nombrePanel, const std::string& material, float dimX, float dimY);
@@ -45,11 +41,8 @@ public:
 	/// <summary>
 	/// Solo cambia a rojo o negro
 	/// </summary>
-	/// <param name="panelName"></param>
-	/// <param name="textName"></param>
-	/// <param name="newColor">"Red" para rojo y ya</param>
-	/// <returns></returns>
 	void changeTextColor(std::string panelName, std::string textName, std::string newColor);
+
 	Ogre::PanelOverlayElement* getPanel(std::string name);
 	Ogre::PanelOverlayElement* getBoton(std::string name);
 	void clear();
@@ -60,14 +53,12 @@ protected:
 	OverlayManager() {};
 private:
 	
-
 	std::vector< Ogre::PanelOverlayElement*>botones;
 	std::vector< Ogre::PanelOverlayElement*>paneles;
 	std::vector< Ogre::PanelOverlayElement*>textos;
 	Ogre::Overlay* mOverlay=nullptr;
 	
 	OgreManager* og;
-	
 };
 
 

@@ -10,9 +10,9 @@
 #include <fmod.hpp>
 #include <fmod_errors.h>
 
-
 const int NUM_CHANNELS = 24;
 
+// Manejador de audio con 24 canales
 class MOTOR_API AudioManager {
 public:
 	~AudioManager();

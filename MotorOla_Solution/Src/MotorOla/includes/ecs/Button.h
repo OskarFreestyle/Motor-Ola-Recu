@@ -12,6 +12,7 @@
 
 class Motor;
 
+// Utiliza una imagen y detecta cuando se clicka en ella
 class MOTOR_API Button :public Componente
 {
 public:
@@ -27,28 +28,31 @@ public:
 	virtual void update();
 	
 protected:
-	float posX; 
-	float posY; 
-	std::string texto; 
-	std::string nombrePanel;  
-	std::string nombreTexto; 
-	float tamLetra;
-	std::string material; 
-	float dimX;
-	float dimY;
-	Type type;
-	std::string nextScene = "";
+	Type _type;
+
+	float _posX; 
+	float _posY; 
+	float _tamLetra;
+	float _dimX;
+	float _dimY;
+	
+	std::string _texto; 
+	std::string _nombrePanel;  
+	std::string _nombreTexto; 
+	std::string _material; 
+	std::string _nextScene = "";
+
 	/// <summary>
 	/// Variables para delay entre que se pulsa y se hace la función onClick
 	/// </summary>
-	bool isClick = false;
-	clock_t inClick = 0;
-	clock_t clickDelay;
+	bool _isClick = false;
+	clock_t _timeClick = 0;
+	clock_t _clickDelay;
 
 	/// <summary>
 	/// Comprueba si se pulsa el botón
 	/// </summary>
-	/// <returns></returns>
+	/// <returns>True si se ha pulsado</returns>
 	bool isClicked();
 
 	/// <summary>

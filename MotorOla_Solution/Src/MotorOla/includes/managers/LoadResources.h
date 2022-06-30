@@ -19,6 +19,7 @@ using namespace std;
 //RUTA PARA BUSCAR LOS ASSETS
 static const std::string ASSETS = ".\\Assets";
 
+// Maps para obtener las rutas de los assets
 class MOTOR_API LoadResources {
 public:
 	~LoadResources();

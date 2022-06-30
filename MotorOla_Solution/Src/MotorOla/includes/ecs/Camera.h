@@ -9,7 +9,7 @@
 #endif
 #include "Componente.h"
 
-
+// Camara para el renderizado en la ventana
 class Camera : public Componente
 {
 public:

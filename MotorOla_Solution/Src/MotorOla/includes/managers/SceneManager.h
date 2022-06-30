@@ -7,6 +7,7 @@
 
 #include "Entidad.h"
 
+// Gestor de las entidades en la escena
 class MOTOR_API SceneManager {
 public:
 	~SceneManager();

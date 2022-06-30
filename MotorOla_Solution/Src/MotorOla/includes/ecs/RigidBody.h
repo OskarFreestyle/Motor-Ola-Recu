@@ -10,6 +10,7 @@
 
 using namespace physx;
 
+// Define el comportamiento fisico de un objeto (Necesita Collider)
 class MOTOR_API RigidBody : public Componente
 {
 public:
@@ -22,18 +23,18 @@ public:
 	bool init(const std::map<std::string, std::string>& mapa);
 
 	// Getter
-	PxRigidDynamic* getBody() { return body; };
-	PxRigidStatic* getStBody() { return stBody; };
+	PxRigidDynamic* getBody() { return _body; };
+	PxRigidStatic* getStBody() { return _stBody; };
 	PxVec3 getVelocity() { return _vel; };
-	PxVec3 getAngularVelocity() { return body->getAngularVelocity(); };
+	PxVec3 getAngularVelocity() { return _body->getAngularVelocity(); };
 
 	// Setter
 	void setVelocity(PxVec3 v);
 	void setAngularVelocity(PxVec3 av);
 
 private:
-	PxRigidDynamic* body = nullptr;
-	PxRigidStatic* stBody = nullptr;
+	PxRigidDynamic* _body = nullptr;
+	PxRigidStatic* _stBody = nullptr;
 
 	// Parametros por defecto
 	PxVec3 _pos = PxVec3(PxZero);		// position
@@ -41,10 +42,10 @@ private:
 	PxVec3 _vel = PxVec3(PxZero);		// velocity
 
 	// Constrains
-	bool lockPosX = false;
-	bool lockPosY = false;
-	bool lockPosZ = false;
-	bool lockRotX = false;
-	bool lockRotY = false;
-	bool lockRotZ = false;
+	bool _lockPosX = false;
+	bool _lockPosY = false;
+	bool _lockPosZ = false;
+	bool _lockRotX = false;
+	bool _lockRotY = false;
+	bool _lockRotZ = false;
 };

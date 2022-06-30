@@ -3,7 +3,6 @@
 #include <limits.h>
 #include "Motor.h"
 
-
 // Managers
 #include "OgreManager.h"
 #include "InputManager.h"

@@ -16,42 +16,42 @@ bool Button::init(const std::map<std::string, std::string>& mapa) {
 		mapa.find("nombreTexto") == mapa.end() || mapa.find("tamLetra") == mapa.end() || mapa.find("material") == mapa.end()||mapa.find("dimensionX")==mapa.end()||mapa.find("dimensionY")==mapa.end()||
 		mapa.find("type")==mapa.end()||mapa.find("nextScene")==mapa.end()|| mapa.find("clickDelay") == mapa.end()) return false;
 
-	std::string s = mapa.at("positionX");
-	posX = std::stof(s);
-	s = mapa.at("positionY");
-	posY = std::stof(s);
+	std::string auxString = mapa.at("positionX");
+	_posX = std::stof(auxString);
+	auxString = mapa.at("positionY");
+	_posY = std::stof(auxString);
 
-	s = mapa.at("texto");
-	texto = s;
+	auxString = mapa.at("texto");
+	_texto = auxString;
 
-	s = mapa.at("nombrePanel");
-	nombrePanel = s;
-	s = mapa.at("nombreTexto");
-	nombreTexto = s;
-	s = mapa.at("tamLetra");
-	tamLetra = std::stof(s);
-	s = mapa.at("material");
-	material = s;
-	s = mapa.at("dimensionX");
-	dimX = std::stof(s);
-	s = mapa.at("dimensionY");
-	dimY = std::stof(s);
+	auxString = mapa.at("nombrePanel");
+	_nombrePanel = auxString;
+	auxString = mapa.at("nombreTexto");
+	_nombreTexto = auxString;
+	auxString = mapa.at("tamLetra");
+	_tamLetra = std::stof(auxString);
+	auxString = mapa.at("material");
+	_material = auxString;
+	auxString = mapa.at("dimensionX");
+	_dimX = std::stof(auxString);
+	auxString = mapa.at("dimensionY");
+	_dimY = std::stof(auxString);
 	
-	OverlayManager::GetInstance()->creaBoton(posX, posY, texto, nombrePanel, nombreTexto, tamLetra, material, dimX, dimY);
-	s = mapa.at("type");
-	if (s == "CHANGE_SCENE") {
-		type = Type::CHANGE_SCENE;
-		s = mapa.at("nextScene");
-		nextScene = s;
+	OverlayManager::GetInstance()->creaBoton(_posX, _posY, _texto, _nombrePanel, _nombreTexto, _tamLetra, _material, _dimX, _dimY);
+	auxString = mapa.at("type");
+	if (auxString == "CHANGE_SCENE") {
+		_type = Type::CHANGE_SCENE;
+		auxString = mapa.at("nextScene");
+		_nextScene = auxString;
 	}
-	else if (s == "VOLUME") {
-		type = Type::VOLUME;
+	else if (auxString == "VOLUME") {
+		_type = Type::VOLUME;
 	}
-	else if (s == "EXIT") {
-		type = Type::EXIT;
+	else if (auxString == "EXIT") {
+		_type = Type::EXIT;
 	}
-	s = mapa.at("clickDelay");
-	clickDelay = std::stof(s);
+	auxString = mapa.at("clickDelay");
+	_clickDelay = std::stof(auxString);
 
 	_inicializado = true;
 
@@ -60,18 +60,18 @@ bool Button::init(const std::map<std::string, std::string>& mapa) {
 
 void Button::update()
 {
-	if (!isClick && isClicked()) {
+	if (!_isClick && isClicked()) {
 		// Si tiene algun audio asociado, suena
 		if (_entity->hasComponent<AudioSource>()) _entity->getComponent<AudioSource>()->play();
 		//Lo marca pulsado
-		isClick = true;
+		_isClick = true;
 		//Actualiza la variable inClick con el momento pulsado
-		inClick = clock();
+		_timeClick = clock();
 	}
 	//Si pasa el tiempo del delay entre la pulsación y la funcion
-	if (isClick && inClick+clickDelay<clock()) {
+	if (_isClick && _timeClick+_clickDelay<clock()) {
 		//Lo marca a falso
-		isClick = false;
+		_isClick = false;
 		//Funciones del boton
 		onClick();
 	}
@@ -81,19 +81,19 @@ void Button::update()
 bool Button::isClicked() {
 	//DEvuelve si el raton esta dentro del boton
 	return (ih().getMouseButtonState(ih().LEFT)) &&
-		(ih().getMousePos().first > posX * OgreManager::GetInstance()->getWindowWidth() && ih().getMousePos().first < (posX + dimX)* OgreManager::GetInstance()->getWindowWidth() &&
-			ih().getMousePos().second>posY * OgreManager::GetInstance()->getWindowHeight() && ih().getMousePos().second < (posY + dimY)* OgreManager::GetInstance()->getWindowHeight());
+		(ih().getMousePos().first > _posX * OgreManager::GetInstance()->getWindowWidth() && ih().getMousePos().first < (_posX + _dimX)* OgreManager::GetInstance()->getWindowWidth() &&
+			ih().getMousePos().second>_posY * OgreManager::GetInstance()->getWindowHeight() && ih().getMousePos().second < (_posY + _dimY)* OgreManager::GetInstance()->getWindowHeight());
 }
 
 void Button::onClick()
 {
 	// Realiza la accion correspondiente
-	switch (type) {
+	switch (_type) {
 	case Type::CHANGE_SCENE:
 		ih().MouseButtonUp(ih().LEFT);
 		AudioManager::GetInstance()->stopAllChannels();
 		OverlayManager::GetInstance()->clear();
-		SceneManager::GetInstance()->newScene(nextScene);	// Escena pasada por carga de datos
+		SceneManager::GetInstance()->newScene(_nextScene);	// Escena pasada por carga de datos
 		break;
 	case Type::VOLUME:
 		ih().MouseButtonUp(ih().LEFT);

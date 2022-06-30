@@ -22,6 +22,7 @@ MOTOR_API inline std::ostream& operator<<(std::ostream& os, const physx::PxQuat&
 	return os;
 }
 
+// Manejador del sistema de físicas
 class MOTOR_API PhysxManager {
 public:	
 	~PhysxManager();

@@ -13,6 +13,7 @@ extern "C"
     struct lua_State;
 }
 
+// Lector de lua para escenas y prefabs
 class MOTOR_API LuaReader {
 public:
     ~LuaReader() {};

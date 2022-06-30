@@ -21,14 +21,6 @@ Entidad::Entidad(std::string entityName, int id, std::string entityTag) :
 
 Entidad::~Entidad()
 {
-	//int n = components.size();
-	//for (int i = 0; i < n; i++)
-	//{
-	//	if (components.at(i) != nullptr) {
-	//	components.at(i).reset();
-	//		components.at(i) = nullptr;
-	//	}
-	//}
 }
 
 void Entidad::update()
@@ -41,12 +33,12 @@ void Entidad::update()
 
 bool Entidad::isActive() const
 {
-	return active;
+	return _active;
 }
 
 void Entidad::destroy()
 {
-	active = false;
+	_active = false;
 }
 
 void Entidad::OnCollisionEnter(Entidad* other)
@@ -86,15 +78,15 @@ Componente* Entidad::addComponent(const std::string& compName, const std::map<st
 
 inline void Entidad::setActive(bool state)
 {
-	active = state;
+	_active = state;
 	if (hasComponent<Mesh>()) getComponent<Mesh>()->setVisible(state);
 }
 
 bool Entidad::init()
 {
-	_numTriesToLoad = components.size() * 100000;
+	_numTriesToLoad = components.size() * MAX_TRIES_LOAD_COMPONENT;
 	int i = 0;
-	j = 0;
+	int j = 0;
 	int numComponents = components.size();
 	int initedComps = 0;
 	while (initedComps != numComponents && j < _numTriesToLoad) {

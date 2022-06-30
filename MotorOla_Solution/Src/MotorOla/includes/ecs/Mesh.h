@@ -5,6 +5,7 @@
 #include "checkML.h"
 #endif
 
+// Malla de renderizado
 class Mesh : public Componente
 {
 public:

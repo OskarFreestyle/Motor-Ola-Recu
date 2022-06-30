@@ -11,7 +11,7 @@
 #include "Componente.h"
 #include "Quaterniola.h"
 
-
+// Contiene la posicion, rotacion y escala de una entidad en la escena
 class MOTOR_API Transform : public Componente
 {
 public:

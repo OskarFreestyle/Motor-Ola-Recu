@@ -5,13 +5,16 @@
 #define MOTOR_API __declspec(dllimport)
 #endif
 #include "Componente.h"
+
 #if _DEBUG
 #include "checkML.h"
 #endif
+
 class AudioManager;
 using namespace std;
 
-class MOTOR_API AudioSource :	public Componente
+// Componente para reproducir sonido
+class MOTOR_API AudioSource : public Componente
 {
 public:
 	AudioSource() {};
@@ -21,7 +24,6 @@ public:
 	void play();
 	void pause();
 	void stopMusicComponent();
-
 private:
 	std::string _audioFileName;
 	int _channel;

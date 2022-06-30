@@ -8,6 +8,8 @@
 #include "Componente.h"
 #include "Quaterniola.h"
 
+const int MAX_TRIES_LOAD_COMPONENT = 10000;
+
 class Entidad
 {
 	using uptr_cmp = std::unique_ptr<Componente>;
@@ -31,11 +33,6 @@ public:
 	bool hasComponent() {
 		return getComponent<T>() != nullptr;
 	}
-
-	//template<typename T>
-	//bool hasInitComponent() {
-	//	return (getComponent<T>() != nullptr && getComponent<T>());
-	//}
 
 	/// <summary>
 	/// Devuelve un componente de la entidad, o nullptr si no lo tiene. Coste: O(N) :(
@@ -83,8 +80,7 @@ private:
 	std::vector<bool> compinits;		// Marca los componentes que estan inicializados
 	std::vector<std::map<std::string, std::string>> compMaps;
 	
-	bool active = true;	// Quitar porque esto se va a hacer en el SceneManager
-
+	bool _active = true;	// Quitar porque esto se va a hacer en el SceneManager
 
 	// Aqui estaran los componentes de esta entidad
 	ComponentArray componentArray;
@@ -94,6 +90,5 @@ private:
 
 	//numero de veces que puedes intentar iniciar tus componentes (para evitar bucle infinito)
 	int _numTriesToLoad;
-	int j;
 };
 

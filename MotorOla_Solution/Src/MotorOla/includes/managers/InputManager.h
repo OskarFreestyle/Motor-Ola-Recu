@@ -12,9 +12,7 @@
 #include "OgreManager.h"
 #include "Motor.h"
 
-// Instead of a Singleton class, we could make it part of
-// SDLUtils as well.
-
+// Manejador del Input del ratón y del teclado
 class MOTOR_API InputManager {
 public:
 	enum MOUSEBUTTON : uint8_t {
@@ -43,8 +41,6 @@ public:
 		_isMouseButtonEvent = false;
 		_isMouseMotionEvent = false;
 	}
-
-
 
 	// update the state with a new event
 	inline void update(const SDL_Event& event) {
@@ -143,7 +139,6 @@ public:
 		p.first = _mousePos.first -(OgreManager::GetInstance()->getWindowWidth() / 2);
 		p.second = _mousePos.second -(OgreManager::GetInstance()->getWindowHeight() / 2);
 		return p;
-
 	}
 
 protected:
@@ -173,7 +168,6 @@ private:
 		_isMouseMotionEvent = true;
 		_mousePos.first = event.motion.x;
 		_mousePos.second = event.motion.y;
-
 	}
 
 	inline void onMouseButtonChange(const SDL_Event& event, bool isDown) {
@@ -211,8 +205,7 @@ private:
 	std::pair<Sint32, Sint32> _mousePos;
 	std::array<bool, 3> _mbState;
 	const Uint8* _kbState;
-}
-;
+};
 
 // This macro defines a compact way for using the singleton InputHandler, instead of
 // writing InputHandler::instance()->method() we write ih().method()

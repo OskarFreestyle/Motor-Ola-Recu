@@ -11,7 +11,8 @@
 using namespace physx;
 const float BOX_SCALE = 50.0f;
 
-class Collider : public Componente
+// Forma geométrica para la simulación física (necesita Transform)
+class MOTOR_API Collider : public Componente
 {
 public:
 	// OBLIGATORIO EN CADA COMPONENTE
@@ -23,11 +24,11 @@ public:
 	bool init(const std::map<std::string, std::string>& mapa);
 
 	// Getter
-	MOTOR_API PxShape* getShape() { return shape; };
+	PxShape* getShape() { return _shape; };
 
 private:
-	PxShape* shape = nullptr;
-	PxGeometry* geometry = nullptr;
+	PxShape* _shape = nullptr;
+	PxGeometry* _geometry = nullptr;
 	// forma geometrica por defecto
 	PxGeometryType::Enum _type = PxGeometryType::eBOX;
 };

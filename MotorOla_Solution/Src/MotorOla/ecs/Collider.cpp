@@ -15,13 +15,13 @@ Collider::Collider()
 
 Collider::~Collider()
 {
-	if (geometry) {
-		delete geometry;
-		geometry = nullptr;
+	if (_geometry) {
+		delete _geometry;
+		_geometry = nullptr;
 	}
-	if (shape) {
-		shape->release();
-		shape = nullptr;
+	if (_shape) {
+		_shape->release();
+		_shape = nullptr;
 	}
 
 }
@@ -58,7 +58,7 @@ bool Collider::init(const std::map<std::string, std::string>& mapa)
 			return false;
 
 		// Crea la forma del collider (esfera)
-		geometry = new PxSphereGeometry(rad * _entity->getComponent<Transform>()->getScale().getX() * 100); /// ¿la escala es igual respecto a Ogre?
+		_geometry = new PxSphereGeometry(rad * _entity->getComponent<Transform>()->getScale().getX() * 100); /// ¿la escala es igual respecto a Ogre?
 	}
 	else if (typeString == "box") {
 		// comprobar que la sección existe
@@ -82,7 +82,7 @@ bool Collider::init(const std::map<std::string, std::string>& mapa)
 			return false;
 
 		// Crea la forma del collider (cubo)
-		geometry = new PxBoxGeometry(PxVec3(dimX * _entity->getComponent<Transform>()->getScale().getX(),
+		_geometry = new PxBoxGeometry(PxVec3(dimX * _entity->getComponent<Transform>()->getScale().getX(),
 			dimY * _entity->getComponent<Transform>()->getScale().getY(), 
 			dimZ * _entity->getComponent<Transform>()->getScale().getZ()) * BOX_SCALE); /// ¿escala?
 	}
@@ -94,20 +94,20 @@ bool Collider::init(const std::map<std::string, std::string>& mapa)
 		// Establece el tipo de simulacion fisica
 		std::string triggerString = mapa.at("trigger");
 		if (triggerString == "true")
-			shape = pm().createTriggerShape(*geometry, *material, false);
+			_shape = pm().createTriggerShape(*_geometry, *material, false);
 	}
 	// Si no se ha definido dicho parametro o es 'false'
-	if (shape == nullptr) {
-		shape = pm().createShape(*geometry, *material, false); // NO TRIGGER, NO POO
+	if (_shape == nullptr) {
+		_shape = pm().createShape(*_geometry, *material, false); // NO TRIGGER, NO POO
 	}
 
 	// Recoge si existe el componente RigidBody
 	RigidBody* body = getEntidad()->getComponent<RigidBody>();
 	if (body) {
 		if (body->getBody() && body->getBody()->getNbShapes() == 0)				// dynamic
-			body->getBody()->attachShape(*shape);
+			body->getBody()->attachShape(*_shape);
 		else if (body->getStBody() && body->getStBody()->getNbShapes() == 0)	// static
-			body->getStBody()->attachShape(*shape);
+			body->getStBody()->attachShape(*_shape);
 #if _DEBUG
 		if (debugCom) std::cout << "RB first - Collider: shape attach!\n";
 #endif

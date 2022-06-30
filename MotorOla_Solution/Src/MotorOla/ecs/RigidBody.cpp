@@ -14,13 +14,13 @@ RigidBody::RigidBody()
 
 RigidBody::~RigidBody()
 {
-	if (body) {
-		body->release();
-		body = nullptr;
+	if (_body) {
+		_body->release();
+		_body = nullptr;
 	}
-	if (stBody) {
-		stBody->release();	// Also delete the shape
-		stBody = nullptr;
+	if (_stBody) {
+		_stBody->release();	// Also delete the shape
+		_stBody = nullptr;
 	}
 }
 
@@ -117,18 +117,18 @@ bool RigidBody::init(const std::map<std::string, std::string>& mapa)
 	PxShape* shape = getEntidad()->getComponent<Collider>()->getShape();
 	if (shape) {
 		if (estatico)
-			stBody = pm().createStaticRigid(pose, shape);
+			_stBody = pm().createStaticRigid(pose, shape);
 		else
-			body = pm().createDynamic(pose, shape, _vel);
+			_body = pm().createDynamic(pose, shape, _vel);
 #if _DEBUG
 		if (debugCom) std::cout << "Shape first - Rigidbody: set collider!\n";
 #endif
 	}
 	else {
 		if (estatico)
-			stBody = pm().createStaticRigid(pose);
+			_stBody = pm().createStaticRigid(pose);
 		else
-			body = pm().createDynamic(pose, _vel);
+			_body = pm().createDynamic(pose, _vel);
 #if _DEBUG
 		if (debugCom) std::cout << "Rigidbody - sin collider...\n";
 #endif
@@ -141,7 +141,7 @@ bool RigidBody::init(const std::map<std::string, std::string>& mapa)
 		// Establece la masa y la inercia
 		std::string densityString = mapa.at("density");
 		density = stof(densityString);
-		if (body) PxRigidBodyExt::updateMassAndInertia(*body, density);
+		if (_body) PxRigidBodyExt::updateMassAndInertia(*_body, density);
 		else {
 #if _DEBUG
 			if (debugCom) std::cout << "RigidBody - ERROR: un static no usa density!\n";
@@ -159,10 +159,10 @@ bool RigidBody::init(const std::map<std::string, std::string>& mapa)
 		if (gravityString == "false")
 		{
 			gravity = false;
-			body->setActorFlag(PxActorFlag::eDISABLE_GRAVITY, true);
+			_body->setActorFlag(PxActorFlag::eDISABLE_GRAVITY, true);
 		}
 	}
-	if (gravity && body) body->setActorFlag(PxActorFlag::eDISABLE_GRAVITY, false);
+	if (gravity && _body) _body->setActorFlag(PxActorFlag::eDISABLE_GRAVITY, false);
 
 	// A�ade la entidad asociado al manager de phyx
 	int id_ = getEntidad()->getID();
@@ -171,47 +171,47 @@ bool RigidBody::init(const std::map<std::string, std::string>& mapa)
 	if (mapa.find("lockPosX") != mapa.end())
 	{
 		tempString = mapa.at("lockPosX");
-		if (tempString == "true") lockPosX = true;
-		else if (tempString == "false") lockPosX = false;
+		if (tempString == "true") _lockPosX = true;
+		else if (tempString == "false") _lockPosX = false;
 		else return false;
-		body->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::eLOCK_LINEAR_X, lockPosX);
+		_body->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::eLOCK_LINEAR_X, _lockPosX);
 	}
 	if (mapa.find("lockRotX") != mapa.end()) {
 		tempString = mapa.at("lockRotX");
-		if (tempString == "true") lockRotX = true;
-		else if (tempString == "false") lockRotX = false;
+		if (tempString == "true") _lockRotX = true;
+		else if (tempString == "false") _lockRotX = false;
 		else return false;
-		body->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::eLOCK_ANGULAR_X, lockRotX);
+		_body->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::eLOCK_ANGULAR_X, _lockRotX);
 	}
 	if (mapa.find("lockPosY") != mapa.end())
 	{
 		tempString = mapa.at("lockPosY");
-		if (tempString == "true") lockPosY = true;
-		else if (tempString == "false") lockPosY = false;
+		if (tempString == "true") _lockPosY = true;
+		else if (tempString == "false") _lockPosY = false;
 		else return false;
-		body->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::eLOCK_LINEAR_Y, lockPosY);
+		_body->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::eLOCK_LINEAR_Y, _lockPosY);
 	}
 	if (mapa.find("lockRotY") != mapa.end()) {
 		tempString = mapa.at("lockRotY");
-		if (tempString == "true") lockRotY = true;
-		else if (tempString == "false") lockRotY = false;
+		if (tempString == "true") _lockRotY = true;
+		else if (tempString == "false") _lockRotY = false;
 		else return false;
-		body->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::eLOCK_ANGULAR_Y, lockRotY);
+		_body->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::eLOCK_ANGULAR_Y, _lockRotY);
 	}	
 	if (mapa.find("lockPosZ") != mapa.end())
 	{
 		tempString = mapa.at("lockPosZ");
-		if (tempString == "true") lockPosZ = true;
-		else if (tempString == "false") lockPosZ = false;
+		if (tempString == "true") _lockPosZ = true;
+		else if (tempString == "false") _lockPosZ = false;
 		else return false;
-		body->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::eLOCK_LINEAR_Z, lockPosZ);
+		_body->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::eLOCK_LINEAR_Z, _lockPosZ);
 	}
 	if (mapa.find("lockRotZ") != mapa.end()) {
 		tempString = mapa.at("lockRotZ");
-		if (tempString == "true") lockRotZ = true;
-		else if (tempString == "false") lockRotZ = false;
+		if (tempString == "true") _lockRotZ = true;
+		else if (tempString == "false") _lockRotZ = false;
 		else return false;
-		body->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::eLOCK_ANGULAR_Z, lockRotZ);
+		_body->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::eLOCK_ANGULAR_Z, _lockRotZ);
 	}
 
 	return true;
@@ -220,10 +220,10 @@ bool RigidBody::init(const std::map<std::string, std::string>& mapa)
 void RigidBody::setVelocity(PxVec3 v)
 {
 	_vel = v;
-	body->setLinearVelocity(v);
+	_body->setLinearVelocity(v);
 }
 
 void RigidBody::setAngularVelocity(PxVec3 av)
 {
-	body->setAngularVelocity(av);
+	_body->setAngularVelocity(av);
 }

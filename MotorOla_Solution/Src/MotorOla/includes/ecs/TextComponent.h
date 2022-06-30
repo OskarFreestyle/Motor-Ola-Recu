@@ -9,6 +9,7 @@
 #endif
 #include "Componente.h"
 
+// Textos que se renderizan en la escena
 class MOTOR_API TextComponent :public Componente
 {
 public:
@@ -21,15 +22,16 @@ public:
 
 
 private:
-	float posX;
-	float posY;
-	std::string texto;
-	std::string textoIni;
-	std::string nombreTexto;
-	float tamLetra;
-	std::string nombrePanel;
-	float dimX;
-	float dimY;
-	std::string color; //Solo puede ser Red o Black
+	float _posX;
+	float _posY;
+	float _dimX;
+	float _dimY;
+	float _tamLetra;
+
+	std::string _texto;
+	std::string _textoIni;
+	std::string _nombreTexto;
+	std::string _nombrePanel;
+	std::string _color; //Solo puede ser Red o Black
 };
 

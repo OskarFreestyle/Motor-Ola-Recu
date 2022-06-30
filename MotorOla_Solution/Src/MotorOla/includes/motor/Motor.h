@@ -10,17 +10,6 @@
 #include <Ogre.h>
 #include <Windows.h>
 
-// Declaracion de clases necesarias
-class OgreManager;
-class InputManager;
-class LoadResources;
-class FMODAudioManager;
-class PhysxManager;
-class Entidad;
-class EntidadManager;
-class Entity;
-class OverlayManager;
-
 typedef HRESULT(CALLBACK* LPFNDLLFUNC1)(DWORD, UINT*);
 
 const int FPS = 60;

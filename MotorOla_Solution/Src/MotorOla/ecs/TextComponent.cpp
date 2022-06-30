@@ -13,30 +13,30 @@ bool TextComponent::init(const std::map<std::string, std::string>& mapa)
 		mapa.find("color") == mapa.end()) return false;
 
 	std::string s = mapa.at("positionX");
-	posX = std::stof(s);
+	_posX = std::stof(s);
 	s = mapa.at("positionY");
-	posY = std::stof(s);
+	_posY = std::stof(s);
 
 	s = mapa.at("texto");
-	texto = s;
-	textoIni = texto;
+	_texto = s;
+	_textoIni = _texto;
 
 	s = mapa.at("nombreTexto");
-	nombreTexto = s;
+	_nombreTexto = s;
 	s = mapa.at("tamLetra");
-	tamLetra = std::stof(s);
+	_tamLetra = std::stof(s);
 	s = mapa.at("nombrePanel");
-	nombrePanel = s;
+	_nombrePanel = s;
 	
 	s = mapa.at("dimensionX");
-	dimX = std::stof(s);
+	_dimX = std::stof(s);
 	s = mapa.at("dimensionY");
-	dimY = std::stof(s);
+	_dimY = std::stof(s);
 	s = mapa.at("color");
-	color = s;
+	_color = s;
 
-	OverlayManager::GetInstance()->creaTexto(posX, posY, texto, nombreTexto, tamLetra, nombrePanel, dimX, dimY);
-	OverlayManager::GetInstance()->changeTextColor(nombrePanel, nombreTexto, color);
+	OverlayManager::GetInstance()->creaTexto(_posX, _posY, _texto, _nombreTexto, _tamLetra, _nombrePanel, _dimX, _dimY);
+	OverlayManager::GetInstance()->changeTextColor(_nombrePanel, _nombreTexto, _color);
 
 	_inicializado = true;
 
@@ -45,17 +45,17 @@ bool TextComponent::init(const std::map<std::string, std::string>& mapa)
 
 std::string TextComponent::getTexto()
 {
-	return texto;
+	return _texto;
 }
 std::string TextComponent::getTextoIni()
 {
-	return textoIni;
+	return _textoIni;
 }
 void TextComponent::setTexto(const std::string& s)
 {
-	texto = s;
-	Ogre::TextAreaOverlayElement* t = OverlayManager::GetInstance()->getTexto(nombrePanel,nombreTexto);
-	if (t != nullptr)t->setCaption(texto);
+	_texto = s;
+	Ogre::TextAreaOverlayElement* t = OverlayManager::GetInstance()->getTexto(_nombrePanel,_nombreTexto);
+	if (t != nullptr)t->setCaption(_texto);
 }
 
 
