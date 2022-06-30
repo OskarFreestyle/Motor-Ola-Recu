@@ -9,11 +9,17 @@ Subgrupo Óscar Pedregal y Óscar Fernández
 3. Preparación del entorno
 
 # 1. BIBLIOTECAS  
+## SDL
+Simple DirectMedia Layer es una biblioteca de desarrollo multiplataforma diseñada para brindar acceso de bajo nivel a hardware de audio, teclado, mouse, joystick y gráficos a través de OpenGL y Direct3D. MotorOla la utiliza para procesar el Input.
+
 ## OGRE 3D
 Object-Oriented Graphics Rendering Engine, biblioteca escrita principalmente en C++ y orientada a *escenas*.  
 Facilita el desarrollo de aplicación con gráficos 3D acelerados por hardware,  
 evita la dificultad de utilización de librerías de capas inferiores para gráficos como OpenGL o Direct3D,  
 además, ofrece una interfaz basada en *objetos del mundo* y otras clases de alto nivel.  
+
+## OGREOVERLAY
+UI facilitada por Ogre para renderizar objetos encima de la escena.
 
 ## PHYSX
 Motor propietario de capa de software intermedia (middleware)  
@@ -23,9 +29,6 @@ Está desarrollado por NVIDIA y de hecho está integrado en sus chips gráficos 
 ## FMOD
 Motor propietario de efectos de sonido especializado para el desarrollo de videojuegos,  
 reproduce y mezcla sonidos en muchos sistemas operativos.  
-
-## OGREOVERLAY
-UI facilitada por Ogre para renderizar objetos encima de la escena.
 
 ## LUA
 Lenguaje multiparadigma, imperativo, estructurado y bastante ligero.  
