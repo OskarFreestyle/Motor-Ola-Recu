@@ -1,11 +1,7 @@
 #include "Camera.h"
 #include "OgreManager.h"
-#include <OgreNode.h>
 #include "Transform.h"
 #include "Entidad.h"
-#include <OgreViewport.h>
-#include <OgreSceneManager.h>
-#include <OgreRenderWindow.h>
 
 Camera::Camera() : _cam(nullptr), _camNode(nullptr), _viewport(nullptr) {
 

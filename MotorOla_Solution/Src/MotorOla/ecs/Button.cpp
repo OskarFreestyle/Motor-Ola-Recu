@@ -8,7 +8,7 @@
 #include "Entidad.h"
 
 Button::~Button() {
-	//OverlayManager::GetInstance()->clear();
+	
 }
 
 bool Button::init(const std::map<std::string, std::string>& mapa) {
@@ -63,17 +63,23 @@ void Button::update()
 	if (!isClick && isClicked()) {
 		// Si tiene algun audio asociado, suena
 		if (_entity->hasComponent<AudioSource>()) _entity->getComponent<AudioSource>()->play();
+		//Lo marca pulsado
 		isClick = true;
+		//Actualiza la variable inClick con el momento pulsado
 		inClick = clock();
 	}
+	//Si pasa el tiempo del delay entre la pulsación y la funcion
 	if (isClick && inClick+clickDelay<clock()) {
+		//Lo marca a falso
 		isClick = false;
+		//Funciones del boton
 		onClick();
 	}
 }
 
 
 bool Button::isClicked() {
+	//DEvuelve si el raton esta dentro del boton
 	return (ih().getMouseButtonState(ih().LEFT)) &&
 		(ih().getMousePos().first > posX * OgreManager::GetInstance()->getWindowWidth() && ih().getMousePos().first < (posX + dimX)* OgreManager::GetInstance()->getWindowWidth() &&
 			ih().getMousePos().second>posY * OgreManager::GetInstance()->getWindowHeight() && ih().getMousePos().second < (posY + dimY)* OgreManager::GetInstance()->getWindowHeight());
@@ -90,14 +96,12 @@ void Button::onClick()
 		SceneManager::GetInstance()->newScene(nextScene);	// Escena pasada por carga de datos
 		break;
 	case Type::VOLUME:
-		//ih().refresh();
 		ih().MouseButtonUp(ih().LEFT);
-		AudioManager::GetInstance()->setMute(!AudioManager::GetInstance()->getMute());
+		AudioManager::GetInstance()->setMute(!AudioManager::GetInstance()->getMute());//Cambia el mute
 		break;
 	case Type::EXIT:
-		//ih().refresh();
 		ih().MouseButtonUp(ih().LEFT);
-		Motor::GetInstance()->setStop(true);
+		Motor::GetInstance()->setStop(true);//Sale del bucle del motor
 		break;
 	default:
 		break;

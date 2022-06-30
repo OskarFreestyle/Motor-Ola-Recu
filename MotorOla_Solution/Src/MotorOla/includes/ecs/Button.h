@@ -38,6 +38,9 @@ protected:
 	float dimY;
 	Type type;
 	std::string nextScene = "";
+	/// <summary>
+	/// Variables para delay entre que se pulsa y se hace la función onClick
+	/// </summary>
 	bool isClick = false;
 	clock_t inClick = 0;
 	clock_t clickDelay;

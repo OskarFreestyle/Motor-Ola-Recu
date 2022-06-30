@@ -1,7 +1,6 @@
 #include "Transform.h"
-#include "OgreManager.h"
 #include "SceneManager.h"
-#include "Entidad.h"
+
 
 Transform::Transform() :
 	_position(), _scale({ 1,1,1 }), _rotation()

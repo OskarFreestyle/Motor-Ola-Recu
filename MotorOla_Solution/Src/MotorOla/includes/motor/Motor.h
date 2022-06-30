@@ -7,8 +7,6 @@
 #endif
 
 #include <SDL.h>
-#include <string>
-#include <iostream>
 #include <Ogre.h>
 #include <Windows.h>
 

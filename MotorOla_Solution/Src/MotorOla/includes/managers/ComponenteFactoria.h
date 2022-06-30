@@ -7,7 +7,6 @@
 #if _DEBUG
 #include "checkML.h"
 #endif
-#include <string>
 #include <unordered_map>
 class Componente;
 

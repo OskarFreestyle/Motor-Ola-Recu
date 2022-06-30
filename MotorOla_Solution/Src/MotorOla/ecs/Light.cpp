@@ -1,11 +1,7 @@
 #include "Light.h"
 #include "OgreManager.h"
-#include <OgreNode.h>
 #include "Transform.h"
 #include "Entidad.h"
-#include <OgreViewport.h>
-#include <OgreSceneManager.h>
-#include <OgreRenderWindow.h>
 
 Light::~Light()
 {

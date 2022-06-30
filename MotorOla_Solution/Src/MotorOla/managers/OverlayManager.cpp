@@ -1,9 +1,6 @@
 #include "OverlayManager.h"
-#include <string>
-#include "InputManager.h"
-#include "Motor.h"
-#include "OgreManager.h"
-#include "Button.h"
+#include <OgreOverlayManager.h>
+#include <OgreOverlay.h>
 
 OverlayManager* OverlayManager::_singleton = nullptr;
 

@@ -1,7 +1,5 @@
 #pragma once
 #include "ECS.h"
-#include <map>
-#include <string>
 #include "Vectola3D.h"
 
 class Entidad;

@@ -9,22 +9,9 @@
 #include "checkML.h"
 #endif
 
-
-#include <string>
-#include <Ogre.h>
-#include "OverlayManager.h"
-
-#include <OgreOverlaySystem.h>
-#include <OgreOverlayElement.h>
-#include <OgreOverlayManager.h>
-#include <OgreFontManager.h>
 #include <OgreTextAreaOverlayElement.h>
-#include <OgreOverlayContainer.h>
-#include "OgreOverlayPrerequisites.h"
 #include <OgrePanelOverlayElement.h>
-#include <OgreOverlay.h>
 
-#include <vector>
 class Motor;
 class OgreManager;
 using CallBackOnClick = void(Motor* m);

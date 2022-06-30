@@ -1,6 +1,5 @@
 #pragma once
 #include "ComponenteFactoria.h"
-#include "ECS.h"
 #if _DEBUG
 #include "checkML.h"
 #endif

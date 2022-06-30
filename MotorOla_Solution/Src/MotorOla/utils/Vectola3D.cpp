@@ -1,5 +1,5 @@
 #include "Vectola3D.h"
-#include <assert.h>
+
 
 // needed for visual studio
 #ifndef M_PI

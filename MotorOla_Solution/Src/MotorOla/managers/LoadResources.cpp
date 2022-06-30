@@ -1,5 +1,5 @@
 #include "LoadResources.h"
-#include <iostream>
+
 
 LoadResources* LoadResources::_singleton = nullptr;
 

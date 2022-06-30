@@ -1,14 +1,8 @@
 #include "LuaReader.h"
-#include <vector>
-#include <iostream>
-#include <map>
 
 // Clases propias
-#include "Entidad.h"
 #include "SceneManager.h"
 #include "OgreManager.h"
-#include "OverlayManager.h"
-#include <stdio.h>
 #include "PhysxManager.h"
 
 extern "C"

@@ -7,6 +7,7 @@
 #include "Vectola3D.h"
 
 
+
 class MOTOR_API Quaterniola {
 public:
 	float s;

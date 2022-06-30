@@ -1,8 +1,5 @@
 #pragma once
 #include "Componente.h"
-#include <OgreLight.h>
-#include <OgreSceneNode.h>
-#include "Vectola3D.h"
 #if _DEBUG
 #include "checkML.h"
 #endif

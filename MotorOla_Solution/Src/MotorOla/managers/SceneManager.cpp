@@ -1,7 +1,6 @@
 #include "SceneManager.h"
 #include "LoadResources.h"
 #include "LuaReader.h"
-#include "PhysxManager.h"
 
 SceneManager* SceneManager::_singleton = nullptr;
 

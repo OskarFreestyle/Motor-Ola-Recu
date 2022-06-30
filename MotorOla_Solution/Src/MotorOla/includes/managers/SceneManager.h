@@ -6,7 +6,6 @@
 #endif
 
 #include "Entidad.h"
-#include <vector>
 
 class MOTOR_API SceneManager {
 public:

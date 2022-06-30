@@ -1,16 +1,9 @@
 #include "OgreManager.h"
 
-#include <OgreRoot.h>
-#include <OgreGpuProgramManager.h>
-#include <OgreConfigFile.h>
-#include <OgreRenderWindow.h>
-#include <OgreViewport.h>
-#include <OgreDataStream.h>
 #include <OgreFileSystemLayer.h>
 #include <OgreOverlaySystem.h>
 #include <OgreOverlayManager.h>
 
-#include <SDL_video.h>
 #include <SDL_syswm.h>
 
 #include "InputManager.h"

@@ -6,7 +6,7 @@
 #include "RigidBody.h"
 #include "Mesh.h"
 #include "ComponenteFactoria.h"
-#include "SceneManager.h"
+
 
 
 Entidad::Entidad() : 

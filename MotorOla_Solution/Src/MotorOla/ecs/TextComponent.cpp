@@ -1,7 +1,6 @@
 #include "TextComponent.h"
 #include "OverlayManager.h"
-#include "Entidad.h"
-#include <string>
+
 
 TextComponent::~TextComponent()
 {

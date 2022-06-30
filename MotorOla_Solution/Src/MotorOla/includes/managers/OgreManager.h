@@ -8,15 +8,8 @@
 #if _DEBUG
 #include "checkML.h"
 #endif
-#include <string>
 
 #include <Ogre.h>
-#include <OgreBuildSettings.h>
-#include <OgreLogManager.h>
-#include <OgrePlugin.h>
-#include <OgreFileSystemLayer.h>
-#include <OgreFrameListener.h>
-#include <OgreOverlayPrerequisites.h> 
 #include <SDL.h> 
 
 namespace Ogre {

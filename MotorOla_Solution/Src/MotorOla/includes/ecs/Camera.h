@@ -8,7 +8,7 @@
 #include "checkML.h"
 #endif
 #include "Componente.h"
-#include <OgreCamera.h>
+
 
 class Camera : public Componente
 {

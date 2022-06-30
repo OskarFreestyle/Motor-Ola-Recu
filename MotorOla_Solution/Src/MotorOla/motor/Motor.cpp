@@ -3,11 +3,6 @@
 #include <limits.h>
 #include "Motor.h"
 
-// Ogre
-#include <Ogre.h>
-#include <OgreEntity.h>
-#include <OgreVector3.h>
-#include <OgreVector.h>
 
 // Managers
 #include "OgreManager.h"
@@ -21,8 +16,6 @@
 #include "ComponenteFactoria.h"
 
 // Entidades y Componentes
-#include "Entidad.h"
-#include "Componente.h"
 #include "ComponenteRegistro.h"
 #include "Transform.h"
 #include "Mesh.h"
@@ -36,7 +29,6 @@
 #include "RigidBody.h"
 #include <time.h>
 
-#include <iostream>
 
 Motor* Motor::_singleton = nullptr;
 

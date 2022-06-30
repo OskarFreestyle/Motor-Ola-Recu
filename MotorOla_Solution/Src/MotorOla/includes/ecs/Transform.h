@@ -9,9 +9,8 @@
 #endif
 
 #include "Componente.h"
-#include "Vectola3D.h"
 #include "Quaterniola.h"
-#include <list>
+
 
 class MOTOR_API Transform : public Componente
 {

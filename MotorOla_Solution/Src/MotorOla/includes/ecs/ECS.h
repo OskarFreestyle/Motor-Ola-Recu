@@ -1,8 +1,6 @@
 #pragma once
-#include <array>
-#include <iostream>
 #include <bitset>
-#include <memory>
+
 
 class Entidad;
 class Componente;

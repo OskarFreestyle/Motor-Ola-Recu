@@ -6,7 +6,6 @@
 #endif
 
 #include <iostream>
-#include <math.h>
 #include <Ogre.h>
 
 class MOTOR_API Vectola3D

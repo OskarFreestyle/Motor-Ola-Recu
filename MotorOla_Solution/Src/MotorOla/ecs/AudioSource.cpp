@@ -4,7 +4,7 @@
 
 AudioSource::~AudioSource()
 {
-	//stopMusicComponent();
+
 }
 
 bool AudioSource::init(const std::map<std::string, std::string>& mapa) {
@@ -40,15 +40,18 @@ void AudioSource::play()
 {
 	// Comprueba que no haya mute
 	if(!AudioManager::GetInstance()->getMute())
+		//Hace que suene el audio
 		AudioManager::GetInstance()->playMusic(_channel, _loop);
 }
 
 void AudioSource::pause()
 {
+	//Pausa el audio
 	AudioManager::GetInstance()->togglePause(_channel);
 }
 
 void AudioSource::stopMusicComponent()
 {
+	//Para el audio
 	AudioManager::GetInstance()->stopMusic(_channel);
 }

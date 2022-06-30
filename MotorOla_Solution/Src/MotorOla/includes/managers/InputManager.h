@@ -9,10 +9,6 @@
 #include "checkML.h"
 #endif
 
-#include <iostream>
-#include <SDL.h>
-#include <array>
-
 #include "OgreManager.h"
 #include "Motor.h"
 

@@ -3,6 +3,7 @@
 #include "RigidBody.h"
 #include "Transform.h"
 
+
 #if _DEBUG
 	const bool debugCom = false;
 #endif
