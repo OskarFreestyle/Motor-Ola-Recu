@@ -1,8 +1,6 @@
 :: Este .bat hay que ejecutarlo desde el Developer Command Prompt de Visual Studio 
 :: se puede encontrar en la pestaña tools de visual en Command Line
 
-
-
 :: BUILD OGRE
 :: Entra en la carpeta de dependencias
 cd Dependencies/Ogre
@@ -104,12 +102,6 @@ cd ..\..\..\..\
 echo: && Echo ::::: BUILD [ LUA ] COMPLETADA :::::
 
 :: FINALIZADO!!!
-
-:: Despues tiene que generar MotorOla.lib, MotorOla.dll, MotorOla_d.lib y MotorOla_d.dll para poder compilar la dll del juego
-echo BUILDING MOTOROLA.LIB
-msbuild MotorOla_Solution.sln -p:Configuration=Debug
-msbuild MotorOla_Solution.sln -p:Configuration=Release
-echo BUILDING DONE
 
 :: Mensaje de verificación
 echo: && Echo ::::: BUILD [ MotorOla ] COMPLETADA :::::
