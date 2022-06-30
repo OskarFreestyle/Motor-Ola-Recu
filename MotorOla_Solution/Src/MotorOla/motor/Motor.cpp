@@ -107,7 +107,7 @@ void Motor::initManagers()
 		PhysxManager::Init();
 		InputManager::Init();
 		OgreManager::Init();
-		OverlayManager::Init(OgreManager::GetInstance(), this);
+		OverlayManager::Init(OgreManager::GetInstance());
 		LuaReader::Init();
 	}
 	catch (std::exception& error) {

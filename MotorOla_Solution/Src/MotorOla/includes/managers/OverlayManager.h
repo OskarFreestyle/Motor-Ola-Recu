@@ -31,9 +31,9 @@ public:
 	/// Inicializa la clase SceneManager con los parametros dados si no se ha inicializado antes.
 	/// Devuelve true si se inicializa por primera vez y false si ya habia sido inicializada.
 	/// </summary>
-	static bool Init(OgreManager* om_, Motor* m);
+	static bool Init(OgreManager* om_);
 
-	void initOverlay(OgreManager* om_, Motor* m);
+	void initOverlay(OgreManager* om_);
 
 	//void update();
 
@@ -53,7 +53,6 @@ public:
 	Ogre::PanelOverlayElement* getPanel(std::string name);
 	Ogre::PanelOverlayElement* getBoton(std::string name);
 	void clear();
-	Motor* getMotor();
 
 protected:
 	static OverlayManager* _singleton;
@@ -68,7 +67,7 @@ private:
 	Ogre::Overlay* mOverlay=nullptr;
 	
 	OgreManager* og;
-	Motor* motor;
+	
 };
 
 

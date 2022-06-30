@@ -16,7 +16,7 @@ public:
 	~TextComponent();
 	bool init(const std::map<std::string, std::string>& mapa) override;
 	std::string getTexto();
-	void setTexto(const std::string& s,const std::string& textName,const std::string& panelName);
+	void setTexto(const std::string& s);
 	std::string getTextoIni();
 
 

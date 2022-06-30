@@ -14,7 +14,7 @@ OverlayManager::~OverlayManager()
 	overlayManager.destroy("PanelOverlay");
 }
 
-bool OverlayManager::Init(OgreManager* om_, Motor* m)
+bool OverlayManager::Init(OgreManager* om_)
 {
 	// Si ya existe devuelve false
 	if (_singleton != nullptr) return false;
@@ -23,14 +23,14 @@ bool OverlayManager::Init(OgreManager* om_, Motor* m)
 	_singleton = new OverlayManager();
 
 	try {
-		_singleton->initOverlay(om_, m);
+		_singleton->initOverlay(om_);
 	}
 	catch (...) { throw std::exception("Error iniciando OverlayManager\n"); }
 
 	return true;
 }
 
-void OverlayManager::initOverlay(OgreManager* om, Motor* m)
+void OverlayManager::initOverlay(OgreManager* om)
 {
 	Ogre::OverlayManager& overlayManager = Ogre::OverlayManager::getSingleton();
 	mOverlay = 0;
@@ -38,7 +38,6 @@ void OverlayManager::initOverlay(OgreManager* om, Motor* m)
 	mOverlay = overlayManager.create("PanelOverlay");
 	mOverlay->setZOrder(100);
 	og = om;
-	motor = m;
 }
 
 /*void OverlayManager::update() {
@@ -213,10 +212,7 @@ void OverlayManager::clear()
 	overlayManager.destroyAllOverlayElements();
 }
 
- Motor* OverlayManager::getMotor()
-{
-	return motor;
-}
+
 
 
 
