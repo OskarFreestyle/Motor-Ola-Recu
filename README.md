@@ -76,7 +76,17 @@ El motor al iniciarse creará los managers, después registrará los componentes
 </p>
 
 ## Managers
-Los managers utilizan el patrón de diseño *Singleton*, que permite restringir la creación de objetos pertenecientes a una clase o el valor de un tipo a un único objeto. Hay un manager para el Audio, Componentes, Input, Recursos, Lua, Ogre, Overlay, Physx y Scenes.
+Los managers utilizan el patrón de diseño *Singleton*, que permite restringir la creación de objetos pertenecientes a una clase o el valor de un tipo a un único objeto. Son los siguientes:
+
+* **AudioManager:** Utiliza FMOD para gestionar todos los audios del juego. Dispone de 24 canales en los que cargar distintos audios.
+* **ComponenteFactoria:** Utiliza el patrón *Abstract Factory* para registrar los componentes.
+* **InputManager:** Se encarga de recoger el Input de ratón y teclado en cada frame.
+* **LoadResources:** Almacena una serie de *maps* que relaciona las rutas de cada recurso con su nombre para poder acceder a ellas de una manera más cómoda y eficiente.
+* **LuaReader:** Sirve para leer las escenas.lua y los prefabs.prefab porque nuestro motor ahora sí es dirigido a datos.
+* **OgreManager:** Pone en marcha la ventana del juego y se encarga del renderizado cada frame.
+* **OverlayManager:** Se encarga de los elementos del UI que se renderizan por encima de los demás elementos de la escena.
+* **PhysxManager:** Realiza la simulación de las físicas.
+* **SceneManager:** Almacena las entidades de la escena y se encarga de cargar/borrar dichas entidades.
 
 ## ECS (Entity-Component-System)
 Es un patrón arquitectónico de software utilizado principalmente en el desarrollo de videojuegos para la representación de objetos del mundo del juego. Un ECS comprende entidades compuestas de componentes de datos, con sistemas que operan en componentes de entidades.
