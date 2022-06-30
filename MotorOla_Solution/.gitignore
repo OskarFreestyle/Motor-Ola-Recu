@@ -20,7 +20,7 @@
 *.ipdb
 *.exp
 *.idb
-#*.txt
+*.txt
 
 # /exes
 [Ee]xes/*.exe
