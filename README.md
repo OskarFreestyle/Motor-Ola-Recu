@@ -1,5 +1,6 @@
 # Motor-Ola
 Motor de juego de "Proyectos 3"
+
 Subgrupo Óscar Pedregal y Óscar Fernández
 
 # ÍNDICE 
@@ -8,7 +9,6 @@ Subgrupo Óscar Pedregal y Óscar Fernández
 3. Preparación del entorno
 
 # 1. BIBLIOTECAS  
-
 ## OGRE 3D
 Object-Oriented Graphics Rendering Engine, biblioteca escrita principalmente en C++ y orientada a *escenas*.  
 Facilita el desarrollo de aplicación con gráficos 3D acelerados por hardware,  
