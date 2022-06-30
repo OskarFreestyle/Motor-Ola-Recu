@@ -39,7 +39,9 @@ Escrito en ANSI C y suficientemente compacto como para usarse en diferentes plat
 
 ## Buble principal
 
-Foto aqui
+<p align="center">
+  <img src="https://github.com/OskarFreestyle/Motor-Ola-Recu/blob/main/ImagenesMarkdown/BuclePrincipal.png">
+</p>
 
 ## Managers
 Los managers utilizan el patrón de diseño *Singleton*, que permite restringir la creación de objetos pertenecientes a una clase o el valor de un tipo a un único objeto. Hay un manager para el Audio, Componentes, Input, Recursos, Lua, Ogre, Overlay, Physx y Scenes.
