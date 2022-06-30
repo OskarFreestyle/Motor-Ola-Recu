@@ -66,6 +66,9 @@ Página oficial: https://www.lua.org/
 
 # 2. DISEÑO DEL MOTOR
 
+## Inicio del motor
+El motor al iniciarse creará los managers, después registrará los componentes en la factoría abstracta y por último cargará el juego que se encuentre en la DLL.
+
 ## Buble principal
 
 <p align="center">
