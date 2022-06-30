@@ -28,7 +28,7 @@ OgreOverlay es un UI facilitada por Ogre para renderizar objetos encima de la es
 
 Página oficial: https://www.ogre3d.org/ 
 
-<p align="center">
+<p align="center" width="50%" height="50%">
   <img src="https://github.com/OskarFreestyle/Motor-Ola-Recu/blob/main/ImagenesMarkdown/LogoOgre3D.png" alt="" width="50%" height="50%"/>
 </p>
 
