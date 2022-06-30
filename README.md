@@ -8,11 +8,6 @@ Subgrupo Óscar Pedregal y Óscar Fernández
 3. Preparación del entorno
 
 # 1. BIBLIOTECAS  
-***Renderizado Gráfico*** -> Ogre 3D  
-***Físicas y colisiones***  -> Physx  
-***Gestión de Audio y Sonido*** -> Fmod  
-***Interfaz de Usuario*** -> OgreOverlay  
-***Lenguaje Script*** -> LUA  
 
 ## OGRE 3D
 Object-Oriented Graphics Rendering Engine, biblioteca escrita principalmente en C++ y orientada a *escenas*.  
