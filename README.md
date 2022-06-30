@@ -6,7 +6,6 @@ Subgrupo Óscar Pedregal y Óscar Fernández
 # ÍNDICE 
 1. Bibliotecas
 2. Diseño del motor
-3. Preparación del entorno
 
 # 1. BIBLIOTECAS  
 ## SDL
@@ -69,7 +68,7 @@ Página oficial: https://www.lua.org/
 ## Inicio del motor
 El motor al iniciarse creará los managers, después registrará los componentes en la factoría abstracta y por último cargará el juego que se encuentre en la DLL.
 
-## Buble principal
+## Bucle principal
 
 <p align="center">
   <img src="https://github.com/OskarFreestyle/Motor-Ola-Recu/blob/main/ImagenesMarkdown/BuclePrincipal.png">
